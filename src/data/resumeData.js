@@ -27,7 +27,7 @@ export const resumeData = {
     ],
 
     skills: [
-        { category: "Frontend", items: ["React.js", "PWA", "JavaScript", "Client-side QR Scanning", "Local Caching", "framer-motion"] },
+        { category: "Frontend", items: ["React.js", "JavaScript", "Local Caching"] },
         { category: "Backend & Serverless", items: ["Firebase Cloud Functions", "Event-driven Architecture", "Python", "Flask", "Node.js"] },
         { category: "Databases & Cloud", items: ["Firebase Realtime Database", "Firebase Storage", "Firebase Auth", "GCP"] },
         { category: "Security", items: ["Signed URLs", "Upload Throttling", "Storage Path Isolation", "RTDB Rules", "IAM", "Abuse Alerts"] },

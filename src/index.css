@@ -732,13 +732,14 @@ section {
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(8, 12, 15, 0.85);
-  backdrop-filter: blur(12px);
+  background: rgba(8, 12, 15, 0.92);
+  backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border-color);
-  padding: 0.7rem 2rem;
+  padding: 0.6rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
 }
 
 .nav-logo {
@@ -747,27 +748,169 @@ section {
   font-size: 1rem;
   color: var(--accent-green);
   text-shadow: 0 0 10px rgba(34, 211, 238, 0.4);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .nav-links {
   display: flex;
-  gap: 1.5rem;
+  gap: 0;
   list-style: none;
-  flex-wrap: wrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  flex-wrap: nowrap;
+}
+
+.nav-links::-webkit-scrollbar {
+  display: none;
 }
 
 .nav-link {
   color: var(--text-muted);
   text-decoration: none;
-  font-size: 0.8rem;
-  transition: color 0.2s;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 4px;
+  transition: color 0.2s, background 0.2s;
+  white-space: nowrap;
 }
 
 .nav-link:hover {
   color: var(--accent-green);
+  background: rgba(34, 211, 238, 0.07);
 }
 
 /* add top padding to body content so it clears the fixed nav */
 .page-content {
   padding-top: 60px;
+}
+
+/* ─── Scroll Reveal ──────────────────────────────────────── */
+
+/*
+  .scroll-reveal: initially hidden (transparent, shifted down slightly)
+  .scroll-reveal--visible: animate the box border drawing in (clip-path),
+     then content fades up.
+*/
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  /* border is drawn via clip-path on the child .terminal-window / .exp-card etc. */
+}
+
+.scroll-reveal--visible {
+  animation:
+    sr-fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) var(--sr-delay, 0ms) forwards;
+}
+
+/* Content fade + rise */
+@keyframes sr-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*
+  Box draw-in: applies to the INNER terminal-window / card containers
+  when their parent .scroll-reveal becomes visible.
+  Uses clip-path sweeping left → right, then receding clip = full reveal.
+*/
+.scroll-reveal .terminal-window,
+.scroll-reveal .exp-card,
+.scroll-reveal .skill-card,
+.scroll-reveal .project-card,
+.scroll-reveal .edu-card,
+.scroll-reveal .contact-box,
+.scroll-reveal .exp-groups {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0s;
+}
+
+.scroll-reveal--visible .terminal-window,
+.scroll-reveal--visible .exp-card,
+.scroll-reveal--visible .skill-card,
+.scroll-reveal--visible .project-card,
+.scroll-reveal--visible .edu-card,
+.scroll-reveal--visible .contact-box {
+  animation: sr-box-draw 0.55s cubic-bezier(0.22, 1, 0.36, 1) var(--sr-delay, 0ms) forwards;
+}
+
+@keyframes sr-box-draw {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  100% {
+    clip-path: inset(0 0% 0 0);
+  }
+}
+
+/* Stagger children inside grid wrappers (skills/projects) */
+.scroll-reveal--visible .skill-card:nth-child(1) {
+  animation-delay: calc(var(--sr-delay, 0ms) + 0ms);
+}
+
+.scroll-reveal--visible .skill-card:nth-child(2) {
+  animation-delay: calc(var(--sr-delay, 0ms) + 60ms);
+}
+
+.scroll-reveal--visible .skill-card:nth-child(3) {
+  animation-delay: calc(var(--sr-delay, 0ms) + 120ms);
+}
+
+.scroll-reveal--visible .skill-card:nth-child(4) {
+  animation-delay: calc(var(--sr-delay, 0ms) + 180ms);
+}
+
+.scroll-reveal--visible .skill-card:nth-child(5) {
+  animation-delay: calc(var(--sr-delay, 0ms) + 240ms);
+}
+
+.scroll-reveal--visible .skill-card:nth-child(6) {
+  animation-delay: calc(var(--sr-delay, 0ms) + 300ms);
+}
+
+.scroll-reveal--visible .skill-card:nth-child(7) {
+  animation-delay: calc(var(--sr-delay, 0ms) + 360ms);
+}
+
+.scroll-reveal--visible .skill-card:nth-child(8) {
+  animation-delay: calc(var(--sr-delay, 0ms) + 420ms);
+}
+
+.scroll-reveal--visible .skill-card:nth-child(9) {
+  animation-delay: calc(var(--sr-delay, 0ms) + 480ms);
+}
+
+.scroll-reveal--visible .project-card:nth-child(1) {
+  animation-delay: calc(var(--sr-delay, 0ms) + 0ms);
+}
+
+.scroll-reveal--visible .project-card:nth-child(2) {
+  animation-delay: calc(var(--sr-delay, 0ms) + 80ms);
+}
+
+.scroll-reveal--visible .project-card:nth-child(3) {
+  animation-delay: calc(var(--sr-delay, 0ms) + 160ms);
+}
+
+.scroll-reveal--visible .project-card:nth-child(4) {
+  animation-delay: calc(var(--sr-delay, 0ms) + 240ms);
+}
+
+.scroll-reveal--visible .project-card:nth-child(5) {
+  animation-delay: calc(var(--sr-delay, 0ms) + 320ms);
+}
+
+.scroll-reveal--visible .project-card:nth-child(6) {
+  animation-delay: calc(var(--sr-delay, 0ms) + 400ms);
 }
