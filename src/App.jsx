@@ -13,9 +13,15 @@ import {
 const SectionHeading = ({ icon: Icon, label, command }) => (
   <div className="section-heading">
     <Icon className="section-heading-icon" size={22} />
-    <span className="section-heading-label">{label}</span>
+    <span className="section-heading-label">
+      <TypewriterText text={label} speed={5} />
+    </span>
     <div className="section-heading-line" />
-    {command && <span className="section-heading-command">{command}</span>}
+    {command && (
+      <span className="section-heading-command">
+        <TypewriterText text={command} speed={5} />
+      </span>
+    )}
   </div>
 );
 
@@ -36,7 +42,9 @@ const FeaturedExpCard = ({ exp }) => (
       <div className="exp-period">{exp.period}</div>
     </div>
     <div className="exp-role fulltime">{exp.role}</div>
-    <p className="exp-overview">{exp.overview}</p>
+    <div className="exp-overview">
+      <TypewriterText text={exp.overview} speed={5} />
+    </div>
     <div className="exp-groups">
       {exp.groups.map((group, gi) => (
         <div key={gi} className="exp-group">
@@ -46,7 +54,9 @@ const FeaturedExpCard = ({ exp }) => (
           </div>
           <ul className="exp-bullets">
             {group.bullets.map((bullet, bi) => (
-              <li key={bi} className="exp-bullet">{bullet}</li>
+              <li key={bi} className="exp-bullet">
+                <TypewriterText text={bullet} speed={5} />
+              </li>
             ))}
           </ul>
         </div>
@@ -65,7 +75,9 @@ const RegularExpCard = ({ exp }) => (
     <div className="exp-role intern">{exp.role}</div>
     <ul className="exp-bullets">
       {exp.bullets.map((bullet, i) => (
-        <li key={i} className="exp-bullet">{bullet}</li>
+        <li key={i} className="exp-bullet">
+          <TypewriterText text={bullet} speed={5} />
+        </li>
       ))}
     </ul>
   </div>
@@ -105,10 +117,12 @@ function App() {
                   <div className="glitch-wrapper hero-name" data-text={personalInfo.name}>
                     {personalInfo.name}
                   </div>
-                  <div className="hero-role">▸ {personalInfo.role}</div>
+                  <div className="hero-role">
+                    ▸ <TypewriterText text={personalInfo.role} speed={5} className="inline-typewriter" />
+                  </div>
                   <div className="hero-location">
                     <MapPin size={13} style={{ display: 'inline', marginRight: '4px', verticalAlign: 'middle' }} />
-                    {personalInfo.location}
+                    <TypewriterText text={personalInfo.location} speed={5} className="inline-typewriter" />
                   </div>
                   <div className="status-badge" style={{ marginTop: '1rem' }}>
                     <span className="status-dot" />
@@ -121,7 +135,7 @@ function App() {
                     <span className="prompt">visitor@portfolio:~$</span>
                     <span className="command">cat about_me.txt</span>
                   </div>
-                  <p className="hero-summary">{summary}</p>
+                  <TypewriterText text={summary} speed={5} className="hero-summary" />
                 </div>
               </div>
             </TerminalWindow>
@@ -174,7 +188,9 @@ function App() {
                     )}
                     {proj.name}
                   </div>
-                  <p className="project-desc">{proj.description}</p>
+                  <div className="project-desc">
+                    <TypewriterText text={proj.description} speed={5} />
+                  </div>
                   <div className="project-tech">
                     {proj.tech.map((t, i) => (
                       <span key={i} className="skill-tag">{t}</span>
@@ -193,11 +209,19 @@ function App() {
             <ScrollReveal key={idx} delay={idx * 100}>
               <div className="edu-card">
                 <div>
-                  <div className="edu-degree">{edu.degree}</div>
-                  <div className="edu-institution">{edu.institution}</div>
-                  <div className="edu-grade">{edu.grade}</div>
+                  <div className="edu-degree">
+                    <TypewriterText text={edu.degree} speed={5} />
+                  </div>
+                  <div className="edu-institution">
+                    <TypewriterText text={edu.institution} speed={5} />
+                  </div>
+                  <div className="edu-grade">
+                    <TypewriterText text={edu.grade} speed={5} />
+                  </div>
                 </div>
-                <div className="edu-period">{edu.period}</div>
+                <div className="edu-period">
+                  <TypewriterText text={edu.period} speed={5} />
+                </div>
               </div>
             </ScrollReveal>
           ))}

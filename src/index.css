@@ -227,6 +227,11 @@ section {
   color: var(--text-body);
 }
 
+.typewriter-line.inline-typewriter {
+  display: inline-block;
+  margin-bottom: 0;
+}
+
 /* ─── Hero Section ───────────────────────────────────────── */
 .hero-name {
   font-family: 'Inter', sans-serif;
@@ -776,7 +781,27 @@ section {
     padding-right: 1.5rem;
     /* give some room at the end */
   }
+
+  .exp-card {
+    padding: 1.25rem 1rem;
+  }
+
+  .exp-groups {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .exp-group {
+    padding: 0.8rem 1rem;
+  }
+
+  .exp-overview {
+    padding: 0.8rem;
+    font-size: 0.82rem;
+    margin-bottom: 1rem;
+  }
 }
+
 
 
 .nav-link {
