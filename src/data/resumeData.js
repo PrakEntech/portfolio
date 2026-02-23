@@ -9,7 +9,7 @@ export const resumeData = {
         linkedin: "prakhar-srivastava-3210641ba",
     },
 
-    summary: "Software Developer with ~1 year of hands-on experience building secure, scalable, zero-to-one systems. Owned the complete lifecycle of a production PWA — from requirements and architecture through development, CI/CD, documentation, and independent releases. Strong in serverless Firebase, React, security-hardened deployments, and AI-assisted engineering workflows.",
+    summary: "Software Developer with 1+ years of hands-on experience building secure, scalable, zero-to-one systems. Owned the complete lifecycle of a production PWA — from requirements and architecture through development, CI/CD, documentation, and independent releases. Strong in serverless Firebase, React, security-hardened deployments, and AI-assisted engineering workflows.",
 
     education: [
         {

@@ -754,18 +754,30 @@ section {
 
 .nav-links {
   display: flex;
-  gap: 0;
+  gap: 0.25rem;
   list-style: none;
   overflow-x: auto;
   scrollbar-width: none;
-  /* Firefox */
   -ms-overflow-style: none;
   flex-wrap: nowrap;
+  min-width: 0;
+  flex: 1;
+  justify-content: flex-end;
+  -webkit-overflow-scrolling: touch;
 }
 
 .nav-links::-webkit-scrollbar {
   display: none;
 }
+
+@media (max-width: 640px) {
+  .nav-links {
+    justify-content: flex-start;
+    padding-right: 1.5rem;
+    /* give some room at the end */
+  }
+}
+
 
 .nav-link {
   color: var(--text-muted);
@@ -829,8 +841,7 @@ section {
 .scroll-reveal .skill-card,
 .scroll-reveal .project-card,
 .scroll-reveal .edu-card,
-.scroll-reveal .contact-box,
-.scroll-reveal .exp-groups {
+.scroll-reveal .contact-box {
   clip-path: inset(0 100% 0 0);
   transition: clip-path 0s;
 }
