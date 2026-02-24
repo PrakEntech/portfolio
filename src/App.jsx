@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import HackerBackground from './components/HackerBackground';
 import TypewriterText from './components/TypewriterText';
 import TerminalWindow from './components/TerminalWindow';
+import InteractiveTerminal from './components/InteractiveTerminal';
 import ScrollReveal from './components/ScrollReveal';
 import { resumeData } from './data/resumeData';
 import {
   Briefcase, GraduationCap, Github, Linkedin,
-  Mail, Phone, MapPin, Cpu, FolderGit2, ChevronRight, Star
+  Mail, Phone, MapPin, Cpu, FolderGit2, ChevronRight, Star,
+  Sun, Moon, Download
 } from 'lucide-react';
 
 /* ── Section heading ────────────────────────────────────── */
@@ -85,6 +87,15 @@ const RegularExpCard = ({ exp }) => (
 
 function App() {
   const { personalInfo, summary, education, skills, experience, projects } = resumeData;
+  const [theme, setTheme] = useState('dark');
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  };
 
   return (
     <>
@@ -100,6 +111,14 @@ function App() {
             </li>
           ))}
         </ul>
+        <div style={{ display: 'flex', gap: '15px', alignItems: 'center', marginLeft: '1rem' }}>
+          <button onClick={toggleTheme} className="theme-toggle nav-link" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex' }} aria-label="Toggle Theme">
+            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+          <a href="/resume.pdf" download="Prakhar_Srivastava_Resume.pdf" className="nav-link download-btn" style={{ display: 'flex', alignItems: 'center', gap: '6px', border: '1px solid var(--accent-green)', color: 'var(--accent-green)', padding: '4px 12px', borderRadius: '4px', textDecoration: 'none', fontSize: '0.85rem' }}>
+            <Download size={14} /> Resume
+          </a>
+        </div>
       </nav>
 
       <div className="page-wrapper page-content">
@@ -107,38 +126,7 @@ function App() {
         {/* ── HERO ─────────────────────────────── */}
         <section id="about" style={{ paddingTop: '6rem' }}>
           <ScrollReveal>
-            <TerminalWindow title="prakhar@system: ~ — bash">
-              <div className="terminal-body">
-                <div style={{ marginBottom: '2rem' }}>
-                  <div className="prompt-line">
-                    <span className="prompt">visitor@portfolio:~$</span>
-                    <span className="command">whoami</span>
-                  </div>
-                  <div className="glitch-wrapper hero-name" data-text={personalInfo.name}>
-                    {personalInfo.name}
-                  </div>
-                  <div className="hero-role">
-                    ▸ <TypewriterText text={personalInfo.role} speed={5} className="inline-typewriter" />
-                  </div>
-                  <div className="hero-location">
-                    <MapPin size={13} style={{ display: 'inline', marginRight: '4px', verticalAlign: 'middle' }} />
-                    <TypewriterText text={personalInfo.location} speed={5} className="inline-typewriter" />
-                  </div>
-                  <div className="status-badge" style={{ marginTop: '1rem' }}>
-                    <span className="status-dot" />
-                    Open to new opportunities
-                  </div>
-                </div>
-
-                <div style={{ borderTop: '1px solid rgba(34,211,238,0.1)', paddingTop: '1.5rem' }}>
-                  <div className="prompt-line">
-                    <span className="prompt">visitor@portfolio:~$</span>
-                    <span className="command">cat about_me.txt</span>
-                  </div>
-                  <TypewriterText text={summary} speed={5} className="hero-summary" />
-                </div>
-              </div>
-            </TerminalWindow>
+            <InteractiveTerminal resumeData={resumeData} />
           </ScrollReveal>
         </section>
 

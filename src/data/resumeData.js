@@ -9,19 +9,19 @@ export const resumeData = {
         linkedin: "prakhar-srivastava-3210641ba",
     },
 
-    summary: "Full-Stack Engineer with 1+ years of experience building and shipping secure, production-grade web systems. Owned end-to-end delivery of a QR-based field operations PWA — from architecture and development to CI/CD automation, security hardening, and independent production releases. Specialized in React, Firebase serverless architecture, and designing systems with strong security and operational reliability.",
+    summary: "Full-Stack Engineer with 1+ years of experience building and shipping secure, production-grade web systems. Owned end-to-end delivery of a QR-based field operations PWA — from development to CI/CD automation, security hardening, and independent production releases. Specialized in React, Firebase serverless architecture, and designing systems with strong security and operational reliability.",
 
     education: [
         {
             degree: "BSc in Computer Science, Mathematics, Electronics",
             institution: "Christ University",
-            period: "2021 – 2024",
+            period: "2021 - 2024",
             grade: "CGPA: 3.0 / 4.0",
         },
         {
-            degree: "Class X – XII",
+            degree: "Class X - XII",
             institution: "Delhi Public School",
-            period: "2019 – 2021",
+            period: "2019 - 2021",
             grade: "CGPA: 9.0 / 10.0",
         }
     ],
@@ -42,11 +42,11 @@ export const resumeData = {
         {
             company: "Weberon",
             role: "Software Developer",
-            period: "Aug 2024 – Present",
-            internPeriod: "Intern: Aug 2024 – Jan 2025",
-            fullTimePeriod: "Full-Time: Feb 2025 – Present",
+            period: "Aug 2024 - Present",
+            internPeriod: "Intern: Aug 2024 - Jan 2025",
+            fullTimePeriod: "Full-Time: Feb 2025 - Present",
             type: "featured",
-            overview: "Owned end-to-end delivery of the Delivery Tracker — a production QR-based field operations system. Led architecture design, development, security hardening, CI/CD automation, and independent multi-environment production releases.",
+            overview: "Owned end-to-end delivery of the Delivery Tracker — a production QR-based field operations system. Led development, security hardening, CI/CD automation, and independent multi-environment production releases.",
 
             groups: [
                 {
@@ -99,7 +99,7 @@ export const resumeData = {
                 {
                     label: "Professional Growth",
                     bullets: [
-                        "Progressed from intern to independently owning a production system within six months through hands-on architectural decision-making and delivery ownership.",
+                        "Progressed from intern to independently owning a production through hands-on architectural decision-making and delivery ownership.",
                         "Leveraged AI-assisted engineering workflows to accelerate documentation comprehension, solution exploration, and iteration speed."
                     ]
                 },
@@ -109,12 +109,11 @@ export const resumeData = {
         {
             company: "TerraviewOS",
             role: "Backend Intern",
-            period: "June 2022 – Oct 2022",
+            period: "June 2022 - Oct 2022",
             type: "intern",
             bullets: [
                 "Collaborated with backend engineers to develop secure, scalable solutions for collaborative business platforms.",
-                "Built and optimized REST APIs using Python and Flask, improving response performance and maintainability.",
-                "Contributed to a vineyard management platform supporting yield analytics, disease tracking, and weather forecasting modules.",
+                "Built and optimized REST API using Python and Flask, improving response performance and maintainability.",
                 "Improved internal technical documentation quality across backend services."
             ]
         }
@@ -122,7 +121,7 @@ export const resumeData = {
 
     projects: [
         {
-            name: "Delivery Tracker PWA",
+            name: "Delivery Tracker",
             description: "Production QR-based field operations PWA with full lifecycle ownership — React frontend, serverless Firebase backend, secure image uploads via signed URLs, multi-environment CI/CD automation, and security-hardened architecture.",
             tech: ["React.js", "Firebase", "PWA", "Jenkins", "GitHub Actions", "GCP"],
             highlight: true,
@@ -140,7 +139,7 @@ export const resumeData = {
         {
             name: "Music Streaming App",
             description: "Spotify-inspired cross-platform mobile application featuring gesture-based controls, media library management, and favourites built using React Native and Firebase.",
-            tech: ["React Native", "Firebase"],
+            tech: ["Kotlin"],
         },
         {
             name: "Word Hurdle Game",
