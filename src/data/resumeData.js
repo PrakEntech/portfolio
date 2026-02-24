@@ -9,7 +9,7 @@ export const resumeData = {
         linkedin: "prakhar-srivastava-3210641ba",
     },
 
-    summary: "Software Developer with 1+ years of hands-on experience building secure, scalable, zero-to-one systems. Owned the complete lifecycle of a production PWA — from requirements and architecture through development, CI/CD, documentation, and independent releases. Strong in serverless Firebase, React, security-hardened deployments, and AI-assisted engineering workflows.",
+    summary: "Software Developer with 1+ years of hands-on experience implementing secure, scalable, zero-to-one systems. Owned the complete implementation lifecycle of a production PWA — from development through CI/CD, documentation, and independent releases. Strong in serverless Firebase, React, security-hardened deployments, and AI-assisted engineering workflows.",
 
     education: [
         {
@@ -46,14 +46,14 @@ export const resumeData = {
             internPeriod: "Intern: Aug 2024 – Jan 2025",
             fullTimePeriod: "Full-Time: Feb 2025 – Present",
             type: "featured",
-            overview: "End-to-end ownership of the Delivery Tracker PWA — a production system QR-scanning deliveries in the field. Led the full lifecycle: requirements → architecture → development → security hardening → CI/CD → documentation → independent production releases.",
+            overview: "End-to-end ownership of the Delivery Tracker — a production system QR-scanning deliveries in the field. Led the full lifecycle: development → security hardening → CI/CD → documentation → independent environment releases.",
             groups: [
                 {
                     label: "Product & Architecture",
                     bullets: [
-                        "Designed and owned the complete lifecycle of a QR-based delivery tracking Progressive Web App (PWA) using React and Firebase — from POC through to production.",
-                        "Architected a scalable, serverless system using Firebase Authentication, Realtime Database, Storage, and event-driven Cloud Functions — eliminating public HTTP endpoints to reduce attack surface.",
-                        "Designed multi-environment deployments (Developer, Alpha, Blue, Production) with fully isolated Firebase projects and per-environment configurations.",
+                        "Implemented and owned the lifecycle of a QR-based delivery tracking Progressive Web App (PWA) using React and Firebase — from POC through to production.",
+                        "Implemented a scalable, serverless system using Firebase Authentication, Realtime Database, Storage, and event-driven Cloud Functions — eliminating public HTTP endpoints to reduce attack surface.",
+                        "Implemented multi-environment deployments (Developer, Alpha, Blue, Production) with fully isolated Firebase projects and per-environment configurations.",
                     ]
                 },
                 {
@@ -66,8 +66,8 @@ export const resumeData = {
                 {
                     label: "Security Engineering",
                     bullets: [
-                        "Engineered a secure image upload workflow using short-lived signed URLs, upload attempt throttling (max 3 attempts), and user-isolated Storage paths — ensuring data privacy and abuse prevention.",
-                        "Led security hardening and cost optimisation during migration from Firebase Spark (Free) to Blaze (Paid): strict RTDB security rules, real-time abuse alerts, and automated database lockdown mechanisms.",
+                        "Learned and implemented system designs, building a secure image upload workflow using short-lived signed URLs, upload attempt throttling (max 3 attempts), and user-isolated Storage paths — ensuring data privacy and abuse prevention.",
+                        "Implemented security hardening and cost optimisation during migration from Firebase Spark (Free) to Blaze (Paid): strict RTDB security rules, real-time abuse alerts, and automated database lockdown mechanisms.",
                         "Validated the complete security flow through manual edge-case testing, covering upload abuse, rule bypass attempts, and environment bleed scenarios.",
                     ]
                 },
@@ -83,7 +83,7 @@ export const resumeData = {
                 {
                     label: "CI/CD & DevOps",
                     bullets: [
-                        "Designed and implemented CI/CD pipelines using Jenkins and GitHub Actions for automated, secret-free builds and deployments across all environments.",
+                        "Implemented CI/CD pipelines using Jenkins and GitHub Actions for automated, secret-free builds and deployments across all environments.",
                         "Wrote shell scripts for deployment automation, versioning strategies, and release management — managed production releases independently.",
                     ]
                 },
