@@ -74,7 +74,7 @@ export default function HackerBackground({ theme = 'dark' }) {
                 const isLead = drops[i] * fontSize < canvas.height && Math.random() > 0.9;
 
                 if (theme === 'light') {
-                    ctx.fillStyle = isLead ? '#64748b' : `rgba(14, 165, 233, ${Math.random() * 0.5 + 0.1})`;
+                    ctx.fillStyle = isLead ? '#000000' : `rgba(71, 85, 105, ${Math.random() * 0.5 + 0.1})`; // slate-600 background stream
                 } else {
                     ctx.fillStyle = isLead ? '#ffffff' : `rgba(74, 222, 128, ${Math.random() * 0.5 + 0.1})`;
                 }
@@ -119,7 +119,7 @@ export default function HackerBackground({ theme = 'dark' }) {
             line.style.fontSize = `${Math.random() * 3 + 9}px`;
 
             if (theme === 'light') {
-                line.style.color = Math.random() > 0.7 ? '#3b82f6' : '#64748b'; // darker blue/slate
+                line.style.color = Math.random() > 0.7 ? '#475569' : '#1e293b'; // slate-600 or slate-800
             } else {
                 line.style.color = Math.random() > 0.7 ? '#60a5fa' : '#4ade80'; // bright blue/green
             }

@@ -40,12 +40,14 @@ const InteractiveTerminal = ({ resumeData }) => {
 
     const [history, setHistory] = useState(initialHistory);
     const [input, setInput] = useState('');
-    const endRef = useRef(null);
+    const terminalBodyRef = useRef(null);
     const inputRef = useRef(null);
 
     const scrollToBottom = () => {
         setTimeout(() => {
-            endRef.current?.scrollIntoView({ behavior: 'smooth' });
+            if (terminalBodyRef.current) {
+                terminalBodyRef.current.scrollTop = terminalBodyRef.current.scrollHeight;
+            }
         }, 0);
     };
 
@@ -126,7 +128,7 @@ const InteractiveTerminal = ({ resumeData }) => {
                 <div style={{ width: '40px' }}></div>
             </div>
 
-            <div className="terminal-body" style={{ minHeight: '300px', maxHeight: '500px', overflowY: 'auto' }}>
+            <div className="terminal-body" ref={terminalBodyRef} style={{ minHeight: '300px', maxHeight: '500px', overflowY: 'auto' }}>
                 {history.map((item, idx) => (
                     <div key={idx} style={{ marginBottom: item.type === 'command' ? '8px' : '1.5rem' }}>
                         {item.type === 'command' ? (
@@ -163,7 +165,6 @@ const InteractiveTerminal = ({ resumeData }) => {
                         autoFocus
                     />
                 </div>
-                <div ref={endRef} />
             </div>
         </div>
     );
