@@ -1,7 +1,7 @@
 export const resumeData = {
     personalInfo: {
         name: "Prakhar Srivastava",
-        role: "Software Developer | Full Stack Developer",
+        role: "Full-Stack Engineer | React & Serverless Systems",
         location: "Bengaluru, Karnataka",
         phone: "+91 6203555484",
         email: "prakhartech983@gmail.com",
@@ -9,7 +9,7 @@ export const resumeData = {
         linkedin: "prakhar-srivastava-3210641ba",
     },
 
-    summary: "Software Developer with 1+ years of hands-on experience implementing secure, scalable, zero-to-one systems. Owned the complete implementation lifecycle of a production PWA — from development through CI/CD, documentation, and independent releases. Strong in serverless Firebase, React, security-hardened deployments, and AI-assisted engineering workflows.",
+    summary: "Full-Stack Engineer with 1+ years of experience building and shipping secure, production-grade web systems. Owned end-to-end delivery of a QR-based field operations PWA — from architecture and development to CI/CD automation, security hardening, and independent production releases. Specialized in React, Firebase serverless architecture, and designing systems with strong security and operational reliability.",
 
     education: [
         {
@@ -27,15 +27,15 @@ export const resumeData = {
     ],
 
     skills: [
-        { category: "Frontend", items: ["React.js", "JavaScript", "Local Caching"] },
-        { category: "Backend & Serverless", items: ["Firebase Cloud Functions", "Event-driven Architecture", "Python", "Flask", "Node.js"] },
-        { category: "Databases & Cloud", items: ["Firebase Realtime Database", "Firebase Storage", "Firebase Auth", "GCP"] },
-        { category: "Security", items: ["Signed URLs", "Upload Throttling", "Storage Path Isolation", "RTDB Rules", "IAM", "Abuse Alerts"] },
-        { category: "CI/CD & DevOps", items: ["Jenkins", "GitHub Actions", "Multi-env Deployments", "Secrets Handling", "Shell Scripting"] },
+        { category: "Frontend", items: ["React.js", "JavaScript", "PWA Patterns", "Client-side Caching"] },
+        { category: "Backend & Serverless", items: ["Firebase Cloud Functions", "Event-driven Architecture", "Node.js", "Python", "Flask"] },
+        { category: "Databases & Cloud", items: ["Firebase Realtime Database", "Firebase Storage", "Firebase Auth", "Google Cloud Platform (GCP)"] },
+        { category: "Security Engineering", items: ["Signed URLs", "Upload Throttling", "Storage Path Isolation", "RTDB Security Rules", "IAM", "Abuse Monitoring"] },
+        { category: "CI/CD & DevOps", items: ["Jenkins", "GitHub Actions", "Multi-environment Deployments", "Secrets Management", "Shell Scripting"] },
         { category: "Languages", items: ["JavaScript", "Python", "Java", "Kotlin", "Dart", "C"] },
-        { category: "Integrations & APIs", items: ["Google Maps Reverse Geocoding", "Mautic CRM", "Dropbox API"] },
-        { category: "AI-Augmented Eng.", items: ["ChatGPT / Gemini Workflows", "POC Development", "Prompt-driven Debugging", "Doc Generation"] },
-        { category: "Quality & Tooling", items: ["SonarQube", "Manual & Edge-case Testing", "System Design Docs", "Deployment Docs"] },
+        { category: "Integrations & APIs", items: ["Google Maps Reverse Geocoding API", "Mautic CRM", "Dropbox API"] },
+        { category: "Engineering Productivity", items: ["AI-assisted Development Workflows", "Rapid POC Development", "Prompt-guided Debugging", "Technical Documentation Generation"] },
+        { category: "Quality & Tooling", items: ["SonarQube", "Edge-case Testing", "System Design Documentation", "Deployment Documentation"] },
     ],
 
     experience: [
@@ -46,74 +46,76 @@ export const resumeData = {
             internPeriod: "Intern: Aug 2024 – Jan 2025",
             fullTimePeriod: "Full-Time: Feb 2025 – Present",
             type: "featured",
-            overview: "End-to-end ownership of the Delivery Tracker — a production system QR-scanning deliveries in the field. Led the full lifecycle: development → security hardening → CI/CD → documentation → independent environment releases.",
+            overview: "Owned end-to-end delivery of the Delivery Tracker — a production QR-based field operations system. Led architecture design, development, security hardening, CI/CD automation, and independent multi-environment production releases.",
+
             groups: [
                 {
                     label: "Product & Architecture",
                     bullets: [
-                        "Implemented and owned the lifecycle of a QR-based delivery tracking Progressive Web App (PWA) using React and Firebase — from POC through to production.",
-                        "Implemented a scalable, serverless system using Firebase Authentication, Realtime Database, Storage, and event-driven Cloud Functions — eliminating public HTTP endpoints to reduce attack surface.",
-                        "Implemented multi-environment deployments (Developer, Alpha, Blue, Production) with fully isolated Firebase projects and per-environment configurations.",
+                        "Architected and shipped a QR-based delivery tracking Progressive Web App (PWA) using React and Firebase, taking the system from proof-of-concept to stable production deployment.",
+                        "Designed a fully serverless architecture using Firebase Authentication, Realtime Database, Storage, and event-driven Cloud Functions — eliminating public HTTP endpoints to reduce attack surface.",
+                        "Established isolated multi-environment deployments (Developer, Alpha, Blue, Production) with independent Firebase projects and environment-specific configurations."
                     ]
                 },
                 {
-                    label: "Frontend Development",
+                    label: "Frontend Engineering",
                     bullets: [
-                        "Built a full-featured React PWA with authentication flows, real-time dashboard, client-side QR scanning, address validation and editing, image capture/upload, and local caching to prevent duplicate scans.",
-                        "Implemented PWA patterns including offline-readiness and install prompts for field use on mobile devices.",
+                        "Built a production-grade React PWA featuring secure authentication flows, real-time dashboards, client-side QR scanning, structured address validation/editing, image capture/upload workflows, and local caching to prevent duplicate scans.",
+                        "Implemented offline-ready PWA patterns including service workers, caching strategies, and install prompts to ensure reliable field usage on mobile devices."
                     ]
                 },
                 {
                     label: "Security Engineering",
                     bullets: [
-                        "Learned and implemented system designs, building a secure image upload workflow using short-lived signed URLs, upload attempt throttling (max 3 attempts), and user-isolated Storage paths — ensuring data privacy and abuse prevention.",
-                        "Implemented security hardening and cost optimisation during migration from Firebase Spark (Free) to Blaze (Paid): strict RTDB security rules, real-time abuse alerts, and automated database lockdown mechanisms.",
-                        "Validated the complete security flow through manual edge-case testing, covering upload abuse, rule bypass attempts, and environment bleed scenarios.",
+                        "Engineered a secure image upload pipeline using short-lived signed URLs, upload attempt throttling (max 3 attempts), and user-isolated Storage paths to enforce strict data separation and abuse prevention.",
+                        "Strengthened production security during migration from Firebase Spark to Blaze by implementing strict RTDB security rules, automated abuse alerts, and real-time database lockdown safeguards.",
+                        "Performed structured edge-case and abuse-path validation to test upload protection, rule enforcement, and cross-environment isolation."
                     ]
                 },
                 {
                     label: "Integrations",
                     bullets: [
-                        "Integrated Google Maps Reverse Geocoding API for automated address resolution from GPS coordinates.",
-                        "Integrated Mautic CRM for contact address synchronisation, keeping delivery records consistent with CRM data.",
-                        "Developed a Mautic plugin for trackable URL generation, gaining hands-on experience in plugin architecture, Mautic internals, and API development.",
-                        "Implemented Postcard PDF generation with a grid layout, integrating Dropbox API for file storage and delivery.",
+                        "Integrated Google Maps Reverse Geocoding API to automatically resolve structured addresses from GPS coordinates during field scans.",
+                        "Integrated Mautic CRM for bidirectional address synchronisation, ensuring delivery records remained consistent with CRM data.",
+                        "Developed a custom Mautic plugin for trackable URL generation, working directly with plugin architecture, internal hooks, and API workflows.",
+                        "Automated Postcard PDF generation with structured grid layouts and integrated Dropbox API for secure file storage and distribution."
                     ]
                 },
                 {
                     label: "CI/CD & DevOps",
                     bullets: [
-                        "Implemented CI/CD pipelines using Jenkins and GitHub Actions for automated, secret-free builds and deployments across all environments.",
-                        "Wrote shell scripts for deployment automation, versioning strategies, and release management — managed production releases independently.",
+                        "Designed and maintained CI/CD pipelines using Jenkins and GitHub Actions for automated, environment-aware deployments with secure secret handling.",
+                        "Built shell-based deployment automation covering versioning strategies, environment promotion workflows, and independent production release management."
                     ]
                 },
                 {
                     label: "Documentation & Quality",
                     bullets: [
-                        "Produced comprehensive system design, usage, and deployment documentation to support maintainability and team onboarding.",
-                        "Used SonarQube to identify and resolve code smells before review cycles.",
-                        "Performed manual and edge-case testing across all features to ensure production readiness before each release.",
+                        "Authored comprehensive system design, usage, and deployment documentation to improve maintainability and onboarding efficiency.",
+                        "Used SonarQube to proactively identify and resolve code quality issues before review cycles.",
+                        "Conducted structured manual and edge-case testing to ensure production readiness before each release."
                     ]
                 },
                 {
-                    label: "Growth & Learning",
+                    label: "Professional Growth",
                     bullets: [
-                        "Grew from intern with limited JS experience to independently owning a production system within 6 months — learning through hands-on implementation, not courses.",
-                        "Adopted AI-assisted development workflows (ChatGPT, Gemini) to accelerate understanding of documentation, generate solution approaches, and reduce iteration time.",
+                        "Progressed from intern to independently owning a production system within six months through hands-on architectural decision-making and delivery ownership.",
+                        "Leveraged AI-assisted engineering workflows to accelerate documentation comprehension, solution exploration, and iteration speed."
                     ]
                 },
             ]
         },
+
         {
             company: "TerraviewOS",
             role: "Backend Intern",
             period: "June 2022 – Oct 2022",
             type: "intern",
             bullets: [
-                "Collaborated with the core backend team to build secure, scalable collaborative solutions for medium-sized businesses.",
-                "Developed backend features for a unified vineyard management platform with yield intelligence, disease management, and weather forecasting modules.",
-                "Built and optimised REST APIs using Python and Flask, improving response times and code maintainability.",
-                "Developed CRUD applications in Python and enhanced technical documentation quality across the team.",
+                "Collaborated with backend engineers to develop secure, scalable solutions for collaborative business platforms.",
+                "Built and optimized REST APIs using Python and Flask, improving response performance and maintainability.",
+                "Contributed to a vineyard management platform supporting yield analytics, disease tracking, and weather forecasting modules.",
+                "Improved internal technical documentation quality across backend services."
             ]
         }
     ],
@@ -121,33 +123,33 @@ export const resumeData = {
     projects: [
         {
             name: "Delivery Tracker PWA",
-            description: "Production QR-based delivery tracking PWA. Full lifecycle ownership: React frontend, serverless Firebase backend, secure image uploads, multi-env CI/CD via Jenkins & GitHub Actions.",
+            description: "Production QR-based field operations PWA with full lifecycle ownership — React frontend, serverless Firebase backend, secure image uploads via signed URLs, multi-environment CI/CD automation, and security-hardened architecture.",
             tech: ["React.js", "Firebase", "PWA", "Jenkins", "GitHub Actions", "GCP"],
             highlight: true,
         },
         {
             name: "Mautic Trackable URL Plugin",
-            description: "Custom Mautic CRM plugin for generating trackable URLs with Jenkins-based automation. Gained deep knowledge of Mautic internals and plugin architecture.",
-            tech: ["PHP", "Mautic", "Jenkins", "API Dev"],
+            description: "Custom Mautic CRM plugin for generating trackable URLs with automated Jenkins-based deployments, built using PHP with deep integration into Mautic’s plugin architecture and event system.",
+            tech: ["PHP", "Mautic", "Jenkins", "API Development"],
         },
         {
             name: "Postcard PDF Generator",
-            description: "Automated generation of postcard grids inside PDFs with Dropbox API integration and CI/CD automation.",
+            description: "Automated PDF generation system producing grid-based postcard layouts with Dropbox API integration and CI/CD-enabled deployment workflows.",
             tech: ["Python", "Dropbox API", "Jenkins"],
         },
         {
             name: "Music Streaming App",
-            description: "Spotify-inspired cross-platform mobile app with swipe gesture controls, music library, and favourites.",
+            description: "Spotify-inspired cross-platform mobile application featuring gesture-based controls, media library management, and favourites built using React Native and Firebase.",
             tech: ["React Native", "Firebase"],
         },
         {
             name: "Word Hurdle Game",
-            description: "Wordle-inspired word puzzle with dynamic colour-coded feedback and difficulty progression.",
+            description: "Wordle-inspired puzzle game with dynamic color-coded feedback, difficulty scaling, and responsive UI built using Flutter and Dart.",
             tech: ["Flutter", "Dart"],
         },
         {
             name: "Scitrix Module",
-            description: "Python library for complex matrix calculations and linear algebra operations, published as a standalone package.",
+            description: "Standalone Python library for advanced matrix and linear algebra computations designed for modular usage and reusability.",
             tech: ["Python"],
         }
     ]
