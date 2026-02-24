@@ -99,7 +99,7 @@ function App() {
 
   return (
     <>
-      <HackerBackground />
+      <HackerBackground theme={theme} />
 
       {/* NAV */}
       <nav className="nav-bar">

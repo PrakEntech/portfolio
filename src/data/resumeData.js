@@ -139,7 +139,7 @@ export const resumeData = {
         {
             name: "Music Streaming App",
             description: "Spotify-inspired cross-platform mobile application featuring gesture-based controls, media library management, and favourites built using React Native and Firebase.",
-            tech: ["Kotlin"],
+            tech: ["Java"],
         },
         {
             name: "Word Hurdle Game",

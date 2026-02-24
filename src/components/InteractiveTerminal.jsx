@@ -44,7 +44,9 @@ const InteractiveTerminal = ({ resumeData }) => {
     const inputRef = useRef(null);
 
     const scrollToBottom = () => {
-        endRef.current?.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => {
+            endRef.current?.scrollIntoView({ behavior: 'smooth' });
+        }, 0);
     };
 
     useEffect(() => {
@@ -91,7 +93,9 @@ const InteractiveTerminal = ({ resumeData }) => {
                 const dir = cmd.split(' ')[1];
                 const validDirs = ['about', 'skills', 'experience', 'projects', 'education', 'contact'];
                 if (validDirs.includes(dir)) {
-                    document.getElementById(dir)?.scrollIntoView({ behavior: 'smooth' });
+                    setTimeout(() => {
+                        document.getElementById(dir)?.scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
                     output = <div style={{ color: 'var(--accent-green)' }}>Navigating to ~/{dir}...</div>;
                 } else {
                     output = <div style={{ color: 'var(--accent-red)' }}>cd: {dir}: No such file or directory</div>;
