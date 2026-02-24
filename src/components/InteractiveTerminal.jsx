@@ -78,7 +78,7 @@ const InteractiveTerminal = ({ resumeData }) => {
                         <div><span style={{ color: 'var(--accent-yellow)', width: '60px', display: 'inline-block' }}>sudo</span> - ???</div>
                     </div>
                 );
-            } else if (cmd === 'whoami') {
+            } else if (cmd === 'whoami' || cmd === 'about' || cmd === 'about/') {
                 output = initialHistory[1].content;
             } else if (cmd === 'ls') {
                 output = (
@@ -98,6 +98,15 @@ const InteractiveTerminal = ({ resumeData }) => {
                     setTimeout(() => {
                         document.getElementById(dir)?.scrollIntoView({ behavior: 'smooth' });
                     }, 100);
+
+                    if (dir === 'about') {
+                        setHistory([
+                            { type: 'command', text: cmd },
+                            { type: 'component', content: initialHistory[1].content }
+                        ]);
+                        return;
+                    }
+
                     output = <div style={{ color: 'var(--accent-green)' }}>Navigating to ~/{dir}...</div>;
                 } else {
                     output = <div style={{ color: 'var(--accent-red)' }}>cd: {dir}: No such file or directory</div>;
