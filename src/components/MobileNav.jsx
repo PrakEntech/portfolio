@@ -113,51 +113,73 @@ export default function MobileNav() {
 
                             {/* Orbiting Section Options */}
                             {SECTIONS.map((section, idx) => {
-                                // Start at Top (-90 deg) and go clockwise
-                                const angle = -90 + (idx * (360 / SECTIONS.length));
-                                const rad = angle * (Math.PI / 180);
-                                const targetX = radius * Math.cos(rad);
-                                const targetY = radius * Math.sin(rad);
+                                // 0 degrees is 3 o'clock. We want 12 o'clock, which is -90 degrees.
+                                const targetAngle = -90 + (idx * (360 / SECTIONS.length));
 
                                 return (
-                                    <motion.a
+                                    <motion.div
                                         key={section}
-                                        href={`#${section}`}
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            setIsOpen(false);
+                                        initial={{ rotate: -90, opacity: 0 }}
+                                        animate={{ rotate: targetAngle, opacity: 1 }}
+                                        exit={{ rotate: -90, opacity: 0 }}
+                                        transition={{
+                                            duration: 0.6,
+                                            delay: idx * 0.05,
+                                            type: "spring",
+                                            stiffness: 120,
+                                            damping: 20
                                         }}
                                         style={{
                                             position: 'absolute',
-                                            top: 0, left: 0,
-                                            marginTop: '-20px', marginLeft: '-45px', // Exact center alignment for 90x40 button
-                                            width: '90px', height: '40px',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            background: 'rgba(12, 18, 24, 0.95)',
-                                            border: '1px solid var(--accent-green)',
-                                            color: 'var(--accent-green)',
-                                            textDecoration: 'none',
-                                            borderRadius: '20px',
-                                            fontSize: '0.75rem',
-                                            textTransform: 'uppercase',
-                                            boxShadow: '0 0 15px rgba(34, 211, 238, 0.2)',
-                                            fontFamily: "'Fira Code', monospace"
-                                        }}
-                                        initial={{ opacity: 0, x: 0, y: 0, scale: 0 }}
-                                        animate={{ opacity: 1, x: targetX, y: targetY, scale: 1 }}
-                                        exit={{ opacity: 0, x: 0, y: 0, scale: 0 }}
-                                        transition={{
-                                            duration: 0.4,
-                                            delay: idx * 0.05,
-                                            type: "spring",
-                                            stiffness: 260,
-                                            damping: 20
+                                            top: -radius, left: -radius,
+                                            width: radius * 2, height: radius * 2,
+                                            pointerEvents: 'none'
                                         }}
                                     >
-                                        {section}
-                                    </motion.a>
+                                        <motion.a
+                                            href={`#${section}`}
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                setIsOpen(false);
+                                            }}
+                                            style={{
+                                                position: 'absolute',
+                                                top: '50%', right: 0,
+                                                marginTop: '-20px', marginRight: '-45px', // Center the 90x40 element on the arc
+                                                width: '90px', height: '40px',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                background: 'rgba(12, 18, 24, 0.95)',
+                                                border: '1px solid var(--accent-green)',
+                                                color: 'var(--accent-green)',
+                                                textDecoration: 'none',
+                                                borderRadius: '20px',
+                                                fontSize: '0.75rem',
+                                                textTransform: 'uppercase',
+                                                boxShadow: '0 0 15px rgba(34, 211, 238, 0.2)',
+                                                fontFamily: "'Fira Code', monospace",
+                                                pointerEvents: 'auto'
+                                            }}
+                                            initial={{ rotate: 90 }} // counter-rotate initial -90
+                                            animate={{ rotate: -targetAngle }}
+                                            exit={{ rotate: 90 }}
+                                            transition={{
+                                                duration: 0.6,
+                                                delay: idx * 0.05,
+                                                type: "spring",
+                                                stiffness: 120,
+                                                damping: 20
+                                            }}
+                                            whileHover={{
+                                                scale: 1.1,
+                                                background: 'rgba(34, 211, 238, 0.1)',
+                                                boxShadow: '0 0 20px rgba(34, 211, 238, 0.4)'
+                                            }}
+                                        >
+                                            {section}
+                                        </motion.a>
+                                    </motion.div>
                                 );
                             })}
                         </div>
