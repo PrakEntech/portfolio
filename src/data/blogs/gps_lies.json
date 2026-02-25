@@ -1,0 +1,124 @@
+{
+    "key": "gps_lies",
+    "title": "GPS Lies: Why Distance Alone Cannot Validate a Delivery",
+    "date": "2025-02-24",
+    "tags": [
+        "GPS",
+        "Firebase",
+        "PWA",
+        "Engineering"
+    ],
+    "readTime": "5 min read",
+    "sections": [
+        {
+            "type": "intro",
+            "content": "When building a delivery tracking system, the obvious logic looks like this:"
+        },
+        {
+            "type": "callout",
+            "content": "If driver is within 20 meters → mark delivery valid."
+        },
+        {
+            "type": "paragraph",
+            "content": "Simple. Also wrong."
+        },
+        {
+            "type": "paragraph",
+            "content": "While building my QR-based Delivery Tracker PWA (React + Firebase), I discovered that distance alone is not reliable. The real issue is GPS accuracy."
+        },
+        {
+            "type": "heading",
+            "content": "The Hidden Field Most Developers Ignore"
+        },
+        {
+            "type": "paragraph",
+            "content": "When you call navigator.geolocation.getCurrentPosition(), you don't just get latitude and longitude. You also get accuracy. That number changes everything."
+        },
+        {
+            "type": "code",
+            "lang": "javascript",
+            "content": "navigator.geolocation.getCurrentPosition((position) => {\n  const { latitude, longitude, accuracy } = position.coords;\n  // accuracy = radius in meters — NEVER ignore this!\n});"
+        },
+        {
+            "type": "heading",
+            "content": "Example: Why Accuracy Changes Everything"
+        },
+        {
+            "type": "paragraph",
+            "content": "Distance from delivery point: 12 meters. Accuracy: ±70 meters. This means the phone is only confident within a 70-meter radius. So even if the driver appears \"12 meters away\", the actual position could be far outside your delivery boundary. Now imagine rejecting a valid delivery because GPS was unstable. That's a bad system."
+        },
+        {
+            "type": "heading",
+            "content": "Real Data I Observed"
+        },
+        {
+            "type": "table",
+            "headers": [
+                "Case",
+                "Distance",
+                "Accuracy",
+                "Signal"
+            ],
+            "rows": [
+                [
+                    "Case 1",
+                    "6 meters",
+                    "±8 meters",
+                    "Strong signal, high confidence"
+                ],
+                [
+                    "Case 2",
+                    "12 meters",
+                    "±70 meters",
+                    "Weak signal, medium confidence"
+                ],
+                [
+                    "Case 3",
+                    "40 meters",
+                    "±15 meters",
+                    "User is clearly away, low confidence"
+                ]
+            ]
+        },
+        {
+            "type": "callout",
+            "content": "Distance without accuracy is meaningless."
+        },
+        {
+            "type": "heading",
+            "content": "The Fix: A Confidence-Based Model"
+        },
+        {
+            "type": "paragraph",
+            "content": "Instead of binary validation (Valid / Invalid), I built a confidence scoring model. The system evaluates: Distance from target, GPS accuracy value, and Region bounding box validation (India / US)."
+        },
+        {
+            "type": "paragraph",
+            "content": "Then it classifies delivery as: High Confidence, Medium Confidence, or Low Confidence. This approach reduces false rejections, handles real-world GPS noise, improves driver experience, and makes audit decisions smarter."
+        },
+        {
+            "type": "heading",
+            "content": "Why This Matters in Production"
+        },
+        {
+            "type": "paragraph",
+            "content": "In controlled environments, GPS looks clean. In the real world: Network conditions fluctuate. Buildings block signals. Devices vary in sensor quality. Users sometimes spoof coordinates. If your validation logic is naive, your product breaks under real-world conditions."
+        },
+        {
+            "type": "callout",
+            "content": "Engineering is not about ideal data. It is about handling imperfect data intelligently."
+        },
+        {
+            "type": "heading",
+            "content": "Key Takeaway"
+        },
+        {
+            "type": "paragraph",
+            "content": "Never validate location using distance alone. Always combine: Distance, Accuracy, and Context. If you ignore accuracy, your system will reject valid users and accept invalid ones."
+        },
+        {
+            "type": "paragraph",
+            "content": "Real systems require probabilistic thinking, not checkbox logic. If you're building location-based validation, treat GPS as an estimate — not truth. That one mindset shift changes everything."
+        }
+    ]
+}

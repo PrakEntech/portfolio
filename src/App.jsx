@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
 import HackerBackground from './components/HackerBackground';
 import TypewriterText from './components/TypewriterText';
 import TerminalWindow from './components/TerminalWindow';
 import InteractiveTerminal from './components/InteractiveTerminal';
 import MobileNav from './components/MobileNav';
 import ScrollReveal from './components/ScrollReveal';
+import BlogRoutes from './generated/BlogRoutes.jsx';
 import { resumeData } from './data/resumeData';
 import {
   Briefcase, GraduationCap, Github, Linkedin,
@@ -87,6 +89,15 @@ const RegularExpCard = ({ exp }) => (
 );
 
 function App() {
+  return (
+    <Routes>
+      <Route path="/blog/*" element={<BlogRoutes />} />
+      <Route path="/*" element={<HomeApp />} />
+    </Routes>
+  );
+}
+
+function HomeApp() {
   const { personalInfo, summary, education, skills, experience, projects } = resumeData;
 
   return (
@@ -102,6 +113,7 @@ function App() {
               <a href={href} className="nav-link">{href.replace('#', '')}</a>
             </li>
           ))}
+          <li><Link to="/blog" className="nav-link" style={{ color: 'var(--accent-blue)', whiteSpace: 'nowrap' }}>blog</Link></li>
         </ul>
         <div style={{ display: 'flex', gap: '15px', alignItems: 'center', marginLeft: 'auto' }}>
           <MobileNav />
