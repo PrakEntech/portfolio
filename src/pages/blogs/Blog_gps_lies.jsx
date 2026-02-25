@@ -63,17 +63,17 @@ export default function Blog_gps_lies() {
 
       <p key={2} className="blog-paragraph">Simple. Also wrong.</p>
 
-      <p key={3} className="blog-paragraph">While working on a project, I discovered that distance alone is not reliable. The real issue is GPS accuracy.</p>
+      <p key={3} className="blog-paragraph">I discovered that distance alone is not reliable. The real issue is GPS accuracy.</p>
 
       <h2 key={4} className="blog-heading">The Hidden Field Most Developers Ignore</h2>
 
       <p key={5} className="blog-paragraph">When you call navigator.geolocation.getCurrentPosition(), you don't just get latitude and longitude. You also get accuracy. That number changes everything.</p>
 
-      <pre key={6} className="blog-code"><code>{"navigator.geolocation.getCurrentPosition((position) => {\n  const { latitude, longitude, accuracy } = position.coords;\n  // accuracy = radius in meters — NEVER ignore this!\n});"}</code></pre>
+      <pre key={6} className="blog-code"><code>{"navigator.geolocation.getCurrentPosition((position) => {\n  const { latitude, longitude, accuracy } = position.coords;\n  // accuracy = radius in meters NEVER ignore this!\n});"}</code></pre>
 
       <h2 key={7} className="blog-heading">Example: Why Accuracy Changes Everything</h2>
 
-      <p key={8} className="blog-paragraph">Distance from delivery point: 12 meters. Accuracy: ±70 meters. This means the phone is only confident within a 70-meter radius. So even if the driver appears "12 meters away", the actual position could be far outside your delivery boundary. Now imagine rejecting a valid delivery because GPS was unstable. That's a bad system.</p>
+      <p key={8} className="blog-paragraph">Distance from delivery point: 12 meters. Accuracy: ±70 meters. This means the phone is only confident within a 70 meter radius. So even if the driver appears "12 meters away", the actual position could be far outside your delivery boundary. Now imagine rejecting a valid delivery because GPS was unstable. That's a bad system.</p>
 
       <h2 key={9} className="blog-heading">Real Data I Observed</h2>
 
@@ -88,15 +88,15 @@ export default function Blog_gps_lies() {
 
       <div key={11} className="blog-callout">Distance without accuracy is meaningless.</div>
 
-      <h2 key={12} className="blog-heading">The Fix: A Confidence-Based Model</h2>
+      <h2 key={12} className="blog-heading">The Fix: A Confidence Based Model</h2>
 
-      <p key={13} className="blog-paragraph">Instead of binary validation (Valid / Invalid), I built a confidence scoring model. The system evaluates: Distance from target, GPS accuracy value, and Region bounding box validation (India / US).</p>
+      <p key={13} className="blog-paragraph">Instead of binary validation (Valid / Invalid), Build a confidence scoring model. The system evaluates: Distance from target, GPS accuracy value.</p>
 
-      <p key={14} className="blog-paragraph">Then it classifies delivery as: High Confidence, Medium Confidence, or Low Confidence. This approach reduces false rejections, handles real-world GPS noise, improves driver experience, and makes audit decisions smarter.</p>
+      <p key={14} className="blog-paragraph">Then it classifies delivery as: High Confidence, Medium Confidence, or Low Confidence. This approach reduces false rejections, handles real world GPS noise, improves driver experience, and makes audit decisions smarter.</p>
 
       <h2 key={15} className="blog-heading">Why This Matters in Production</h2>
 
-      <p key={16} className="blog-paragraph">In controlled environments, GPS looks clean. In the real world: Network conditions fluctuate. Buildings block signals. Devices vary in sensor quality. Users sometimes spoof coordinates. If your validation logic is naive, your product breaks under real-world conditions.</p>
+      <p key={16} className="blog-paragraph">In controlled environments, GPS looks clean. In the real world: Network conditions fluctuate. Buildings block signals. Devices vary in sensor quality. Users sometimes spoof coordinates. If your validation logic is naive, your product breaks under real world conditions.</p>
 
       <div key={17} className="blog-callout">Engineering is not about ideal data. It is about handling imperfect data intelligently.</div>
 
@@ -104,7 +104,7 @@ export default function Blog_gps_lies() {
 
       <p key={19} className="blog-paragraph">Never validate location using distance alone. Always combine: Distance, Accuracy, and Context. If you ignore accuracy, your system will reject valid users and accept invalid ones.</p>
 
-      <p key={20} className="blog-paragraph">Real systems require probabilistic thinking, not checkbox logic. If you're building location-based validation, treat GPS as an estimate — not truth. That one mindset shift changes everything.</p>
+      <p key={20} className="blog-paragraph">Real systems require probabilistic thinking, not checkbox logic. If you're building location based validation, treat GPS as an estimate, not truth. That one mindset shift changes everything.</p>
             </div>
           </div>
         </div>

@@ -1,0 +1,69 @@
+{
+    "key": "event_driven_security",
+    "title": "Event Driven Security Is Safer Than Public Endpoints",
+    "date": "2026-02-25",
+    "tags": [
+        "Security",
+        "Architecture",
+        "Backend"
+    ],
+    "readTime": "3 min read",
+    "sections": [
+        {
+            "type": "paragraph",
+            "content": "Public HTTP endpoints are easy to expose and easy to attack."
+        },
+        {
+            "type": "paragraph",
+            "content": "If your backend logic depends on callable HTTP functions, you are increasing your attack surface."
+        },
+        {
+            "type": "heading",
+            "content": "Event Driven Operations"
+        },
+        {
+            "type": "paragraph",
+            "content": "I designed backend operations to be event driven instead."
+        },
+        {
+            "type": "table",
+            "headers": [
+                "Functionality"
+            ],
+            "rows": [
+                [
+                    "Signed URL generation"
+                ],
+                [
+                    "Upload cleanup"
+                ],
+                [
+                    "Abuse detection"
+                ],
+                [
+                    "Database shutdown"
+                ]
+            ]
+        },
+        {
+            "type": "paragraph",
+            "content": "None of these functions are publicly exposed. They are triggered by database changes or storage events."
+        },
+        {
+            "type": "paragraph",
+            "content": "This means external actors cannot directly invoke them. They only execute when internal system events occur."
+        },
+        {
+            "type": "heading",
+            "content": "Reduced Attack Surface"
+        },
+        {
+            "type": "paragraph",
+            "content": "Event driven architecture reduces entry points. Fewer entry points means fewer ways to break your system."
+        },
+        {
+            "type": "callout",
+            "content": "Security improves when you reduce what can be accessed from the outside."
+        }
+    ]
+}

@@ -1,0 +1,61 @@
+{
+    "key": "file_uploads_attack_surface",
+    "title": "File Uploads Are an Attack Surface",
+    "date": "2026-02-25",
+    "tags": [
+        "Security",
+        "Storage",
+        "Architecture"
+    ],
+    "readTime": "4 min read",
+    "sections": [
+        {
+            "type": "paragraph",
+            "content": "Allowing users to upload files sounds harmless. It is not."
+        },
+        {
+            "type": "paragraph",
+            "content": "Without controls, users can spam uploads, overwrite files, inflate storage costs, or attempt unauthorized access."
+        },
+        {
+            "type": "callout",
+            "content": "The first rule is simple. Keep your storage bucket private. No public access. Ever."
+        },
+        {
+            "type": "heading",
+            "content": "Short-Lived Signed URLs"
+        },
+        {
+            "type": "paragraph",
+            "content": "Control uploads using short-lived signed URLs. Here is the flow I implemented:"
+        },
+        {
+            "type": "paragraph",
+            "content": "When a client wants to upload a file, it does not receive upload permission immediately. It sets a flag in the database indicating intent."
+        },
+        {
+            "type": "paragraph",
+            "content": "A backend function listens for that flag. When detected, it generates a signed upload URL with a unique filename and a short expiration time."
+        },
+        {
+            "type": "paragraph",
+            "content": "The signed URL is written back to the database. The client uses it for direct upload. After upload completes, another backend function removes the signed URL from the record. It cannot be reused."
+        },
+        {
+            "type": "heading",
+            "content": "Strict Traceability"
+        },
+        {
+            "type": "paragraph",
+            "content": "If the system detects an upload attempt after the URL was removed, it creates an incident alert."
+        },
+        {
+            "type": "paragraph",
+            "content": "Every upload becomes controlled, traceable, and temporary."
+        },
+        {
+            "type": "callout",
+            "content": "File uploads should be treated like temporary permissions, not permanent capabilities."
+        }
+    ]
+}

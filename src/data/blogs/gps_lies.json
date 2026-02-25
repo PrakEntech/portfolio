@@ -24,7 +24,7 @@
         },
         {
             "type": "paragraph",
-            "content": "While working on a project, I discovered that distance alone is not reliable. The real issue is GPS accuracy."
+            "content": "I discovered that distance alone is not reliable. The real issue is GPS accuracy."
         },
         {
             "type": "heading",
@@ -37,7 +37,7 @@
         {
             "type": "code",
             "lang": "javascript",
-            "content": "navigator.geolocation.getCurrentPosition((position) => {\n  const { latitude, longitude, accuracy } = position.coords;\n  // accuracy = radius in meters — NEVER ignore this!\n});"
+            "content": "navigator.geolocation.getCurrentPosition((position) => {\n  const { latitude, longitude, accuracy } = position.coords;\n  // accuracy = radius in meters NEVER ignore this!\n});"
         },
         {
             "type": "heading",
@@ -45,7 +45,7 @@
         },
         {
             "type": "paragraph",
-            "content": "Distance from delivery point: 12 meters. Accuracy: ±70 meters. This means the phone is only confident within a 70-meter radius. So even if the driver appears \"12 meters away\", the actual position could be far outside your delivery boundary. Now imagine rejecting a valid delivery because GPS was unstable. That's a bad system."
+            "content": "Distance from delivery point: 12 meters. Accuracy: ±70 meters. This means the phone is only confident within a 70 meter radius. So even if the driver appears \"12 meters away\", the actual position could be far outside your delivery boundary. Now imagine rejecting a valid delivery because GPS was unstable. That's a bad system."
         },
         {
             "type": "heading",
@@ -86,15 +86,15 @@
         },
         {
             "type": "heading",
-            "content": "The Fix: A Confidence-Based Model"
+            "content": "The Fix: A Confidence Based Model"
         },
         {
             "type": "paragraph",
-            "content": "Instead of binary validation (Valid / Invalid), I built a confidence scoring model. The system evaluates: Distance from target, GPS accuracy value, and Region bounding box validation (India / US)."
+            "content": "Instead of binary validation (Valid / Invalid), Build a confidence scoring model. The system evaluates: Distance from target, GPS accuracy value."
         },
         {
             "type": "paragraph",
-            "content": "Then it classifies delivery as: High Confidence, Medium Confidence, or Low Confidence. This approach reduces false rejections, handles real-world GPS noise, improves driver experience, and makes audit decisions smarter."
+            "content": "Then it classifies delivery as: High Confidence, Medium Confidence, or Low Confidence. This approach reduces false rejections, handles real world GPS noise, improves driver experience, and makes audit decisions smarter."
         },
         {
             "type": "heading",
@@ -102,7 +102,7 @@
         },
         {
             "type": "paragraph",
-            "content": "In controlled environments, GPS looks clean. In the real world: Network conditions fluctuate. Buildings block signals. Devices vary in sensor quality. Users sometimes spoof coordinates. If your validation logic is naive, your product breaks under real-world conditions."
+            "content": "In controlled environments, GPS looks clean. In the real world: Network conditions fluctuate. Buildings block signals. Devices vary in sensor quality. Users sometimes spoof coordinates. If your validation logic is naive, your product breaks under real world conditions."
         },
         {
             "type": "callout",
@@ -118,7 +118,7 @@
         },
         {
             "type": "paragraph",
-            "content": "Real systems require probabilistic thinking, not checkbox logic. If you're building location-based validation, treat GPS as an estimate — not truth. That one mindset shift changes everything."
+            "content": "Real systems require probabilistic thinking, not checkbox logic. If you're building location based validation, treat GPS as an estimate, not truth. That one mindset shift changes everything."
         }
     ]
 }
