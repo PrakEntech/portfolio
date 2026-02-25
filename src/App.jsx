@@ -115,7 +115,7 @@ function App() {
           <button onClick={toggleTheme} className="theme-toggle nav-link" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex' }} aria-label="Toggle Theme">
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           </button>
-          <a href="/resume.pdf" download="Prakhar_Srivastava_Resume.pdf" className="nav-link download-btn" style={{ display: 'flex', alignItems: 'center', gap: '6px', border: '1px solid var(--accent-green)', color: 'var(--accent-green)', padding: '4px 12px', borderRadius: '4px', textDecoration: 'none', fontSize: '0.85rem' }}>
+          <a href="https://drive.google.com/uc?export=download&id=1igMNs4ceEuZVMB2LMMKKsulOOAbuVvlg" target="_blank" rel="noreferrer" className="nav-link download-btn" style={{ display: 'flex', alignItems: 'center', gap: '6px', border: '1px solid var(--accent-green)', color: 'var(--accent-green)', padding: '4px 12px', borderRadius: '4px', textDecoration: 'none', fontSize: '0.85rem' }}>
             <Download size={14} /> Resume
           </a>
         </div>
