@@ -42,6 +42,7 @@ const InteractiveTerminal = ({ resumeData }) => {
     const [input, setInput] = useState('');
     const terminalBodyRef = useRef(null);
     const inputRef = useRef(null);
+    const isFirstRun = useRef(true);
 
     const scrollToBottom = () => {
         setTimeout(() => {
@@ -52,6 +53,13 @@ const InteractiveTerminal = ({ resumeData }) => {
     };
 
     useEffect(() => {
+        if (isFirstRun.current) {
+            isFirstRun.current = false;
+            if (terminalBodyRef.current) {
+                terminalBodyRef.current.scrollTop = 0;
+            }
+            return;
+        }
         scrollToBottom();
     }, [history]);
 
