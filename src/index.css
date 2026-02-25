@@ -657,6 +657,7 @@ section {
   font-family: 'Fira Code', monospace;
   pointer-events: none;
   animation: fadeInSlide 0.4s ease;
+  will-change: transform, opacity;
 }
 
 @keyframes fadeInSlide {
@@ -716,6 +717,7 @@ section {
   font-size: inherit;
   font-weight: inherit;
   color: inherit;
+  will-change: transform, clip-path;
 }
 
 .glitch-wrapper::before {
@@ -835,6 +837,7 @@ section {
 .scroll-reveal {
   opacity: 0;
   transform: translateY(28px);
+  will-change: transform, opacity;
   /* border is drawn via clip-path on the child .terminal-window / .exp-card etc. */
 }
 

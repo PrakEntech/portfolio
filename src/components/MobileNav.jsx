@@ -65,7 +65,8 @@ export default function MobileNav() {
                             zIndex: 1000,
                             display: 'flex',
                             alignItems: 'center',
-                            justifyContent: 'center'
+                            justifyContent: 'center',
+                            willChange: 'opacity'
                         }}
                         onClick={toggleMenu}
                     >
@@ -133,7 +134,8 @@ export default function MobileNav() {
                                             position: 'absolute',
                                             top: -radius, left: -radius,
                                             width: radius * 2, height: radius * 2,
-                                            pointerEvents: 'none'
+                                            pointerEvents: 'none',
+                                            willChange: 'transform, opacity'
                                         }}
                                     >
                                         <motion.a
@@ -159,7 +161,8 @@ export default function MobileNav() {
                                                 textTransform: 'uppercase',
                                                 boxShadow: '0 0 15px rgba(34, 211, 238, 0.2)',
                                                 fontFamily: "'Fira Code', monospace",
-                                                pointerEvents: 'auto'
+                                                pointerEvents: 'auto',
+                                                willChange: 'transform'
                                             }}
                                             initial={{ rotate: 90 }} // counter-rotate initial -90
                                             animate={{ rotate: -targetAngle }}
