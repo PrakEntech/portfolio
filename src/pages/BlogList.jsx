@@ -43,7 +43,7 @@ export default function BlogList() {
               </div>
               <h2 className="blog-card-title">GPS Lies: Why Distance Alone Cannot Validate a Delivery</h2>
               <div className="blog-meta-row">
-                <span className="blog-date">2025-02-24</span>
+                <span className="blog-date">2026-02-25</span>
               </div>
               <div className="blog-tags" style={{ marginTop: '0.75rem' }}>
             <span className="blog-tag">GPS</span>
