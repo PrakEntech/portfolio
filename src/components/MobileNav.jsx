@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Cpu } from 'lucide-react';
 
-const SECTIONS = ['about', 'skills', 'experience', 'projects', 'education', 'contact'];
+const SECTIONS = ['about', 'skills', 'experience', 'projects', 'education', 'contact', 'blog'];
 
 export default function MobileNav() {
     const [isOpen, setIsOpen] = useState(false);
@@ -139,7 +139,7 @@ export default function MobileNav() {
                                         }}
                                     >
                                         <motion.a
-                                            href={`#${section}`}
+                                            href={section === 'blog' ? '/blog' : `#${section}`}
                                             onClick={(e) => {
                                                 e.stopPropagation();
                                                 setIsOpen(false);
