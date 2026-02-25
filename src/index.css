@@ -21,9 +21,9 @@
 }
 
 [data-theme='light'] {
-  --bg-color: #f8fafc;
-  --terminal-bg: rgba(255, 255, 255, 0.95);
-  --terminal-header-bg: rgba(241, 245, 249, 0.95);
+  --bg-color: #e2e8f0;
+  --terminal-bg: rgba(248, 250, 252, 0.95);
+  --terminal-header-bg: rgba(226, 232, 240, 0.95);
   --text-color: #020617;
   --text-muted: #475569;
   --text-body: #1e293b;
@@ -36,7 +36,7 @@
   --border-color: rgba(3, 105, 161, 0.25);
   --border-glow: rgba(3, 105, 161, 0.35);
   --section-heading-color: #0369a1;
-  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-bg: rgba(248, 250, 252, 0.85);
 }
 
 /* Light Mode Overrides for specific text contrast */
@@ -83,11 +83,11 @@
 [data-theme='light'] .skill-card,
 [data-theme='light'] .exp-group,
 [data-theme='light'] .contact-box {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(248, 250, 252, 0.85);
 }
 
 [data-theme='light'] .featured-card {
-  background: linear-gradient(180deg, rgba(241, 245, 249, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%);
+  background: linear-gradient(180deg, rgba(226, 232, 240, 0.9) 0%, rgba(248, 250, 252, 0.9) 100%);
 }
 
 [data-theme='light'] .featured-card::before {
