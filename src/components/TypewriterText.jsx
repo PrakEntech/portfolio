@@ -31,9 +31,13 @@ const TypewriterText = ({ text, delay = 0, speed = 30, className = "" }) => {
     }, [isInView, text, speed, delay]);
 
     return (
-        <div ref={ref} className={`typewriter-line ${className}`}>
-            <span>{displayedText}</span>
-            {!complete && isInView && <span className="cursor" />}
+        <div ref={ref} className={`typewriter-line ${className}`} style={{ position: 'relative' }}>
+            {/* Hidden text establishes exact layout height/width to prevent scroll jank */}
+            <span style={{ visibility: 'hidden' }}>{text}</span>
+            <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
+                <span>{displayedText}</span>
+                {!complete && isInView && <span className="cursor" />}
+            </div>
         </div>
     );
 };
