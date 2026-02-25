@@ -35,7 +35,7 @@ export default function Blog_gps_lies() {
               </div>
               <h1 className="blog-title">GPS Lies: Why Distance Alone Cannot Validate a Delivery</h1>
               <div className="blog-meta-row">
-                <span className="blog-date"><Clock size={13} style={{ marginRight: '4px', display: 'inline' }} />2025-02-24</span>
+                <span className="blog-date"><Clock size={13} style={{ marginRight: '4px', display: 'inline' }} />2026-02-25</span>
                 <span className="blog-read-time">5 min read</span>
               </div>
               <div className="blog-tags">
