@@ -950,3 +950,22 @@ section {
 .scroll-reveal--visible .project-card:nth-child(6) {
   animation-delay: calc(var(--sr-delay, 0ms) + 400ms);
 }
+
+/* ─── Mobile Navigation Overrides ────────────────────────── */
+.mobile-nav {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none !important;
+  }
+
+  .mobile-nav {
+    display: block !important;
+  }
+
+  .nav-bar {
+    padding: 1rem 1.25rem;
+  }
+}

@@ -3,6 +3,7 @@ import HackerBackground from './components/HackerBackground';
 import TypewriterText from './components/TypewriterText';
 import TerminalWindow from './components/TerminalWindow';
 import InteractiveTerminal from './components/InteractiveTerminal';
+import MobileNav from './components/MobileNav';
 import ScrollReveal from './components/ScrollReveal';
 import { resumeData } from './data/resumeData';
 import {
@@ -102,7 +103,8 @@ function App() {
             </li>
           ))}
         </ul>
-        <div style={{ display: 'flex', gap: '15px', alignItems: 'center', marginLeft: '1rem' }}>
+        <div style={{ display: 'flex', gap: '15px', alignItems: 'center', marginLeft: 'auto' }}>
+          <MobileNav />
           <a href="https://drive.google.com/uc?export=download&id=1igMNs4ceEuZVMB2LMMKKsulOOAbuVvlg" target="_blank" rel="noreferrer" className="nav-link download-btn" style={{ display: 'flex', alignItems: 'center', gap: '6px', border: '1px solid var(--accent-green)', color: 'var(--accent-green)', padding: '4px 12px', borderRadius: '4px', textDecoration: 'none', fontSize: '0.85rem' }}>
             <Download size={14} /> Resume
           </a>
