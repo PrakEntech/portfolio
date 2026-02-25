@@ -23,7 +23,7 @@
 [data-theme='light'] {
   --bg-color: #e2e8f0;
   --terminal-bg: rgba(255, 255, 255, 0.95);
-  --terminal-header-bg: rgba(248, 250, 252, 0.95);
+  --terminal-header-bg: rgba(241, 245, 249, 0.95);
   --text-color: #020617;
   --text-muted: #475569;
   --text-body: #1e293b;
@@ -83,7 +83,13 @@
 [data-theme='light'] .skill-card,
 [data-theme='light'] .exp-group,
 [data-theme='light'] .contact-box {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+[data-theme='light'] .exp-overview {
+  background: rgba(3, 105, 161, 0.04);
+  border-left-color: rgba(3, 105, 161, 0.3);
+  color: #334155;
 }
 
 [data-theme='light'] .featured-card {
