@@ -63,7 +63,7 @@ export default function Blog_gps_lies() {
 
       <p key={2} className="blog-paragraph">Simple. Also wrong.</p>
 
-      <p key={3} className="blog-paragraph">While building my QR-based Delivery Tracker PWA (React + Firebase), I discovered that distance alone is not reliable. The real issue is GPS accuracy.</p>
+      <p key={3} className="blog-paragraph">While working on a project, I discovered that distance alone is not reliable. The real issue is GPS accuracy.</p>
 
       <h2 key={4} className="blog-heading">The Hidden Field Most Developers Ignore</h2>
 

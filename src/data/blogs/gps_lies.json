@@ -24,7 +24,7 @@
         },
         {
             "type": "paragraph",
-            "content": "While building my QR-based Delivery Tracker PWA (React + Firebase), I discovered that distance alone is not reliable. The real issue is GPS accuracy."
+            "content": "While working on a project, I discovered that distance alone is not reliable. The real issue is GPS accuracy."
         },
         {
             "type": "heading",
