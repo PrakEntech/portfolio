@@ -30,51 +30,51 @@ const ROUTES_OUT = path.join(ROOT, 'src', 'generated', 'BlogRoutes.jsx');
 
 // ── Helpers ────────────────────────────────────────────────
 function parseCsv(raw) {
-    const lines = raw.trim().split('\n').filter(Boolean);
-    const headers = lines[0].split(',').map(h => h.trim());
-    return lines.slice(1).map(line => {
-        const values = line.split(',').map(v => v.trim());
-        return Object.fromEntries(headers.map((h, i) => [h, values[i]]));
-    });
+  const lines = raw.trim().split('\n').filter(Boolean);
+  const headers = lines[0].split(',').map(h => h.trim());
+  return lines.slice(1).map(line => {
+    const values = line.split(',').map(v => v.trim());
+    return Object.fromEntries(headers.map((h, i) => [h, values[i]]));
+  });
 }
 
 function escapeJSX(str) {
-    return str.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$/g, '\\$');
+  return str.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$/g, '\\$');
 }
 
 function generateSectionJSX(section, idx) {
-    switch (section.type) {
-        case 'intro':
-        case 'paragraph':
-            return `      <p key={${idx}} className="blog-paragraph">${escapeJSX(section.content)}</p>`;
+  switch (section.type) {
+    case 'intro':
+    case 'paragraph':
+      return `      <p key={${idx}} className="blog-paragraph">${escapeJSX(section.content)}</p>`;
 
-        case 'heading':
-            return `      <h2 key={${idx}} className="blog-heading">${escapeJSX(section.content)}</h2>`;
+    case 'heading':
+      return `      <h2 key={${idx}} className="blog-heading">${escapeJSX(section.content)}</h2>`;
 
-        case 'callout':
-            return `      <div key={${idx}} className="blog-callout">${escapeJSX(section.content)}</div>`;
+    case 'callout':
+      return `      <div key={${idx}} className="blog-callout">${escapeJSX(section.content)}</div>`;
 
-        case 'code':
-            return `      <pre key={${idx}} className="blog-code"><code>{${JSON.stringify(section.content)}}</code></pre>`;
+    case 'code':
+      return `      <pre key={${idx}} className="blog-code"><code>{${JSON.stringify(section.content)}}</code></pre>`;
 
-        case 'table':
-            return `      <div key={${idx}} className="blog-table-wrapper">
+    case 'table':
+      return `      <div key={${idx}} className="blog-table-wrapper">
         <table className="blog-table">
           <thead><tr>${section.headers.map(h => `<th>${escapeJSX(h)}</th>`).join('')}</tr></thead>
           <tbody>${section.rows.map(row => `<tr>${row.map(c => `<td>${escapeJSX(c)}</td>`).join('')}</tr>`).join('\n            ')}</tbody>
         </table>
       </div>`;
 
-        default:
-            return `      <p key={${idx}}>${escapeJSX(section.content ?? '')}</p>`;
-    }
+    default:
+      return `      <p key={${idx}}>${escapeJSX(section.content ?? '')}</p>`;
+  }
 }
 
 function generateBlogPage(blogData) {
-    const sectionsJSX = blogData.sections.map(generateSectionJSX).join('\n\n');
-    const tagsJSX = blogData.tags.map(t => `<span className="blog-tag">${t}</span>`).join('\n          ');
+  const sectionsJSX = blogData.sections.map(generateSectionJSX).join('\n\n');
+  const tagsJSX = blogData.tags.map(t => `<span className="blog-tag">${t}</span>`).join('\n          ');
 
-    return `// AUTO-GENERATED — do not edit manually.
+  return `// AUTO-GENERATED — do not edit manually.
 // Re-run: node scripts/generate-blogs.js
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -91,7 +91,7 @@ export default function Blog_${blogData.key}() {
             <ArrowLeft size={16} />
             ~/blog
           </Link>
-          <div className="nav-logo">~/prakhar</div>
+          <Link to="/" className="nav-logo" style={{ textDecoration: 'none' }}>~/prakhar</Link>
         </nav>
 
         <div className="blog-container">
@@ -142,9 +142,9 @@ ${sectionsJSX}
 }
 
 function generateBlogList(blogs) {
-    const cards = blogs.map(b => {
-        const tags = b.tags.split(';').map(t => `<span className="blog-tag">${t.trim()}</span>`).join('\n            ');
-        return `        <Link to="/blog/${b.key}" className="blog-card" key="${b.key}">
+  const cards = blogs.map(b => {
+    const tags = b.tags.split(';').map(t => `<span className="blog-tag">${t.trim()}</span>`).join('\n            ');
+    return `        <Link to="/blog/${b.key}" className="blog-card" key="${b.key}">
           <div className="terminal-window" style={{ height: '100%' }}>
             <div className="terminal-header">
               <span className="dot red" /><span className="dot yellow" /><span className="dot green" />
@@ -167,9 +167,9 @@ function generateBlogList(blogs) {
             </div>
           </div>
         </Link>`;
-    }).join('\n\n');
+  }).join('\n\n');
 
-    return `// AUTO-GENERATED — do not edit manually.
+  return `// AUTO-GENERATED — do not edit manually.
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HackerBackground from '../components/HackerBackground';
@@ -184,7 +184,7 @@ export default function BlogList() {
           <Link to="/" className="nav-link" style={{ display: 'flex', alignItems: 'center', gap: '6px', textDecoration: 'none', fontSize: '0.85rem' }}>
             ← ~/home
           </Link>
-          <div className="nav-logo">~/prakhar</div>
+          <Link to="/" className="nav-logo" style={{ textDecoration: 'none' }}>~/prakhar</Link>
         </nav>
 
         <div className="blog-container">
@@ -213,15 +213,15 @@ ${cards}
 }
 
 function generateRoutes(blogs) {
-    const imports = blogs.map(b =>
-        `import Blog_${b.key} from '../pages/blogs/Blog_${b.key}.jsx';`
-    ).join('\n');
+  const imports = blogs.map(b =>
+    `import Blog_${b.key} from '../pages/blogs/Blog_${b.key}.jsx';`
+  ).join('\n');
 
-    const routes = blogs.map(b =>
-        `      <Route path="${b.key}" element={<Blog_${b.key} />} />`
-    ).join('\n');
+  const routes = blogs.map(b =>
+    `      <Route path="${b.key}" element={<Blog_${b.key} />} />`
+  ).join('\n');
 
-    return `// AUTO-GENERATED — do not edit manually.
+  return `// AUTO-GENERATED — do not edit manually.
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import BlogList from '../pages/BlogList.jsx';
@@ -249,16 +249,16 @@ fs.mkdirSync(path.join(ROOT, 'src', 'pages'), { recursive: true });
 const generated = [];
 
 for (const meta of blogs) {
-    const jsonPath = path.join(BLOGS_DIR, `${meta.key}.json`);
-    if (!fs.existsSync(jsonPath)) {
-        console.warn(`⚠  Skipping ${meta.key}: no data file at ${jsonPath}`);
-        continue;
-    }
-    const blogData = JSON.parse(fs.readFileSync(jsonPath, 'utf-8'));
-    const outPath = path.join(PAGES_OUT, `Blog_${meta.key}.jsx`);
-    fs.writeFileSync(outPath, generateBlogPage(blogData));
-    console.log(`✓  Generated ${outPath}`);
-    generated.push(meta);
+  const jsonPath = path.join(BLOGS_DIR, `${meta.key}.json`);
+  if (!fs.existsSync(jsonPath)) {
+    console.warn(`⚠  Skipping ${meta.key}: no data file at ${jsonPath}`);
+    continue;
+  }
+  const blogData = JSON.parse(fs.readFileSync(jsonPath, 'utf-8'));
+  const outPath = path.join(PAGES_OUT, `Blog_${meta.key}.jsx`);
+  fs.writeFileSync(outPath, generateBlogPage(blogData));
+  console.log(`✓  Generated ${outPath}`);
+  generated.push(meta);
 }
 
 fs.writeFileSync(LIST_OUT, generateBlogList(generated));

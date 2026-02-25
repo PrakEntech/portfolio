@@ -15,7 +15,7 @@ export default function Blog_gps_lies() {
             <ArrowLeft size={16} />
             ~/blog
           </Link>
-          <div className="nav-logo">~/prakhar</div>
+          <Link to="/" className="nav-logo" style={{ textDecoration: 'none' }}>~/prakhar</Link>
         </nav>
 
         <div className="blog-container">

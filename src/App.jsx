@@ -106,7 +106,7 @@ function HomeApp() {
 
       {/* NAV */}
       <nav className="nav-bar">
-        <div className="nav-logo">~/prakhar</div>
+        <Link to="/" className="nav-logo" style={{ textDecoration: 'none' }}>~/prakhar</Link>
         <ul className="nav-links">
           {['#about', '#skills', '#experience', '#projects', '#education', '#contact'].map(href => (
             <li key={href}>

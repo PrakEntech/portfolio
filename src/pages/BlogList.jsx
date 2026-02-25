@@ -13,7 +13,7 @@ export default function BlogList() {
           <Link to="/" className="nav-link" style={{ display: 'flex', alignItems: 'center', gap: '6px', textDecoration: 'none', fontSize: '0.85rem' }}>
             ← ~/home
           </Link>
-          <div className="nav-logo">~/prakhar</div>
+          <Link to="/" className="nav-logo" style={{ textDecoration: 'none' }}>~/prakhar</Link>
         </nav>
 
         <div className="blog-container">
