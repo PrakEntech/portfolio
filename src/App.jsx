@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import HackerBackground from './components/HackerBackground';
 import TypewriterText from './components/TypewriterText';
 import TerminalWindow from './components/TerminalWindow';
@@ -8,7 +8,7 @@ import { resumeData } from './data/resumeData';
 import {
   Briefcase, GraduationCap, Github, Linkedin,
   Mail, Phone, MapPin, Cpu, FolderGit2, ChevronRight, Star,
-  Sun, Moon, Download
+  Download
 } from 'lucide-react';
 
 /* ── Section heading ────────────────────────────────────── */
@@ -87,19 +87,10 @@ const RegularExpCard = ({ exp }) => (
 
 function App() {
   const { personalInfo, summary, education, skills, experience, projects } = resumeData;
-  const [theme, setTheme] = useState('dark');
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
-  };
 
   return (
     <>
-      <HackerBackground theme={theme} />
+      <HackerBackground />
 
       {/* NAV */}
       <nav className="nav-bar">
@@ -112,9 +103,6 @@ function App() {
           ))}
         </ul>
         <div style={{ display: 'flex', gap: '15px', alignItems: 'center', marginLeft: '1rem' }}>
-          <button onClick={toggleTheme} className="theme-toggle nav-link" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex' }} aria-label="Toggle Theme">
-            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-          </button>
           <a href="https://drive.google.com/uc?export=download&id=1igMNs4ceEuZVMB2LMMKKsulOOAbuVvlg" target="_blank" rel="noreferrer" className="nav-link download-btn" style={{ display: 'flex', alignItems: 'center', gap: '6px', border: '1px solid var(--accent-green)', color: 'var(--accent-green)', padding: '4px 12px', borderRadius: '4px', textDecoration: 'none', fontSize: '0.85rem' }}>
             <Download size={14} /> Resume
           </a>

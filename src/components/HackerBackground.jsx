@@ -35,7 +35,7 @@ const TERMINAL_LINES = [
     'root@matrix:~# chmod +x ./zero_day.elf && ./zero_day.elf',
 ];
 
-export default function HackerBackground({ theme = 'dark' }) {
+export default function HackerBackground() {
     const canvasRef = useRef(null);
     const linesRef = useRef(null);
 
@@ -61,7 +61,7 @@ export default function HackerBackground({ theme = 'dark' }) {
         window.addEventListener('resize', resize);
 
         const draw = () => {
-            ctx.fillStyle = theme === 'light' ? 'rgba(248, 250, 252, 0.05)' : 'rgba(13, 13, 13, 0.05)';
+            ctx.fillStyle = 'rgba(13, 13, 13, 0.05)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             ctx.font = `${fontSize}px 'Fira Code', monospace`;
@@ -72,12 +72,7 @@ export default function HackerBackground({ theme = 'dark' }) {
 
                 // Lead character brightness
                 const isLead = drops[i] * fontSize < canvas.height && Math.random() > 0.9;
-
-                if (theme === 'light') {
-                    ctx.fillStyle = isLead ? '#000000' : `rgba(71, 85, 105, ${Math.random() * 0.5 + 0.1})`; // slate-600 background stream
-                } else {
-                    ctx.fillStyle = isLead ? '#ffffff' : `rgba(74, 222, 128, ${Math.random() * 0.5 + 0.1})`;
-                }
+                ctx.fillStyle = isLead ? '#ffffff' : `rgba(74, 222, 128, ${Math.random() * 0.5 + 0.1})`;
 
                 ctx.fillText(char, i * fontSize, y);
 
@@ -94,7 +89,7 @@ export default function HackerBackground({ theme = 'dark' }) {
             cancelAnimationFrame(animId);
             window.removeEventListener('resize', resize);
         };
-    }, [theme]);
+    }, []);
 
     // --- Scrolling terminal lines overlay ---
     useEffect(() => {
@@ -117,12 +112,7 @@ export default function HackerBackground({ theme = 'dark' }) {
             line.style.left = `${left}vw`;
             line.style.opacity = (Math.random() * 0.08 + 0.03).toFixed(2);
             line.style.fontSize = `${Math.random() * 3 + 9}px`;
-
-            if (theme === 'light') {
-                line.style.color = Math.random() > 0.7 ? '#475569' : '#1e293b'; // slate-600 or slate-800
-            } else {
-                line.style.color = Math.random() > 0.7 ? '#60a5fa' : '#4ade80'; // bright blue/green
-            }
+            line.style.color = Math.random() > 0.7 ? '#60a5fa' : '#4ade80'; // bright blue/green
 
             container.appendChild(line);
 
@@ -140,7 +130,7 @@ export default function HackerBackground({ theme = 'dark' }) {
         intervalId = setInterval(addLine, 1200);
 
         return () => clearInterval(intervalId);
-    }, [theme]);
+    }, []);
 
     return (
         <>

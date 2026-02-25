@@ -20,80 +20,6 @@
   --glass-bg: rgba(8, 20, 28, 0.85);
 }
 
-[data-theme='light'] {
-  --bg-color: #e2e8f0;
-  --terminal-bg: rgba(248, 250, 252, 0.95);
-  --terminal-header-bg: rgba(226, 232, 240, 0.95);
-  --text-color: #020617;
-  --text-muted: #475569;
-  --text-body: #1e293b;
-  --accent-green: #0369a1;
-  --accent-green-glow: #0369a1;
-  --accent-blue: #1d4ed8;
-  --accent-yellow: #b45309;
-  --accent-red: #dc2626;
-  --accent-purple: #6d28d9;
-  --border-color: rgba(3, 105, 161, 0.25);
-  --border-glow: rgba(3, 105, 161, 0.35);
-  --section-heading-color: #0369a1;
-  --glass-bg: rgba(248, 250, 252, 0.85);
-}
-
-/* Light Mode Overrides for specific text contrast */
-[data-theme='light'] .section-heading-label,
-[data-theme='light'] .hero-name,
-[data-theme='light'] .exp-company,
-[data-theme='light'] .contact-title,
-[data-theme='light'] .project-name,
-[data-theme='light'] .edu-degree {
-  color: #0f172a;
-}
-
-[data-theme='light'] .terminal-title {
-  color: #475569;
-}
-
-[data-theme='light'] .terminal-window {
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-}
-
-[data-theme='light'] .terminal-window:hover {
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
-}
-
-/* Light Mode Overrides for Skills Grid */
-[data-theme='light'] .skill-category {
-  color: var(--accent-yellow);
-}
-
-[data-theme='light'] .skill-category::before {
-  color: var(--accent-purple);
-}
-
-[data-theme='light'] .skill-tag {
-  background: rgba(3, 105, 161, 0.08);
-  border-color: var(--border-color);
-  color: var(--accent-green);
-}
-
-[data-theme='light'] .nav-bar,
-[data-theme='light'] .exp-card,
-[data-theme='light'] .project-card,
-[data-theme='light'] .edu-card,
-[data-theme='light'] .skill-card,
-[data-theme='light'] .exp-group,
-[data-theme='light'] .contact-box {
-  background: rgba(248, 250, 252, 0.85);
-}
-
-[data-theme='light'] .featured-card {
-  background: linear-gradient(180deg, rgba(226, 232, 240, 0.9) 0%, rgba(248, 250, 252, 0.9) 100%);
-}
-
-[data-theme='light'] .featured-card::before {
-  background: linear-gradient(180deg, var(--accent-green) 0%, var(--accent-blue) 60%, transparent 100%);
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -106,7 +32,6 @@ body {
   font-family: 'Fira Code', monospace;
   overflow-x: hidden;
   line-height: 1.7;
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Custom Scrollbar */
