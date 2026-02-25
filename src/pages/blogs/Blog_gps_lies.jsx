@@ -1,11 +1,17 @@
 // AUTO-GENERATED — do not edit manually.
 // Re-run: node scripts/generate-blogs.js
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import HackerBackground from '../../components/HackerBackground';
 import { ArrowLeft, Clock, Tag } from 'lucide-react';
 
 export default function Blog_gps_lies() {
+  useEffect(() => {
+    const originalTitle = document.title;
+    document.title = "GPS Lies: Why Distance Alone Cannot Validate a Delivery";
+    return () => { document.title = originalTitle; };
+  }, []);
+
   return (
     <>
       <HackerBackground />

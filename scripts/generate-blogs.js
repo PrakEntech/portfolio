@@ -76,12 +76,18 @@ function generateBlogPage(blogData) {
 
   return `// AUTO-GENERATED — do not edit manually.
 // Re-run: node scripts/generate-blogs.js
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import HackerBackground from '../../components/HackerBackground';
 import { ArrowLeft, Clock, Tag } from 'lucide-react';
 
 export default function Blog_${blogData.key}() {
+  useEffect(() => {
+    const originalTitle = document.title;
+    document.title = ${JSON.stringify(blogData.title)};
+    return () => { document.title = originalTitle; };
+  }, []);
+
   return (
     <>
       <HackerBackground />
