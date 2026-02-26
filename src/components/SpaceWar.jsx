@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 const SpaceWar = ({ onExit }) => {
+    const containerRef = useRef(null);
     const canvasRef = useRef(null);
     const [gameOver, setGameOver] = useState(false);
     const [winner, setWinner] = useState(null); // 'Needle', 'Wedge', or 'Draw'
     const [gameStarted, setGameStarted] = useState(false);
+    const [isFullscreen, setIsFullscreen] = useState(false);
 
     // Game constants
     const CANVAS_SIZE = 600;
@@ -405,30 +407,173 @@ const SpaceWar = ({ onExit }) => {
         return () => cancelAnimationFrame(animationFrameId);
     }, [gameOver, gameStarted]);
 
+    // Handle fullscreen
+    useEffect(() => {
+        const handleFullscreenChange = () => {
+            setIsFullscreen(!!document.fullscreenElement);
+            // Re-focus canvas when exiting fullscreen so keyboard still works
+            setTimeout(() => {
+                if (canvasRef.current) canvasRef.current.focus();
+            }, 100);
+        };
+
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+        return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    }, []);
+
+    const toggleFullscreen = () => {
+        if (!document.fullscreenElement) {
+            containerRef.current?.requestFullscreen().catch(err => {
+                console.error(`Error attempting to enable fullscreen: ${err.message}`);
+            });
+        } else {
+            document.exitFullscreen();
+        }
+    };
+
+    const controlPanelStyle = {
+        width: '240px',
+        padding: '15px',
+        border: '1px solid rgba(34, 211, 238, 0.3)',
+        borderRadius: '8px',
+        backgroundColor: 'rgba(0, 0, 0, 0.6)',
+        color: 'var(--text-body)',
+        fontFamily: '"Fira Code", monospace',
+        fontSize: '0.9rem',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '15px'
+    };
+
     return (
-        <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            margin: '15px 0'
-        }}>
-            <canvas
-                ref={canvasRef}
-                width={CANVAS_SIZE}
-                height={CANVAS_SIZE}
-                tabIndex={0} // Makes canvas focusable to capture local keyboard events reliably
-                style={{
-                    backgroundColor: '#000',
-                    border: '1px solid #333',
-                    // Phosphor CRT Glow filter
-                    filter: 'drop-shadow(0 0 5px rgba(0, 255, 0, 0.4)) blur(0.5px)',
-                    maxWidth: '100%',
-                    height: 'auto',
-                    aspectRatio: '1 / 1',
-                    outline: 'none',
-                    cursor: gameOver || !gameStarted ? 'default' : 'none',
-                    boxShadow: 'inset 0 0 20px rgba(0,255,0,0.05)'
-                }}
-            />
+        <div
+            ref={containerRef}
+            style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                margin: isFullscreen ? '0' : '15px 0',
+                padding: isFullscreen ? '20px' : '0',
+                backgroundColor: isFullscreen ? '#000' : 'transparent',
+                width: isFullscreen ? '100vw' : '100%',
+                height: isFullscreen ? '100vh' : 'auto',
+                gap: '20px'
+            }}
+        >
+            {/* Player 1 Controls (Left) */}
+            <div style={{ ...controlPanelStyle, alignSelf: 'stretch', justifyContent: 'center' }}>
+                <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+                    <h4 style={{ color: '#0f0', margin: '0 0 5px 0', fontSize: '1.2rem', textTransform: 'uppercase' }}>Needle (P1)</h4>
+                    <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Green Ship</div>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '60px 1fr', gap: '8px', fontSize: '0.85rem' }}>
+                    <span style={{ color: 'var(--accent-yellow)' }}>W</span><span>Thrust</span>
+                    <span style={{ color: 'var(--accent-yellow)' }}>A / D</span><span>Rotate L/R</span>
+                    <span style={{ color: 'var(--accent-yellow)' }}>Space</span><span>Fire Torpedo</span>
+                    <span style={{ color: 'var(--accent-yellow)' }}>L-Shift</span><span>Hyperspace</span>
+                </div>
+
+                <div style={{ marginTop: 'auto', fontSize: '0.75rem', color: 'var(--accent-red)', lineHeight: '1.4' }}>
+                    * Hyperspace has 15% risk of instant destruction.
+                </div>
+            </div>
+
+            {/* Game Canvas (Center) */}
+            <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <canvas
+                    ref={canvasRef}
+                    width={CANVAS_SIZE}
+                    height={CANVAS_SIZE}
+                    tabIndex={0}
+                    style={{
+                        backgroundColor: '#000',
+                        border: '1px solid #333',
+                        filter: 'drop-shadow(0 0 5px rgba(0, 255, 0, 0.4)) blur(0.5px)',
+                        maxWidth: '100%',
+                        maxHeight: isFullscreen ? '90vh' : 'auto', // Keep it in view if fullscreen
+                        height: isFullscreen ? 'auto' : 'auto',
+                        aspectRatio: '1 / 1',
+                        outline: 'none',
+                        cursor: gameOver || !gameStarted ? 'default' : 'none',
+                        boxShadow: 'inset 0 0 20px rgba(0,255,0,0.05)'
+                    }}
+                />
+
+                {/* Exit Instructions Below Canvas */}
+                {!isFullscreen && (
+                    <div style={{
+                        marginTop: '15px',
+                        color: 'var(--accent-blue)',
+                        fontFamily: '"Fira Code", monospace',
+                        fontSize: '0.85rem',
+                        textAlign: 'center',
+                        opacity: 0.8
+                    }}>
+                        Press <span style={{ color: 'var(--accent-yellow)', fontWeight: 'bold' }}>Q</span> to exit the game
+                    </div>
+                )}
+
+                {/* Fullscreen & Exit Overlay Buttons */}
+                <div style={{ position: 'absolute', top: '-10px', right: '-10px', display: 'flex', gap: '10px' }}>
+                    <button
+                        onClick={toggleFullscreen}
+                        style={{
+                            background: 'rgba(0,0,0,0.8)',
+                            color: 'var(--accent-cyan)',
+                            border: '1px solid var(--accent-cyan)',
+                            borderRadius: '4px',
+                            padding: '4px 8px',
+                            cursor: 'pointer',
+                            fontFamily: '"Fira Code", monospace',
+                            fontSize: '0.8rem',
+                            textTransform: 'uppercase',
+                            zIndex: 10
+                        }}
+                    >
+                        {isFullscreen ? 'Window' : 'Fullscreen'}
+                    </button>
+                    {!isFullscreen && (
+                        <button
+                            onClick={onExit}
+                            style={{
+                                background: 'rgba(0,0,0,0.8)',
+                                color: 'var(--accent-red)',
+                                border: '1px solid var(--accent-red)',
+                                borderRadius: '4px',
+                                padding: '4px 8px',
+                                cursor: 'pointer',
+                                fontFamily: '"Fira Code", monospace',
+                                fontSize: '0.8rem',
+                                textTransform: 'uppercase',
+                                zIndex: 10
+                            }}
+                        >
+                            Exit
+                        </button>
+                    )}
+                </div>
+            </div>
+
+            {/* Player 2 Controls (Right) */}
+            <div style={{ ...controlPanelStyle, alignSelf: 'stretch', justifyContent: 'center' }}>
+                <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+                    <h4 style={{ color: '#0cf', margin: '0 0 5px 0', fontSize: '1.2rem', textTransform: 'uppercase' }}>Wedge (P2)</h4>
+                    <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Cyan Ship</div>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '60px 1fr', gap: '8px', fontSize: '0.85rem' }}>
+                    <span style={{ color: 'var(--accent-yellow)' }}>&uarr;</span><span>Thrust</span>
+                    <span style={{ color: 'var(--accent-yellow)' }}>&larr; / &rarr;</span><span>Rotate L/R</span>
+                    <span style={{ color: 'var(--accent-yellow)' }}>Enter</span><span>Fire Torpedo</span>
+                    <span style={{ color: 'var(--accent-yellow)' }}>R-Shift</span><span>Hyperspace</span>
+                </div>
+
+                <div style={{ marginTop: 'auto', textAlign: 'center', padding: '10px', backgroundColor: 'rgba(34, 211, 238, 0.1)', borderRadius: '4px' }}>
+                    <div style={{ color: 'var(--accent-blue)', marginBottom: '5px' }}>Terminal</div>
+                    <div style={{ fontSize: '0.8rem' }}><span style={{ color: 'var(--accent-yellow)' }}>ESC</span> or <span style={{ color: 'var(--accent-yellow)' }}>Q</span> to exit</div>
+                </div>
+            </div>
         </div>
     );
 };
