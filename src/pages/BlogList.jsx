@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import HackerBackground from '../components/HackerBackground';
 import { BookOpen } from 'lucide-react';
-import { playSound, UI_SOUNDS } from '../utils/audio';
 
 export default function BlogList() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -51,10 +50,10 @@ export default function BlogList() {
       <HackerBackground />
       <div className="blog-page page-content">
         <nav className="nav-bar">
-          <Link to="/" className="nav-link" onMouseEnter={() => playSound(UI_SOUNDS.BLEEP, 0.1)} style={{ display: 'flex', alignItems: 'center', gap: '6px', textDecoration: 'none', fontSize: '0.85rem' }}>
+          <Link to="/" className="nav-link" style={{ display: 'flex', alignItems: 'center', gap: '6px', textDecoration: 'none', fontSize: '0.85rem' }}>
             ← ~/home
           </Link>
-          <Link to="/" className="nav-logo" onMouseEnter={() => playSound(UI_SOUNDS.BLEEP, 0.1)} style={{ textDecoration: 'none' }}>~/prakhar</Link>
+          <Link to="/" className="nav-logo" style={{ textDecoration: 'none' }}>~/prakhar</Link>
         </nav>
 
         <div className="blog-container">
@@ -77,7 +76,6 @@ export default function BlogList() {
                 placeholder="search_query"
                 value={searchQuery}
                 onChange={handleSearchChange}
-                onMouseEnter={() => playSound(UI_SOUNDS.BLEEP, 0.1)}
                 style={{
                   width: '100%',
                   background: 'rgba(34,211,238,0.05)',
@@ -98,10 +96,7 @@ export default function BlogList() {
 
           <div className="blog-grid">
             {filteredBlogs.length > 0 ? filteredBlogs.map(blog => (
-              <Link to={blog.path}
-                className="blog-card"
-                key={blog.id}
-                onMouseEnter={() => playSound(UI_SOUNDS.BLEEP, 0.15)}>
+              <Link to={blog.path} className="blog-card" key={blog.id}>
                 <div className="terminal-window" style={{ height: '100%' }}>
                   <div className="terminal-header">
                     <span className="dot red" /><span className="dot yellow" /><span className="dot green" />

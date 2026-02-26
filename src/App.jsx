@@ -13,7 +13,6 @@ import {
   Mail, Phone, MapPin, Cpu, FolderGit2, ChevronRight, Star,
   Download
 } from 'lucide-react';
-import { playSound, UI_SOUNDS } from './utils/audio';
 
 /* ── Section heading ────────────────────────────────────── */
 const SectionHeading = ({ icon: Icon, label, command }) => (
@@ -112,19 +111,14 @@ function HomeApp() {
         <ul className="nav-links">
           {['#about', '#skills', '#experience', '#projects', '#education', '#contact'].map(href => (
             <li key={href}>
-              <a href={href} className="nav-link" onMouseEnter={() => playSound(UI_SOUNDS.BLEEP, 0.1)}>{href.replace('#', '')}</a>
+              <a href={href} className="nav-link">{href.replace('#', '')}</a>
             </li>
           ))}
-          <li><Link to="/blog" className="nav-link" onMouseEnter={() => playSound(UI_SOUNDS.BLEEP, 0.1)} style={{ color: 'var(--accent-blue)', whiteSpace: 'nowrap' }}>blog</Link></li>
+          <li><Link to="/blog" className="nav-link" style={{ color: 'var(--accent-blue)', whiteSpace: 'nowrap' }}>blog</Link></li>
         </ul>
         <div style={{ display: 'flex', gap: '15px', alignItems: 'center', marginLeft: 'auto' }}>
           <MobileNav />
-          <a href="https://drive.google.com/uc?export=download&id=1igMNs4ceEuZVMB2LMMKKsulOOAbuVvlg"
-            target="_blank"
-            rel="noreferrer"
-            className="nav-link download-btn"
-            onMouseEnter={() => playSound(UI_SOUNDS.BLEEP, 0.1)}
-            style={{ display: 'flex', alignItems: 'center', gap: '6px', border: '1px solid var(--accent-green)', color: 'var(--accent-green)', padding: '4px 12px', borderRadius: '4px', textDecoration: 'none', fontSize: '0.85rem' }}>
+          <a href="https://drive.google.com/uc?export=download&id=1igMNs4ceEuZVMB2LMMKKsulOOAbuVvlg" target="_blank" rel="noreferrer" className="nav-link download-btn" style={{ display: 'flex', alignItems: 'center', gap: '6px', border: '1px solid var(--accent-green)', color: 'var(--accent-green)', padding: '4px 12px', borderRadius: '4px', textDecoration: 'none', fontSize: '0.85rem' }}>
             <Download size={14} /> Resume
           </a>
         </div>
@@ -181,7 +175,6 @@ function HomeApp() {
               <button
                 key={cat}
                 onClick={() => setProjectFilter(cat)}
-                onMouseEnter={() => playSound(UI_SOUNDS.BLEEP, 0.1)}
                 className={`filter-btn ${projectFilter === cat ? 'active' : ''}`}
                 style={{
                   background: projectFilter === cat ? 'var(--accent-blue)' : 'rgba(34,211,238,0.1)',
@@ -223,9 +216,7 @@ function HomeApp() {
                   return true;
                 })
                 .map((proj, idx) => (
-                  <div key={idx}
-                    className={`project-card ${proj.highlight ? 'highlight' : ''}`}
-                    onMouseEnter={() => playSound(UI_SOUNDS.BLEEP, 0.15)}>
+                  <div key={idx} className={`project-card ${proj.highlight ? 'highlight' : ''}`}>
                     <div className="project-name">
                       {proj.highlight && (
                         <Star size={13} style={{ display: 'inline', marginRight: '6px', color: 'var(--accent-yellow)', verticalAlign: 'middle' }} />
@@ -287,17 +278,17 @@ function HomeApp() {
             <div className="contact-box">
               <div className="contact-title">Let's build something great.</div>
               <div className="contact-subtitle">Open to roles, collaborations, and interesting problems.</div>
-              <div className="contact-links" onMouseEnter={() => playSound(UI_SOUNDS.BLEEP, 0.1)}>
-                <a href={`mailto:${personalInfo.email}`} className="contact-link" onMouseEnter={() => playSound(UI_SOUNDS.BLEEP, 0.1)}>
+              <div className="contact-links">
+                <a href={`mailto:${personalInfo.email}`} className="contact-link">
                   <Mail size={16} /> {personalInfo.email}
                 </a>
-                <a href={`https://github.com/${personalInfo.github}`} target="_blank" rel="noreferrer" className="contact-link" onMouseEnter={() => playSound(UI_SOUNDS.BLEEP, 0.1)}>
+                <a href={`https://github.com/${personalInfo.github}`} target="_blank" rel="noreferrer" className="contact-link">
                   <Github size={16} /> {personalInfo.github}
                 </a>
-                <a href={`https://linkedin.com/in/${personalInfo.linkedin}`} target="_blank" rel="noreferrer" className="contact-link" onMouseEnter={() => playSound(UI_SOUNDS.BLEEP, 0.1)}>
+                <a href={`https://linkedin.com/in/${personalInfo.linkedin}`} target="_blank" rel="noreferrer" className="contact-link">
                   <Linkedin size={16} /> {personalInfo.linkedin}
                 </a>
-                <a href={`tel:${personalInfo.phone}`} className="contact-link" onMouseEnter={() => playSound(UI_SOUNDS.BLEEP, 0.1)}>
+                <a href={`tel:${personalInfo.phone}`} className="contact-link">
                   <Phone size={16} /> {personalInfo.phone}
                 </a>
               </div>
