@@ -4,8 +4,8 @@
  */
 
 const SOUNDS = {
-    KEYBOARD_CLICK: 'https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3', // Snappy laptop click
-    DATA_BLEEP: 'https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3',   // Subtle UI bleep
+    KEYBOARD_CLICK: 'https://raw.githubusercontent.com/extratone/macOSsystemsounds/main/mp3/Input.mp3', // Snappy macOS-style click
+    DATA_BLEEP: 'https://raw.githubusercontent.com/extratone/macOSsystemsounds/main/mp3/Tink.mp3',      // Subtle macOS Tink bleep
 };
 
 const audioCache = {};
