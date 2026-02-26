@@ -83,14 +83,14 @@ const InteractiveTerminal = ({ resumeData, setProjectFilter }) => {
                 output = (
                     <div style={{ color: 'var(--text-body)', lineHeight: '1.8' }}>
                         <div style={{ color: 'var(--accent-green)' }}>Available commands:</div>
-                        <div><span style={{ color: 'var(--accent-yellow)', width: '60px', display: 'inline-block' }}>whoami</span> - Display detailed professional profile</div>
-                        <div><span style={{ color: 'var(--accent-yellow)', width: '60px', display: 'inline-block' }}>ls</span> - List available portfolio directories (sections)</div>
-                        <div><span style={{ color: 'var(--accent-yellow)', width: '60px', display: 'inline-block' }}>cd</span> - Navigate to a directory (e.g., 'cd experience')</div>
-                        <div><span style={{ color: 'var(--accent-yellow)', width: '60px', display: 'inline-block' }}>projects</span> - Filter projects: --filter [Frontend|Backend|Mobile|Security]</div>
-                        <div><span style={{ color: 'var(--accent-yellow)', width: '60px', display: 'inline-block' }}>blog</span> - Search blog: --search [query]</div>
-                        <div><span style={{ color: 'var(--accent-yellow)', width: '60px', display: 'inline-block' }}>spacewar</span> - Play a retro terminal space game</div>
-                        <div><span style={{ color: 'var(--accent-yellow)', width: '60px', display: 'inline-block' }}>clear</span> - Clear terminal history</div>
-                        <div><span style={{ color: 'var(--accent-yellow)', width: '60px', display: 'inline-block' }}>sudo</span> - ???</div>
+                        <div><span style={{ color: 'var(--accent-yellow)', width: '80px', display: 'inline-block' }}>whoami</span>  - Display detailed professional profile</div>
+                        <div><span style={{ color: 'var(--accent-yellow)', width: '80px', display: 'inline-block' }}>ls</span>  - List available portfolio directories (sections)</div>
+                        <div><span style={{ color: 'var(--accent-yellow)', width: '80px', display: 'inline-block' }}>cd</span>  - Navigate to a directory (e.g., 'cd experience')</div>
+                        <div><span style={{ color: 'var(--accent-yellow)', width: '80px', display: 'inline-block' }}>projects</span>  - Filter projects: --filter [Frontend|Backend|Mobile|Security]</div>
+                        <div><span style={{ color: 'var(--accent-yellow)', width: '80px', display: 'inline-block' }}>blog</span>  - Search blog: --search [query]</div>
+                        <div><span style={{ color: 'var(--accent-yellow)', width: '80px', display: 'inline-block' }}>spacewar</span>  - Play a retro terminal space game</div>
+                        <div><span style={{ color: 'var(--accent-yellow)', width: '80px', display: 'inline-block' }}>clear</span>  - Clear terminal history</div>
+                        <div><span style={{ color: 'var(--accent-yellow)', width: '80px', display: 'inline-block' }}>sudo</span>  - ???</div>
                     </div>
                 );
             } else if (cmd === 'whoami' || cmd === 'about' || cmd === 'about/') {
@@ -172,7 +172,7 @@ const InteractiveTerminal = ({ resumeData, setProjectFilter }) => {
                 }
             } else if (cmd === 'spacewar') {
                 setActiveApp('spacewar');
-                output = <div style={{ color: 'var(--accent-green)' }}>Launching SpaceWar! Type 'Q' or 'ESC' to exit.</div>;
+                output = null; // No log output
             } else if (cmd === 'sudo') {
                 output = <div style={{ color: 'var(--accent-red)' }}>prakhar is not in the sudoers file. This incident will be reported.</div>;
             } else {
@@ -212,10 +212,12 @@ const InteractiveTerminal = ({ resumeData, setProjectFilter }) => {
                 {activeApp === 'spacewar' ? (
                     <SpaceWar onExit={() => {
                         setActiveApp(null);
-                        setHistory(prev => [
-                            ...prev,
-                            { type: 'component', content: <div style={{ color: 'var(--accent-yellow)' }}>Exited SpaceWar. Welcome back to terminal.</div> }
-                        ]);
+                        setHistory(initialHistory); // Reset to "about" loaded state
+                        // Scroll to top of page
+                        setTimeout(() => {
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                            inputRef.current?.focus();
+                        }, 100);
                     }} />
                 ) : (
                     <>
