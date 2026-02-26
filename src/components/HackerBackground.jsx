@@ -35,7 +35,8 @@ const TERMINAL_LINES = [
     'root@matrix:~# chmod +x ./zero_day.elf && ./zero_day.elf',
 ];
 
-export default function HackerBackground() {
+export default function HackerBackground({ isSafeMode }) {
+    if (isSafeMode) return null;
     const canvasRef = useRef(null);
     const linesRef = useRef(null);
 
