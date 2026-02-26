@@ -4,7 +4,7 @@
  */
 
 const SOUNDS = {
-    KEYBOARD_CLICK: 'https://assets.mixkit.co/active_storage/sfx/2358/2358-preview.mp3', // Mechanical click
+    KEYBOARD_CLICK: 'https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3', // Snappy laptop click
     DATA_BLEEP: 'https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3',   // Subtle UI bleep
 };
 
