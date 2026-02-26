@@ -23,7 +23,7 @@
         },
         {
             "type": "paragraph",
-            "content": "I designed backend operations to be event driven instead."
+            "content": "Design backend operations to be event driven instead."
         },
         {
             "type": "table",

@@ -68,7 +68,7 @@ export default function Blog_event_driven_security() {
 
       <h2 key={2} className="blog-heading">Event Driven Operations</h2>
 
-      <p key={3} className="blog-paragraph">I designed backend operations to be event driven instead.</p>
+      <p key={3} className="blog-paragraph">Design backend operations to be event driven instead.</p>
 
       <div key={4} className="blog-table-wrapper">
         <table className="blog-table">
