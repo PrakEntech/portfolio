@@ -186,6 +186,15 @@ function HomeApp() {
                       <span key={i} className="skill-tag">{t}</span>
                     ))}
                   </div>
+                  {proj.links && (
+                    <div className="project-links">
+                      {proj.links.map((link, i) => (
+                        <a key={i} href={link.url} target="_blank" rel="noreferrer" className="project-link-tag">
+                          {link.label} ↗
+                        </a>
+                      ))}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

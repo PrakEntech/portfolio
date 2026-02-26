@@ -125,26 +125,48 @@ export const resumeData = {
             description: "Production QR-based field operations PWA with full lifecycle ownership — React frontend, serverless Firebase backend, secure image uploads via signed URLs, multi-environment CI/CD automation, and security-hardened architecture.",
             tech: ["React.js", "Firebase", "PWA", "Jenkins", "GitHub Actions", "GCP"],
             highlight: true,
+            links: [
+                { label: "Frontend", url: "https://github.com/PrakEntech/deliveryTracker" },
+                { label: "Functions", url: "https://github.com/PrakEntech/deliveryTracker-functions" },
+            ],
         },
         {
             name: "Mautic Trackable URL Plugin",
-            description: "Custom Mautic CRM plugin for generating trackable URLs with automated Jenkins-based deployments, built using PHP with deep integration into Mautic’s plugin architecture and event system.",
+            description: "Custom Mautic CRM plugin for generating trackable URLs with automated Jenkins-based deployments, built using PHP with deep integration into Mautic's plugin architecture and event system.",
             tech: ["PHP", "Mautic", "Jenkins", "API Development"],
+        },
+        {
+            name: "Virtual Card Holder",
+            description: "Flutter mobile app for managing digital visiting cards, featuring manual entry, OCR-based card scanning, contact editing, and persistent local database storage.",
+            tech: ["Flutter", "Dart", "SQLite"],
+            links: [
+                { label: "GitHub", url: "https://github.com/PrakEntech/VirtualCardHolder" },
+            ],
         },
         {
             name: "Music Streaming App",
             description: "Spotify-inspired cross-platform mobile application featuring gesture-based controls, media library management, and favourites built using React Native and Firebase.",
             tech: ["Java"],
+            links: [
+                { label: "GitHub", url: "https://github.com/PrakEntech/MusicStreamingApp" },
+            ],
         },
         {
             name: "Word Hurdle Game",
             description: "Wordle-inspired puzzle game with dynamic color-coded feedback, difficulty scaling, and responsive UI built using Flutter and Dart.",
             tech: ["Flutter", "Dart"],
+            links: [
+                { label: "GitHub", url: "https://github.com/PrakEntech/WordHurdleGame" },
+            ],
         },
         {
             name: "Scitrix Module",
             description: "Standalone Python library for advanced matrix and linear algebra computations designed for modular usage and reusability.",
             tech: ["Python"],
+            links: [
+                { label: "GitHub", url: "https://github.com/PrakEntech/scitrix" },
+                { label: "PyPI", url: "https://pypi.org/project/scitrix/" },
+            ],
         }
     ]
 };

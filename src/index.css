@@ -558,6 +558,32 @@ section {
   gap: 6px;
 }
 
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.project-link-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  padding: 2px 9px;
+  border: 1px solid rgba(96, 165, 250, 0.35);
+  border-radius: 4px;
+  color: var(--accent-blue);
+  background: rgba(96, 165, 250, 0.08);
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  font-family: 'Fira Code', monospace;
+}
+
+.project-link-tag:hover {
+  background: rgba(96, 165, 250, 0.18);
+  border-color: var(--accent-blue);
+  color: #fff;
+}
+
 /* ─── Education Card ─────────────────────────────────────── */
 .edu-card {
   border: 1px solid var(--border-color);
