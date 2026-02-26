@@ -179,7 +179,7 @@ const InteractiveTerminal = ({ resumeData }) => {
                             width: '60%',
                             caretColor: 'var(--accent-green)'
                         }}
-                        autoFocus
+                        autoFocus={typeof window !== 'undefined' && window.matchMedia("(min-width: 768px)").matches}
                     />
                 </div>
             </div>

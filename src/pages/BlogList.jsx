@@ -57,6 +57,32 @@ export default function BlogList() {
             </div>
           </div>
         </Link>
+
+        <Link to="/blog/event_driven_security" className="blog-card" key="event_driven_security">
+          <div className="terminal-window" style={{ height: '100%' }}>
+            <div className="terminal-header">
+              <span className="dot red" /><span className="dot yellow" /><span className="dot green" />
+              <span className="terminal-title">event_driven_security.md</span>
+            </div>
+            <div className="terminal-body" style={{ padding: '1.25rem 1.5rem' }}>
+              <div style={{ color: 'var(--accent-green)', fontFamily: "'Fira Code', monospace", fontSize: '0.7rem', marginBottom: '0.5rem' }}>
+                $ cat event_driven_security.md
+              </div>
+              <h2 className="blog-card-title">Event Driven Security Is Safer Than Public Endpoints</h2>
+              <div className="blog-meta-row">
+                <span className="blog-date">2026-02-26</span>
+              </div>
+              <div className="blog-tags" style={{ marginTop: '0.75rem' }}>
+            <span className="blog-tag">Security</span>
+            <span className="blog-tag">Architecture</span>
+            <span className="blog-tag">Backend</span>
+              </div>
+              <div style={{ marginTop: '1rem', color: 'var(--accent-blue)', fontSize: '0.75rem', fontFamily: "'Fira Code', monospace" }}>
+                read more →
+              </div>
+            </div>
+          </div>
+        </Link>
           </div>
         </div>
       </div>
