@@ -48,6 +48,9 @@ const InteractiveTerminal = ({ resumeData, setProjectFilter }) => {
     const inputRef = useRef(null);
     const isFirstRun = useRef(true);
 
+    // Check if device is large enough for SpaceWar (e.g. tablet/desktop width)
+    const canPlayGames = typeof window !== 'undefined' && window.innerWidth >= 1024;
+
     const scrollToBottom = () => {
         setTimeout(() => {
             if (terminalBodyRef.current) {
@@ -88,7 +91,9 @@ const InteractiveTerminal = ({ resumeData, setProjectFilter }) => {
                         <div><span style={{ color: 'var(--accent-yellow)', width: '80px', display: 'inline-block' }}>cd</span>  - Navigate to a directory (e.g., 'cd experience')</div>
                         <div><span style={{ color: 'var(--accent-yellow)', width: '80px', display: 'inline-block' }}>projects</span>  - Filter projects: --filter [Frontend|Backend|Mobile|Security]</div>
                         <div><span style={{ color: 'var(--accent-yellow)', width: '80px', display: 'inline-block' }}>blog</span>  - Search blog: --search [query]</div>
-                        <div><span style={{ color: 'var(--accent-yellow)', width: '80px', display: 'inline-block' }}>spacewar</span>  - Play a retro terminal space game</div>
+                        {canPlayGames && (
+                            <div><span style={{ color: 'var(--accent-yellow)', width: '80px', display: 'inline-block' }}>spacewar</span>  - Play a retro terminal space game</div>
+                        )}
                         <div><span style={{ color: 'var(--accent-yellow)', width: '80px', display: 'inline-block' }}>clear</span>  - Clear terminal history</div>
                         <div><span style={{ color: 'var(--accent-yellow)', width: '80px', display: 'inline-block' }}>sudo</span>  - ???</div>
                     </div>
@@ -171,8 +176,12 @@ const InteractiveTerminal = ({ resumeData, setProjectFilter }) => {
                     }, 500);
                 }
             } else if (cmd === 'spacewar') {
-                setActiveApp('spacewar');
-                output = null; // No log output
+                if (canPlayGames) {
+                    setActiveApp('spacewar');
+                    output = null; // No log output
+                } else {
+                    output = <div style={{ color: 'var(--accent-red)' }}>Error: Your screen is too small to initialize the SpaceWar canvas. Please use a desktop device.</div>;
+                }
             } else if (cmd === 'sudo') {
                 output = <div style={{ color: 'var(--accent-red)' }}>prakhar is not in the sudoers file. This incident will be reported.</div>;
             } else {

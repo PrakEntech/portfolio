@@ -256,14 +256,15 @@ const SpaceWar = ({ onExit }) => {
             updatePhysics(state.p1, state);
             updatePhysics(state.p2, state);
 
-            // Update Torpedoes
-            state.torpedoes.forEach(t => {
+            // Update Torpedoes (Optimized: Avoid map/filter allocation each frame)
+            for (let i = state.torpedoes.length - 1; i >= 0; i--) {
+                let t = state.torpedoes[i];
                 // Gravity applies to torpedoes too
                 let dx = STAR_X - t.x;
                 let dy = STAR_Y - t.y;
                 let distSq = dx * dx + dy * dy;
-                let dist = Math.sqrt(distSq);
-                if (dist > 15) {
+                if (distSq > 225) { // Avoid Math.sqrt if possible in conditionals
+                    let dist = Math.sqrt(distSq);
                     let force = G / distSq;
                     t.vx += (dx / dist) * force;
                     t.vy += (dy / dist) * force;
@@ -272,8 +273,11 @@ const SpaceWar = ({ onExit }) => {
                 t.x = (t.x + t.vx + CANVAS_SIZE) % CANVAS_SIZE;
                 t.y = (t.y + t.vy + CANVAS_SIZE) % CANVAS_SIZE;
                 t.life -= 1;
-            });
-            state.torpedoes = state.torpedoes.filter(t => t.life > 0);
+
+                if (t.life <= 0) {
+                    state.torpedoes.splice(i, 1);
+                }
+            }
 
             checkCollisions(state);
             checkGameOver(state);
@@ -335,13 +339,14 @@ const SpaceWar = ({ onExit }) => {
             ctx.beginPath();
             ctx.arc(STAR_X, STAR_Y, 4, 0, Math.PI * 2);
             ctx.fill();
-            // Star Glow
-            ctx.shadowBlur = 10;
-            ctx.shadowColor = '#fff';
+            // Star Glow (Optimized: Avoid shadowBlur which causes severe FPS drop on low-spec)
+            const radGrad = ctx.createRadialGradient(STAR_X, STAR_Y, 2, STAR_X, STAR_Y, 14);
+            radGrad.addColorStop(0, 'rgba(255,255,255,0.8)');
+            radGrad.addColorStop(1, 'rgba(255,255,255,0)');
+            ctx.fillStyle = radGrad;
             ctx.beginPath();
-            ctx.arc(STAR_X, STAR_Y, 2, 0, Math.PI * 2);
+            ctx.arc(STAR_X, STAR_Y, 14, 0, Math.PI * 2);
             ctx.fill();
-            ctx.shadowBlur = 0;
 
             // Draw Players
             drawShip(state.p1);
@@ -489,7 +494,10 @@ const SpaceWar = ({ onExit }) => {
                     style={{
                         backgroundColor: '#000',
                         border: '1px solid #333',
+                        // Authentic CRT Glow on game objects
                         filter: 'drop-shadow(0 0 5px rgba(0, 255, 0, 0.4)) blur(0.5px)',
+                        willChange: 'transform, filter',
+                        transform: 'translateZ(0)',
                         maxWidth: '100%',
                         maxHeight: isFullscreen ? '90vh' : 'auto', // Keep it in view if fullscreen
                         height: isFullscreen ? 'auto' : 'auto',
