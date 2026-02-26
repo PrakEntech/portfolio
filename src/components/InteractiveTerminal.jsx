@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { MapPin, Search, Filter } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import TypewriterText from './TypewriterText';
+import { playSound, UI_SOUNDS } from '../utils/audio';
 
 const InteractiveTerminal = ({ resumeData, setProjectFilter }) => {
     const navigate = useNavigate();
@@ -70,6 +71,7 @@ const InteractiveTerminal = ({ resumeData, setProjectFilter }) => {
             const cmd = input.trim().toLowerCase();
             setInput('');
 
+            if (cmd) playSound(UI_SOUNDS.BLEEP);
             if (!cmd) return;
 
             let output = null;
@@ -216,7 +218,10 @@ const InteractiveTerminal = ({ resumeData, setProjectFilter }) => {
                         type="text"
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
-                        onKeyDown={handleCommand}
+                        onKeyDown={(e) => {
+                            if (e.key !== 'Enter') playSound(UI_SOUNDS.CLICK, 0.2);
+                            handleCommand(e);
+                        }}
                         style={{
                             background: 'transparent',
                             border: 'none',
