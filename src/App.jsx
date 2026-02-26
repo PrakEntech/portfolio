@@ -11,7 +11,7 @@ import { resumeData } from './data/resumeData';
 import {
   Briefcase, GraduationCap, Github, Linkedin,
   Mail, Phone, MapPin, Cpu, FolderGit2, ChevronRight, Star,
-  Download, ShieldCheck, ShieldAlert
+  Download
 } from 'lucide-react';
 
 /* ── Section heading ────────────────────────────────────── */
@@ -89,25 +89,21 @@ const RegularExpCard = ({ exp }) => (
 );
 
 function App() {
-  const [isSafeMode, setIsSafeMode] = useState(false);
-
   return (
-    <div className={isSafeMode ? 'safe-mode' : ''}>
-      <Routes>
-        <Route path="/blog/*" element={<BlogRoutes />} />
-        <Route path="/*" element={<HomeApp isSafeMode={isSafeMode} setIsSafeMode={setIsSafeMode} />} />
-      </Routes>
-    </div>
+    <Routes>
+      <Route path="/blog/*" element={<BlogRoutes />} />
+      <Route path="/*" element={<HomeApp />} />
+    </Routes>
   );
 }
 
-function HomeApp({ isSafeMode, setIsSafeMode }) {
+function HomeApp() {
   const { personalInfo, summary, education, skills, experience, projects } = resumeData;
   const [projectFilter, setProjectFilter] = useState('All');
 
   return (
     <>
-      <HackerBackground isSafeMode={isSafeMode} />
+      <HackerBackground />
 
       {/* NAV */}
       <nav className="nav-bar">
@@ -121,24 +117,6 @@ function HomeApp({ isSafeMode, setIsSafeMode }) {
           <li><Link to="/blog" className="nav-link" style={{ color: 'var(--accent-blue)', whiteSpace: 'nowrap' }}>blog</Link></li>
         </ul>
         <div style={{ display: 'flex', gap: '15px', alignItems: 'center', marginLeft: 'auto' }}>
-          <button
-            onClick={() => setIsSafeMode(!isSafeMode)}
-            className="nav-link safe-mode-toggle"
-            title={isSafeMode ? "Disable Safe Mode (Hacker mode)" : "Enable Safe Mode (Corporate compliance)"}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              color: isSafeMode ? 'var(--accent-green)' : 'var(--text-muted)',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              fontSize: '0.85rem'
-            }}
-          >
-            {isSafeMode ? <ShieldCheck size={18} /> : <ShieldAlert size={18} />}
-            <span className="hide-mobile">{isSafeMode ? "Safe Mode: ON" : "Safe Mode"}</span>
-          </button>
           <MobileNav />
           <a href="https://drive.google.com/uc?export=download&id=1igMNs4ceEuZVMB2LMMKKsulOOAbuVvlg" target="_blank" rel="noreferrer" className="nav-link download-btn" style={{ display: 'flex', alignItems: 'center', gap: '6px', border: '1px solid var(--accent-green)', color: 'var(--accent-green)', padding: '4px 12px', borderRadius: '4px', textDecoration: 'none', fontSize: '0.85rem' }}>
             <Download size={14} /> Resume
@@ -151,12 +129,7 @@ function HomeApp({ isSafeMode, setIsSafeMode }) {
         {/* ── HERO ─────────────────────────────── */}
         <section id="about" style={{ paddingTop: '6rem' }}>
           <ScrollReveal>
-            <InteractiveTerminal
-              resumeData={resumeData}
-              setProjectFilter={setProjectFilter}
-              isSafeMode={isSafeMode}
-              setIsSafeMode={setIsSafeMode}
-            />
+            <InteractiveTerminal resumeData={resumeData} setProjectFilter={setProjectFilter} />
           </ScrollReveal>
         </section>
 

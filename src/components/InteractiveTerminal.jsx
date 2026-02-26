@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MapPin, Search, Filter, ShieldCheck } from 'lucide-react';
+import { MapPin, Search, Filter } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import TypewriterText from './TypewriterText';
 
-const InteractiveTerminal = ({ resumeData, setProjectFilter, isSafeMode, setIsSafeMode }) => {
+const InteractiveTerminal = ({ resumeData, setProjectFilter }) => {
     const navigate = useNavigate();
     const { personalInfo, summary } = resumeData;
     const initialHistory = [
@@ -86,7 +86,6 @@ const InteractiveTerminal = ({ resumeData, setProjectFilter, isSafeMode, setIsSa
                         <div><span style={{ color: 'var(--accent-yellow)', width: '60px', display: 'inline-block' }}>cd</span> - Navigate to a directory (e.g., 'cd experience')</div>
                         <div><span style={{ color: 'var(--accent-yellow)', width: '60px', display: 'inline-block' }}>projects</span> - Filter projects: --filter [Frontend|Backend|Mobile|Security]</div>
                         <div><span style={{ color: 'var(--accent-yellow)', width: '60px', display: 'inline-block' }}>blog</span> - Search blog: --search [query]</div>
-                        <div><span style={{ color: 'var(--accent-yellow)', width: '60px', display: 'inline-block' }}>safemode</span> - Toggle corporate compliance mode (ON/OFF)</div>
                         <div><span style={{ color: 'var(--accent-yellow)', width: '60px', display: 'inline-block' }}>clear</span> - Clear terminal history</div>
                         <div><span style={{ color: 'var(--accent-yellow)', width: '60px', display: 'inline-block' }}>sudo</span> - ???</div>
                     </div>
@@ -168,15 +167,6 @@ const InteractiveTerminal = ({ resumeData, setProjectFilter, isSafeMode, setIsSa
                         navigate('/blog');
                     }, 500);
                 }
-            } else if (cmd === 'safemode') {
-                const newState = !isSafeMode;
-                setIsSafeMode(newState);
-                output = (
-                    <div style={{ color: newState ? 'var(--accent-green)' : 'var(--accent-blue)' }}>
-                        <ShieldCheck size={14} style={{ display: 'inline', marginRight: '6px' }} />
-                        Safe Mode {newState ? 'ENABLED' : 'DISABLED'}. Corporate compliance level: {newState ? 'STRICT' : 'NONE'}.
-                    </div>
-                );
             } else if (cmd === 'sudo') {
                 output = <div style={{ color: 'var(--accent-red)' }}>prakhar is not in the sudoers file. This incident will be reported.</div>;
             } else {
