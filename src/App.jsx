@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import HackerBackground from './components/HackerBackground';
 import TypewriterText from './components/TypewriterText';
@@ -99,6 +99,7 @@ function App() {
 
 function HomeApp() {
   const { personalInfo, summary, education, skills, experience, projects } = resumeData;
+  const [projectFilter, setProjectFilter] = useState('All');
 
   return (
     <>
@@ -128,7 +129,7 @@ function HomeApp() {
         {/* ── HERO ─────────────────────────────── */}
         <section id="about" style={{ paddingTop: '6rem' }}>
           <ScrollReveal>
-            <InteractiveTerminal resumeData={resumeData} />
+            <InteractiveTerminal resumeData={resumeData} setProjectFilter={setProjectFilter} />
           </ScrollReveal>
         </section>
 
@@ -168,35 +169,79 @@ function HomeApp() {
         {/* ── PROJECTS ─────────────────────────── */}
         <section id="projects">
           <SectionHeading icon={FolderGit2} label="Projects" command="git log --oneline" />
+
+          <div className="filter-tabs" style={{ marginBottom: '1.5rem', display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+            {['All', 'Frontend', 'Backend', 'Mobile', 'Security'].map(cat => (
+              <button
+                key={cat}
+                onClick={() => setProjectFilter(cat)}
+                className={`filter-btn ${projectFilter === cat ? 'active' : ''}`}
+                style={{
+                  background: projectFilter === cat ? 'var(--accent-blue)' : 'rgba(34,211,238,0.1)',
+                  color: projectFilter === cat ? '#000' : 'var(--accent-blue)',
+                  border: '1px solid var(--accent-blue)',
+                  padding: '4px 12px',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  fontSize: '0.8rem',
+                  fontFamily: "'Fira Code', monospace",
+                  transition: 'all 0.2s ease'
+                }}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
           <ScrollReveal>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1rem' }}>
-              {projects.map((proj, idx) => (
-                <div key={idx} className={`project-card ${proj.highlight ? 'highlight' : ''}`}>
-                  <div className="project-name">
-                    {proj.highlight && (
-                      <Star size={13} style={{ display: 'inline', marginRight: '6px', color: 'var(--accent-yellow)', verticalAlign: 'middle' }} />
-                    )}
-                    {proj.name}
-                  </div>
-                  <div className="project-desc">
-                    <TypewriterText text={proj.description} speed={5} />
-                  </div>
-                  <div className="project-tech">
-                    {proj.tech.map((t, i) => (
-                      <span key={i} className="skill-tag">{t}</span>
-                    ))}
-                  </div>
-                  {proj.links && (
-                    <div className="project-links">
-                      {proj.links.map((link, i) => (
-                        <a key={i} href={link.url} target="_blank" rel="noreferrer" className="project-link-tag">
-                          {link.label} ↗
-                        </a>
+              {projects
+                .filter(proj => {
+                  if (projectFilter === 'All') return true;
+                  const tech = proj.tech.map(t => t.toLowerCase());
+                  const desc = proj.description.toLowerCase();
+
+                  if (projectFilter === 'Frontend') {
+                    return tech.some(t => ['react', 'pwa', 'javascript', 'native', 'flutter'].includes(t.includes('react') ? 'react' : t));
+                  }
+                  if (projectFilter === 'Backend') {
+                    return tech.some(t => ['firebase', 'gcp', 'node', 'python', 'php', 'api'].includes(t.includes('firebase') ? 'firebase' : t));
+                  }
+                  if (projectFilter === 'Mobile') {
+                    return tech.some(t => ['flutter', 'dart', 'react native'].includes(t));
+                  }
+                  if (projectFilter === 'Security') {
+                    return desc.includes('security') || desc.includes('signed urls') || desc.includes('hardened') || tech.includes('security');
+                  }
+                  return true;
+                })
+                .map((proj, idx) => (
+                  <div key={idx} className={`project-card ${proj.highlight ? 'highlight' : ''}`}>
+                    <div className="project-name">
+                      {proj.highlight && (
+                        <Star size={13} style={{ display: 'inline', marginRight: '6px', color: 'var(--accent-yellow)', verticalAlign: 'middle' }} />
+                      )}
+                      {proj.name}
+                    </div>
+                    <div className="project-desc">
+                      <TypewriterText text={proj.description} speed={5} />
+                    </div>
+                    <div className="project-tech">
+                      {proj.tech.map((t, i) => (
+                        <span key={i} className="skill-tag">{t}</span>
                       ))}
                     </div>
-                  )}
-                </div>
-              ))}
+                    {proj.links && (
+                      <div className="project-links">
+                        {proj.links.map((link, i) => (
+                          <a key={i} href={link.url} target="_blank" rel="noreferrer" className="project-link-tag">
+                            {link.label} ↗
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
             </div>
           </ScrollReveal>
         </section>

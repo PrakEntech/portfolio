@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MapPin } from 'lucide-react';
+import { MapPin, Search, Filter } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import TypewriterText from './TypewriterText';
 
-const InteractiveTerminal = ({ resumeData }) => {
+const InteractiveTerminal = ({ resumeData, setProjectFilter }) => {
+    const navigate = useNavigate();
     const { personalInfo, summary } = resumeData;
     const initialHistory = [
         {
@@ -82,6 +84,8 @@ const InteractiveTerminal = ({ resumeData }) => {
                         <div><span style={{ color: 'var(--accent-yellow)', width: '60px', display: 'inline-block' }}>whoami</span> - Display detailed professional profile</div>
                         <div><span style={{ color: 'var(--accent-yellow)', width: '60px', display: 'inline-block' }}>ls</span> - List available portfolio directories (sections)</div>
                         <div><span style={{ color: 'var(--accent-yellow)', width: '60px', display: 'inline-block' }}>cd</span> - Navigate to a directory (e.g., 'cd experience')</div>
+                        <div><span style={{ color: 'var(--accent-yellow)', width: '60px', display: 'inline-block' }}>projects</span> - Filter projects: --filter [Frontend|Backend|Mobile|Security]</div>
+                        <div><span style={{ color: 'var(--accent-yellow)', width: '60px', display: 'inline-block' }}>blog</span> - Search blog: --search [query]</div>
                         <div><span style={{ color: 'var(--accent-yellow)', width: '60px', display: 'inline-block' }}>clear</span> - Clear terminal history</div>
                         <div><span style={{ color: 'var(--accent-yellow)', width: '60px', display: 'inline-block' }}>sudo</span> - ???</div>
                     </div>
@@ -118,6 +122,50 @@ const InteractiveTerminal = ({ resumeData }) => {
                     output = <div style={{ color: 'var(--accent-green)' }}>Navigating to ~/{dir}...</div>;
                 } else {
                     output = <div style={{ color: 'var(--accent-red)' }}>cd: {dir}: No such file or directory</div>;
+                }
+            } else if (cmd.startsWith('projects')) {
+                const parts = cmd.split(' ');
+                const filterIdx = parts.indexOf('--filter');
+                if (filterIdx !== -1 && parts[filterIdx + 1]) {
+                    const category = parts[filterIdx + 1].charAt(0).toUpperCase() + parts[filterIdx + 1].slice(1).toLowerCase();
+                    const validCats = ['All', 'Frontend', 'Backend', 'Mobile', 'Security'];
+                    if (validCats.includes(category)) {
+                        setProjectFilter(category);
+                        setTimeout(() => {
+                            document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+                        }, 100);
+                        output = (
+                            <div style={{ color: 'var(--accent-green)' }}>
+                                <Filter size={14} style={{ display: 'inline', marginRight: '6px' }} />
+                                Filtering projects by: {category}...
+                            </div>
+                        );
+                    } else {
+                        output = <div style={{ color: 'var(--accent-red)' }}>Error: Invalid category. Use: Frontend, Backend, Mobile, Security, or All.</div>;
+                    }
+                } else {
+                    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+                    output = <div style={{ color: 'var(--accent-green)' }}>Navigating to projects... Type 'projects --filter [category]' to filter.</div>;
+                }
+            } else if (cmd.startsWith('blog')) {
+                const parts = cmd.split(' ');
+                const searchIdx = parts.indexOf('--search');
+                if (searchIdx !== -1 && parts[searchIdx + 1]) {
+                    const query = parts.slice(searchIdx + 1).join(' ');
+                    output = (
+                        <div style={{ color: 'var(--accent-green)' }}>
+                            <Search size={14} style={{ display: 'inline', marginRight: '6px' }} />
+                            Searching blog for: "{query}"...
+                        </div>
+                    );
+                    setTimeout(() => {
+                        navigate(`/blog?q=${encodeURIComponent(query)}`);
+                    }, 500);
+                } else {
+                    output = <div style={{ color: 'var(--accent-green)' }}>Navigating to blog...</div>;
+                    setTimeout(() => {
+                        navigate('/blog');
+                    }, 500);
                 }
             } else if (cmd === 'sudo') {
                 output = <div style={{ color: 'var(--accent-red)' }}>prakhar is not in the sudoers file. This incident will be reported.</div>;
