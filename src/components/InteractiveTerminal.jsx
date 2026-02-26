@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { MapPin, Search, Filter } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import TypewriterText from './TypewriterText';
+import SpaceWar from './SpaceWar';
 
 const InteractiveTerminal = ({ resumeData, setProjectFilter }) => {
     const navigate = useNavigate();
@@ -86,6 +87,7 @@ const InteractiveTerminal = ({ resumeData, setProjectFilter }) => {
                         <div><span style={{ color: 'var(--accent-yellow)', width: '60px', display: 'inline-block' }}>cd</span> - Navigate to a directory (e.g., 'cd experience')</div>
                         <div><span style={{ color: 'var(--accent-yellow)', width: '60px', display: 'inline-block' }}>projects</span> - Filter projects: --filter [Frontend|Backend|Mobile|Security]</div>
                         <div><span style={{ color: 'var(--accent-yellow)', width: '60px', display: 'inline-block' }}>blog</span> - Search blog: --search [query]</div>
+                        <div><span style={{ color: 'var(--accent-yellow)', width: '60px', display: 'inline-block' }}>spacewar</span> - Play a retro terminal space game</div>
                         <div><span style={{ color: 'var(--accent-yellow)', width: '60px', display: 'inline-block' }}>clear</span> - Clear terminal history</div>
                         <div><span style={{ color: 'var(--accent-yellow)', width: '60px', display: 'inline-block' }}>sudo</span> - ???</div>
                     </div>
@@ -167,6 +169,8 @@ const InteractiveTerminal = ({ resumeData, setProjectFilter }) => {
                         navigate('/blog');
                     }, 500);
                 }
+            } else if (cmd === 'spacewar') {
+                output = <SpaceWar />;
             } else if (cmd === 'sudo') {
                 output = <div style={{ color: 'var(--accent-red)' }}>prakhar is not in the sudoers file. This incident will be reported.</div>;
             } else {
