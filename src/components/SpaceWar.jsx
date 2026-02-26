@@ -49,6 +49,9 @@ const SpaceWar = ({ onExit }) => {
             if (e.code === 'Escape' || e.code === 'KeyQ' || (e.ctrlKey && e.code === 'KeyC')) {
                 if (onExit) onExit();
             }
+            if (e.code === 'KeyF') {
+                toggleFullscreen();
+            }
         };
         const handleKeyUp = (e) => {
             gameState.current.keys[e.code] = false;
@@ -508,62 +511,17 @@ const SpaceWar = ({ onExit }) => {
                     }}
                 />
 
-                {/* Controls Below Canvas (Fullscreen - Text - Exit) */}
+                {/* Controls Below Canvas (Text only) */}
                 <div style={{
                     marginTop: '15px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '20px',
-                    width: '100%'
+                    color: 'var(--accent-blue)',
+                    fontFamily: '"Fira Code", monospace',
+                    fontSize: '0.85rem',
+                    textAlign: 'center',
+                    opacity: 0.8
                 }}>
-                    <button
-                        onClick={toggleFullscreen}
-                        style={{
-                            background: 'rgba(0,0,0,0.8)',
-                            color: 'var(--accent-cyan)',
-                            border: '1px solid var(--accent-cyan)',
-                            borderRadius: '4px',
-                            padding: '4px 8px',
-                            cursor: 'pointer',
-                            fontFamily: '"Fira Code", monospace',
-                            fontSize: '0.8rem',
-                            textTransform: 'uppercase'
-                        }}
-                    >
-                        {isFullscreen ? 'Window' : 'Fullscreen'}
-                    </button>
-
-                    {!isFullscreen && (
-                        <div style={{
-                            color: 'var(--accent-blue)',
-                            fontFamily: '"Fira Code", monospace',
-                            fontSize: '0.85rem',
-                            textAlign: 'center',
-                            opacity: 0.8
-                        }}>
-                            Press <span style={{ color: 'var(--accent-yellow)', fontWeight: 'bold' }}>Q</span> to exit the game
-                        </div>
-                    )}
-
-                    {!isFullscreen && (
-                        <button
-                            onClick={onExit}
-                            style={{
-                                background: 'rgba(0,0,0,0.8)',
-                                color: 'var(--accent-red)',
-                                border: '1px solid var(--accent-red)',
-                                borderRadius: '4px',
-                                padding: '4px 8px',
-                                cursor: 'pointer',
-                                fontFamily: '"Fira Code", monospace',
-                                fontSize: '0.8rem',
-                                textTransform: 'uppercase'
-                            }}
-                        >
-                            Exit
-                        </button>
-                    )}
+                    Press <span style={{ color: 'var(--accent-yellow)', fontWeight: 'bold' }}>F</span> to toggle Fullscreen &nbsp;|&nbsp;
+                    Press <span style={{ color: 'var(--accent-yellow)', fontWeight: 'bold' }}>Q</span> to exit the game
                 </div>
             </div>
 
