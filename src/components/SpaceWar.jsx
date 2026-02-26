@@ -500,22 +500,15 @@ const SpaceWar = ({ onExit }) => {
                     }}
                 />
 
-                {/* Exit Instructions Below Canvas */}
-                {!isFullscreen && (
-                    <div style={{
-                        marginTop: '15px',
-                        color: 'var(--accent-blue)',
-                        fontFamily: '"Fira Code", monospace',
-                        fontSize: '0.85rem',
-                        textAlign: 'center',
-                        opacity: 0.8
-                    }}>
-                        Press <span style={{ color: 'var(--accent-yellow)', fontWeight: 'bold' }}>Q</span> to exit the game
-                    </div>
-                )}
-
-                {/* Fullscreen & Exit Overlay Buttons */}
-                <div style={{ position: 'absolute', top: '-10px', right: '-10px', display: 'flex', gap: '10px' }}>
+                {/* Controls Below Canvas (Fullscreen - Text - Exit) */}
+                <div style={{
+                    marginTop: '15px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '20px',
+                    width: '100%'
+                }}>
                     <button
                         onClick={toggleFullscreen}
                         style={{
@@ -527,12 +520,24 @@ const SpaceWar = ({ onExit }) => {
                             cursor: 'pointer',
                             fontFamily: '"Fira Code", monospace',
                             fontSize: '0.8rem',
-                            textTransform: 'uppercase',
-                            zIndex: 10
+                            textTransform: 'uppercase'
                         }}
                     >
                         {isFullscreen ? 'Window' : 'Fullscreen'}
                     </button>
+
+                    {!isFullscreen && (
+                        <div style={{
+                            color: 'var(--accent-blue)',
+                            fontFamily: '"Fira Code", monospace',
+                            fontSize: '0.85rem',
+                            textAlign: 'center',
+                            opacity: 0.8
+                        }}>
+                            Press <span style={{ color: 'var(--accent-yellow)', fontWeight: 'bold' }}>Q</span> to exit the game
+                        </div>
+                    )}
+
                     {!isFullscreen && (
                         <button
                             onClick={onExit}
@@ -545,8 +550,7 @@ const SpaceWar = ({ onExit }) => {
                                 cursor: 'pointer',
                                 fontFamily: '"Fira Code", monospace',
                                 fontSize: '0.8rem',
-                                textTransform: 'uppercase',
-                                zIndex: 10
+                                textTransform: 'uppercase'
                             }}
                         >
                             Exit
