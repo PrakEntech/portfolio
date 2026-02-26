@@ -132,11 +132,6 @@ export const resumeData = {
             tech: ["PHP", "Mautic", "Jenkins", "API Development"],
         },
         {
-            name: "Postcard PDF Generator",
-            description: "Automated PDF generation system producing grid-based postcard layouts with Dropbox API integration and CI/CD-enabled deployment workflows.",
-            tech: ["Python", "Dropbox API", "Jenkins"],
-        },
-        {
             name: "Music Streaming App",
             description: "Spotify-inspired cross-platform mobile application featuring gesture-based controls, media library management, and favourites built using React Native and Firebase.",
             tech: ["Java"],
