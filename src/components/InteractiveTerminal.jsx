@@ -42,6 +42,8 @@ const InteractiveTerminal = ({ resumeData, setProjectFilter }) => {
     ];
 
     const [history, setHistory] = useState(initialHistory);
+    const [commandLog, setCommandLog] = useState([]); // Stores just the string commands typed
+    const [historyIndex, setHistoryIndex] = useState(-1); // -1 means currently typing new command
     const [input, setInput] = useState('');
     const [activeApp, setActiveApp] = useState(null); // e.g. 'spacewar'
     const terminalBodyRef = useRef(null);
@@ -71,9 +73,38 @@ const InteractiveTerminal = ({ resumeData, setProjectFilter }) => {
     }, [history]);
 
     const handleCommand = (e) => {
+        if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (commandLog.length > 0) {
+                const newIndex = historyIndex < commandLog.length - 1 ? historyIndex + 1 : historyIndex;
+                setHistoryIndex(newIndex);
+                setInput(commandLog[commandLog.length - 1 - newIndex]);
+            }
+            return;
+        }
+
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            if (historyIndex > 0) {
+                const newIndex = historyIndex - 1;
+                setHistoryIndex(newIndex);
+                setInput(commandLog[commandLog.length - 1 - newIndex]);
+            } else if (historyIndex === 0) {
+                setHistoryIndex(-1);
+                setInput('');
+            }
+            return;
+        }
+
         if (e.key === 'Enter') {
             const cmd = input.trim().toLowerCase();
             setInput('');
+            setHistoryIndex(-1); // Reset history index on new command submit
+
+            if (cmd) {
+                // Add to command log unless it's identical to the very last command typed
+                setCommandLog(prev => prev[prev.length - 1] === cmd ? prev : [...prev, cmd]);
+            }
 
             if (!cmd) return;
 
