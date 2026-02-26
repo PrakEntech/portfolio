@@ -9,6 +9,8 @@ import ScrollReveal from './components/ScrollReveal';
 import BlogRoutes from './generated/BlogRoutes.jsx';
 import { resumeData } from './data/resumeData';
 import {
+  Briefcase, GraduationCap, Github, Linkedin,
+  Mail, Phone, MapPin, Cpu, FolderGit2, ChevronRight, Star,
   Download
 } from 'lucide-react';
 import { playSound, UI_SOUNDS } from './utils/audio';
