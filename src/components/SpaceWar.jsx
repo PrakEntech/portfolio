@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-const SpaceWar = () => {
+const SpaceWar = ({ onExit }) => {
     const canvasRef = useRef(null);
     const [gameOver, setGameOver] = useState(false);
     const [winner, setWinner] = useState(null); // 'Needle', 'Wedge', or 'Draw'
@@ -43,6 +43,9 @@ const SpaceWar = () => {
             }
             if (e.code === 'KeyR' && gameOver) {
                 resetGame();
+            }
+            if (e.code === 'Escape' || e.code === 'KeyQ' || (e.ctrlKey && e.code === 'KeyC')) {
+                if (onExit) onExit();
             }
         };
         const handleKeyUp = (e) => {

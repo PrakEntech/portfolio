@@ -43,6 +43,7 @@ const InteractiveTerminal = ({ resumeData, setProjectFilter }) => {
 
     const [history, setHistory] = useState(initialHistory);
     const [input, setInput] = useState('');
+    const [activeApp, setActiveApp] = useState(null); // e.g. 'spacewar'
     const terminalBodyRef = useRef(null);
     const inputRef = useRef(null);
     const isFirstRun = useRef(true);
@@ -170,7 +171,8 @@ const InteractiveTerminal = ({ resumeData, setProjectFilter }) => {
                     }, 500);
                 }
             } else if (cmd === 'spacewar') {
-                output = <SpaceWar />;
+                setActiveApp('spacewar');
+                output = <div style={{ color: 'var(--accent-green)' }}>Launching SpaceWar! Type 'Q' or 'ESC' to exit.</div>;
             } else if (cmd === 'sudo') {
                 output = <div style={{ color: 'var(--accent-red)' }}>prakhar is not in the sudoers file. This incident will be reported.</div>;
             } else {
@@ -197,43 +199,64 @@ const InteractiveTerminal = ({ resumeData, setProjectFilter }) => {
                 <div style={{ width: '40px' }}></div>
             </div>
 
-            <div className="terminal-body" ref={terminalBodyRef} style={{ minHeight: '300px', maxHeight: '500px', overflowY: 'auto' }}>
-                {history.map((item, idx) => (
-                    <div key={idx} style={{ marginBottom: item.type === 'command' ? '8px' : '1.5rem' }}>
-                        {item.type === 'command' ? (
-                            <div className="prompt-line" style={{ marginBottom: 0 }}>
-                                <span className="prompt">visitor@portfolio:~$</span>
-                                <span className="command">{item.text}</span>
+            <div
+                className={`terminal-body ${activeApp ? 'app-active' : ''}`}
+                ref={terminalBodyRef}
+                style={{
+                    minHeight: activeApp ? '600px' : '300px',
+                    maxHeight: activeApp ? '800px' : '500px',
+                    overflowY: activeApp ? 'hidden' : 'auto',
+                    transition: 'all 0.3s ease'
+                }}
+            >
+                {activeApp === 'spacewar' ? (
+                    <SpaceWar onExit={() => {
+                        setActiveApp(null);
+                        setHistory(prev => [
+                            ...prev,
+                            { type: 'component', content: <div style={{ color: 'var(--accent-yellow)' }}>Exited SpaceWar. Welcome back to terminal.</div> }
+                        ]);
+                    }} />
+                ) : (
+                    <>
+                        {history.map((item, idx) => (
+                            <div key={idx} style={{ marginBottom: item.type === 'command' ? '8px' : '1.5rem' }}>
+                                {item.type === 'command' ? (
+                                    <div className="prompt-line" style={{ marginBottom: 0 }}>
+                                        <span className="prompt">visitor@portfolio:~$</span>
+                                        <span className="command">{item.text}</span>
+                                    </div>
+                                ) : (
+                                    <div className="cmd-output">
+                                        {item.content}
+                                    </div>
+                                )}
                             </div>
-                        ) : (
-                            <div className="cmd-output">
-                                {item.content}
-                            </div>
-                        )}
-                    </div>
-                ))}
+                        ))}
 
-                <div className="prompt-line" style={{ marginTop: '8px' }}>
-                    <span className="prompt">visitor@portfolio:~$</span>
-                    <input
-                        ref={inputRef}
-                        type="text"
-                        value={input}
-                        onChange={(e) => setInput(e.target.value)}
-                        onKeyDown={handleCommand}
-                        style={{
-                            background: 'transparent',
-                            border: 'none',
-                            color: 'var(--accent-blue)',
-                            outline: 'none',
-                            fontFamily: 'inherit',
-                            fontSize: 'inherit',
-                            width: '60%',
-                            caretColor: 'var(--accent-green)'
-                        }}
-                        autoFocus={typeof window !== 'undefined' && window.matchMedia("(min-width: 768px)").matches}
-                    />
-                </div>
+                        <div className="prompt-line" style={{ marginTop: '8px' }}>
+                            <span className="prompt">visitor@portfolio:~$</span>
+                            <input
+                                ref={inputRef}
+                                type="text"
+                                value={input}
+                                onChange={(e) => setInput(e.target.value)}
+                                onKeyDown={handleCommand}
+                                style={{
+                                    background: 'transparent',
+                                    border: 'none',
+                                    color: 'var(--accent-blue)',
+                                    outline: 'none',
+                                    fontFamily: 'inherit',
+                                    fontSize: 'inherit',
+                                    width: '60%',
+                                    caretColor: 'var(--accent-green)'
+                                }}
+                                autoFocus={typeof window !== 'undefined' && window.matchMedia("(min-width: 768px)").matches}
+                            />
+                        </div>
+                    </>
+                )}
             </div>
         </div>
     );
