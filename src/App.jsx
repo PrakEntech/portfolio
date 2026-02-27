@@ -6,14 +6,13 @@ import TerminalWindow from './components/TerminalWindow';
 import InteractiveTerminal from './components/InteractiveTerminal';
 import MobileNav from './components/MobileNav';
 import ScrollReveal from './components/ScrollReveal';
-import ArchitectureViewer from './components/ArchitectureViewer';
 import FlowDiagramViewer from './components/FlowDiagramViewer';
 import BlogRoutes from './generated/BlogRoutes.jsx';
 import { resumeData } from './data/resumeData';
 import {
   Briefcase, GraduationCap, Github, Linkedin,
   Mail, Phone, MapPin, Cpu, FolderGit2, ChevronRight, Star,
-  Download, Network, List
+  Download, List
 } from 'lucide-react';
 
 /* ── Section heading ────────────────────────────────────── */
@@ -102,7 +101,6 @@ function App() {
 function HomeApp() {
   const { personalInfo, summary, education, skills, experience, projects } = resumeData;
   const [projectFilter, setProjectFilter] = useState('All');
-  const [isArchViewerOpen, setIsArchViewerOpen] = useState(false);
   const [isFlowViewerOpen, setIsFlowViewerOpen] = useState(false);
 
   // Parse terminal commands
@@ -112,7 +110,6 @@ function HomeApp() {
     <>
       <HackerBackground />
 
-      {/* NAV */}
       <nav className="nav-bar">
         <Link to="/" className="nav-logo" style={{ textDecoration: 'none' }}>~/prakhar</Link>
         <ul className="nav-links">
@@ -121,12 +118,12 @@ function HomeApp() {
               <a href={href} className="nav-link">{href.replace('#', '')}</a>
             </li>
           ))}
-          <li><Link to="/blog" className="nav-link" style={{ color: 'var(--accent-blue)', whiteWhiteSpace: 'nowrap' }}>blog</Link></li>
+          <li><Link to="/blog" className="nav-link" style={{ color: 'var(--accent-blue)', whiteSpace: 'nowrap' }}>blog</Link></li>
         </ul>
         <div style={{ display: 'flex', gap: '15px', alignItems: 'center', marginLeft: 'auto' }}>
           <MobileNav />
-          <a href="https://drive.google.com/uc?export=download&id=1igMNs4ceEuZVMB2LMMKKsulOOAbuVvlg" target="_blank" rel="noreferrer" className="nav-link download-btn" style={{ display: 'flex', alignItems: 'center', gap: '6px', border: '1px solid var(--accent-green)', color: 'var(--accent-green)', padding: '4px 12px', borderRadius: '4px', textDecoration: 'none', fontSize: '0.85rem' }}>
-            <Download size={14} /> Resume
+          <a href="/resume.pdf" target="_blank" className="nav-resume-btn">
+            <Download size={16} /> Resume
           </a>
         </div>
       </nav>
@@ -135,20 +132,35 @@ function HomeApp() {
 
         {/* ── HERO ─────────────────────────────── */}
         <section id="about" style={{ paddingTop: '6rem' }}>
-          <ScrollReveal>
-            <InteractiveTerminal resumeData={resumeData} setProjectFilter={setProjectFilter} />
-          </ScrollReveal>
+          <div className="hero-section">
+            <div className="hero-content">
+              <h1 className="hero-title">
+                <TypewriterText text={`I'm ${personalInfo.name}`} speed={70} />
+              </h1>
+              <p className="hero-subtitle">
+                <TypewriterText text={personalInfo.title} delay={1000} speed={40} />
+              </p>
+              <div className="hero-summary">
+                <TypewriterText text={summary} delay={2000} speed={5} />
+              </div>
+            </div>
+
+            <div className="hero-terminal">
+              <TerminalWindow title="interactive-terminal">
+                <InteractiveTerminal />
+              </TerminalWindow>
+            </div>
+          </div>
         </section>
 
         {/* ── SKILLS ───────────────────────────── */}
         <section id="skills">
-          <SectionHeading icon={Cpu} label="Technical Skills" command="ls -la ~/skills/" />
-          {/* Wrap whole grid so cards can stagger */}
+          <SectionHeading icon={Cpu} label="Technical Stack" command="ls -la /usr/prakhar/skills" />
           <ScrollReveal>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '1rem' }}>
+            <div className="skills-grid">
               {skills.map((group, idx) => (
-                <div key={idx} className="skill-card">
-                  <div className="skill-category">{group.category}</div>
+                <div key={idx} className="skill-category">
+                  <div className="skill-category-name">{group.category}</div>
                   <div>
                     {group.items.map((item, i) => (
                       <span key={i} className="skill-tag">{item}</span>
@@ -250,21 +262,6 @@ function HomeApp() {
                     {proj.name === "Delivery Tracker" && (
                       <div style={{ marginTop: '0.75rem' }}>
                         <button
-                          onClick={() => setIsArchViewerOpen(true)}
-                          className="project-link-tag"
-                          style={{
-                            background: 'transparent',
-                            borderColor: 'var(--accent-purple)',
-                            color: 'var(--accent-purple)',
-                            cursor: 'pointer',
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: '4px'
-                          }}
-                        >
-                          <Network size={12} /> View Architecture
-                        </button>
-                        <button
                           onClick={() => setIsFlowViewerOpen(true)}
                           className="project-link-tag"
                           style={{
@@ -274,8 +271,7 @@ function HomeApp() {
                             cursor: 'pointer',
                             display: 'inline-flex',
                             alignItems: 'center',
-                            gap: '4px',
-                            marginLeft: '8px'
+                            gap: '4px'
                           }}
                         >
                           <List size={12} /> View Flow
@@ -300,9 +296,6 @@ function HomeApp() {
                   </div>
                   <div className="edu-institution">
                     <TypewriterText text={edu.institution} speed={5} />
-                  </div>
-                  <div className="edu-grade">
-                    <TypewriterText text={edu.grade} speed={5} />
                   </div>
                 </div>
                 <div className="edu-period">
@@ -343,11 +336,6 @@ function HomeApp() {
 
       </main>
 
-      {/* ── Architecture Viewer Modal ── */}
-      <ArchitectureViewer
-        isOpen={isArchViewerOpen}
-        onClose={() => setIsArchViewerOpen(false)}
-      />
       <FlowDiagramViewer
         isOpen={isFlowViewerOpen}
         onClose={() => setIsFlowViewerOpen(false)}
