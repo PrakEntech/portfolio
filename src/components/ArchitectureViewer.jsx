@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
-import { X, Network, Database, Server, Users, ArrowRight, Zap, Globe, Cog } from 'lucide-react';
+import { X, Network, Database, Server, Users, ArrowRight, Zap, Globe, Cog, RotateCw } from 'lucide-react';
 import architectureData from '../../architecture.json';
 
 const ICON_MAP = {
@@ -14,16 +14,22 @@ const ICON_MAP = {
 const ArchitectureViewer = ({ isOpen, onClose }) => {
     const [selectedNodeId, setSelectedNodeId] = useState(null);
     const [hoveredNodeId, setHoveredNodeId] = useState(null);
-    const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
-
-    useEffect(() => {
-        const handleResize = () => setIsMobile(window.innerWidth < 768);
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
+    const [isPortrait, setIsPortrait] = useState(false);
 
     const activeNodeId = hoveredNodeId || selectedNodeId;
     const viewerRef = useRef(null);
+
+    useEffect(() => {
+        const checkOrientation = () => {
+            const isMob = window.innerWidth <= 768;
+            const isPort = window.innerHeight > window.innerWidth;
+            setIsPortrait(isMob && isPort);
+        };
+
+        checkOrientation();
+        window.addEventListener('resize', checkOrientation);
+        return () => window.removeEventListener('resize', checkOrientation);
+    }, []);
 
     // Group nodes by their defined 'group' property
     const groupedNodes = useMemo(() => {
@@ -63,45 +69,63 @@ const ArchitectureViewer = ({ isOpen, onClose }) => {
         <div className="arch-modal-overlay" style={{
             position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
             backgroundColor: 'rgba(5, 8, 12, 0.98)',
-            backdropFilter: 'blur(10px)',
-            zIndex: 2000,
+            backdropFilter: 'blur(15px)',
+            zIndex: 1000,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: isMobile ? '0' : '2rem'
+            padding: isPortrait ? '0' : '2rem',
+            overflow: 'hidden'
         }}>
+            {/* Rotation Hint for Mobile Portrait */}
+            {isPortrait && (
+                <div style={{
+                    position: 'absolute',
+                    top: '1rem',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    zIndex: 1001,
+                    background: 'var(--accent-purple)',
+                    color: '#fff',
+                    padding: '8px 16px',
+                    borderRadius: '20px',
+                    fontSize: '0.75rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    boxShadow: '0 4px 15px rgba(0,0,0,0.5)',
+                    animation: 'bounce 2s infinite'
+                }}>
+                    <RotateCw size={14} /> Best viewed in Landscape
+                </div>
+            )}
+
             <div className="terminal-window" style={{
-                width: '100%',
+                width: isPortrait ? '92vh' : '100%',
                 maxWidth: '1200px',
-                height: isMobile ? '100vh' : '85vh',
+                height: isPortrait ? '92vw' : '85vh',
                 display: 'flex',
                 flexDirection: 'column',
                 boxShadow: '0 25px 80px rgba(0,0,0,0.8)',
-                borderRadius: isMobile ? '0' : '10px',
-                border: isMobile ? 'none' : '1px solid var(--border-color)'
+                transform: isPortrait ? 'rotate(90deg)' : 'none',
+                transition: 'transform 0.3s ease, width 0.3s ease, height 0.3s ease',
+                transformOrigin: 'center center'
             }}>
                 {/* Terminal Header */}
-                <div className="terminal-header" style={{
-                    justifyContent: 'space-between',
-                    padding: isMobile ? '0.75rem 1rem' : '0.6rem 1rem'
-                }}>
+                <div className="terminal-header" style={{ justifyContent: 'space-between' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                        {!isMobile && (
-                            <div className="terminal-controls">
-                                <div className="control red" onClick={onClose} style={{ cursor: 'pointer' }} />
-                                <div className="control yellow" />
-                                <div className="control green" />
-                            </div>
-                        )}
-                        <span className="terminal-title" style={{ fontSize: isMobile ? '0.7rem' : '0.78rem' }}>
-                            {isMobile ? 'architecture.json' : '~/delivery-tracker/architecture.json — Flow Viewer'}
-                        </span>
+                        <div className="terminal-controls">
+                            <div className="control red" onClick={onClose} style={{ cursor: 'pointer' }} />
+                            <div className="control yellow" />
+                            <div className="control green" />
+                        </div>
+                        <span className="terminal-title">~/delivery-tracker/architecture.json — Flow Viewer</span>
                     </div>
                     <button onClick={onClose} style={{
                         background: 'none', border: 'none', color: 'var(--text-muted)',
                         cursor: 'pointer', outline: 'none', display: 'flex', alignItems: 'center'
                     }}>
-                        <X size={isMobile ? 20 : 18} />
+                        <X size={18} />
                     </button>
                 </div>
 
@@ -109,38 +133,35 @@ const ArchitectureViewer = ({ isOpen, onClose }) => {
                 <div className="terminal-body" style={{
                     flex: 1,
                     display: 'flex',
-                    flexDirection: isMobile ? 'column' : 'row',
                     overflow: 'hidden',
                     padding: 0
                 }}>
-                    {/* Layout Area - Always keeps its horizontal scroll nature */}
+                    {/* Layout Area */}
                     <div className="arch-grid" ref={viewerRef} style={{
-                        flex: isMobile && selectedNodeId ? '0 0 50%' : '1',
+                        flex: 2,
                         display: 'flex',
-                        gap: '1.25rem',
-                        padding: isMobile ? '1.5rem 1rem' : '2rem',
+                        gap: '1.5rem',
+                        padding: '2rem',
                         overflowX: 'auto',
-                        overflowY: 'auto',
                         background: 'rgba(8, 12, 16, 0.5)',
-                        scrollSnapType: isMobile ? 'x mandatory' : 'none'
+                        WebkitOverflowScrolling: 'touch'
                     }}>
                         {columns.map(colId => {
                             if (!groupedNodes[colId]) return null;
                             return (
                                 <div key={colId} className="arch-col" style={{
-                                    flex: isMobile ? '0 0 80%' : '0 0 220px',
+                                    flex: '0 0 240px',
                                     display: 'flex',
                                     flexDirection: 'column',
-                                    gap: '0.75rem',
-                                    scrollSnapAlign: 'start'
+                                    gap: '1rem'
                                 }}>
                                     <div style={{
                                         color: 'var(--text-muted)',
-                                        fontSize: '0.7rem',
+                                        fontSize: '0.75rem',
                                         textTransform: 'uppercase',
                                         letterSpacing: '0.1em',
                                         fontWeight: 600,
-                                        marginBottom: '0.4rem',
+                                        marginBottom: '0.5rem',
                                         display: 'flex',
                                         alignItems: 'center',
                                         gap: '6px'
@@ -148,6 +169,7 @@ const ArchitectureViewer = ({ isOpen, onClose }) => {
                                         {ICON_MAP[colId]} {colId}
                                     </div>
                                     {groupedNodes[colId].map(node => {
+                                        // Determine highlight state for CSS
                                         let nodeState = 'normal';
                                         if (activeNodeId) {
                                             if (node.id === activeNodeId) nodeState = 'active';
@@ -159,26 +181,26 @@ const ArchitectureViewer = ({ isOpen, onClose }) => {
                                             <div
                                                 key={node.id}
                                                 className={`arch-node state-${nodeState}`}
-                                                onMouseEnter={() => !isMobile && setHoveredNodeId(node.id)}
-                                                onMouseLeave={() => !isMobile && setHoveredNodeId(null)}
+                                                onMouseEnter={() => setHoveredNodeId(node.id)}
+                                                onMouseLeave={() => setHoveredNodeId(null)}
                                                 onClick={() => handleNodeClick(node.id)}
                                                 style={{
                                                     background: nodeState === 'active' ? 'rgba(34, 211, 238, 0.15)' : 'rgba(8, 20, 28, 0.8)',
                                                     border: `1px solid ${nodeState === 'active' ? 'var(--accent-green)' : 'var(--border-color)'}`,
-                                                    padding: '0.75rem',
+                                                    padding: '1rem',
                                                     borderRadius: '8px',
                                                     cursor: 'pointer',
                                                     transition: 'all 0.2s',
                                                     opacity: nodeState === 'dimmed' ? 0.3 : 1,
                                                     transform: nodeState === 'active' ? 'translateY(-2px)' : 'none',
-                                                    boxShadow: nodeState === 'active' ? '0 0 15px rgba(34, 211, 238, 0.2)' : 'none'
+                                                    boxShadow: nodeState === 'active' ? '0 0 20px rgba(34, 211, 238, 0.2)' : 'none'
                                                 }}
                                             >
-                                                <div style={{ fontSize: '0.8rem', color: nodeState === 'active' ? '#fff' : 'var(--text-body)', fontWeight: 500 }}>
+                                                <div style={{ fontSize: '0.85rem', color: nodeState === 'active' ? '#fff' : 'var(--text-body)', fontWeight: 500 }}>
                                                     {node.label}
                                                 </div>
-                                                <div style={{ fontSize: '0.6rem', color: 'var(--text-muted)', marginTop: '2px', fontFamily: "'Fira Code', monospace" }}>
-                                                    {node.id}
+                                                <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', marginTop: '4px', fontFamily: "'Fira Code', monospace" }}>
+                                                    id: {node.id}
                                                 </div>
                                             </div>
                                         )
@@ -188,58 +210,46 @@ const ArchitectureViewer = ({ isOpen, onClose }) => {
                         })}
                     </div>
 
-                    {/* Details Sidebar / Bottom Panel on Mobile */}
+                    {/* Details Sidebar */}
                     <div className="arch-sidebar" style={{
-                        flex: isMobile ? (selectedNodeId ? '1' : '0') : '0 0 320px',
-                        borderLeft: isMobile ? 'none' : '1px solid var(--border-color)',
-                        borderTop: isMobile ? '1px solid var(--border-color)' : 'none',
+                        flex: '0 0 350px',
+                        borderLeft: '1px solid var(--border-color)',
                         background: 'var(--terminal-header-bg)',
-                        padding: isMobile ? '1.5rem' : '2rem',
-                        overflowY: 'auto',
-                        display: isMobile && !selectedNodeId ? 'none' : 'block'
+                        padding: '1.5rem',
+                        overflowY: 'auto'
                     }}>
                         {selectedNode ? (
                             <div>
-                                <div style={{ marginBottom: '1.5rem', position: 'relative' }}>
-                                    {isMobile && (
-                                        <button
-                                            onClick={() => setSelectedNodeId(null)}
-                                            style={{
-                                                position: 'absolute', right: 0, top: 0, background: 'none', border: 'none', color: 'var(--text-muted)'
-                                            }}
-                                        >
-                                            <X size={16} />
-                                        </button>
-                                    )}
-                                    <div style={{ color: 'var(--accent-green)', fontFamily: "'Fira Code', monospace", fontSize: '0.65rem', marginBottom: '6px' }}>
+                                <div style={{ marginBottom: '1.5rem' }}>
+                                    <div style={{ color: 'var(--accent-green)', fontFamily: "'Fira Code', monospace", fontSize: '0.75rem', marginBottom: '8px' }}>
                                         $ inspect {selectedNode.id}
                                     </div>
-                                    <h3 style={{ fontSize: '1.1rem', color: '#fff', marginBottom: '2px' }}>{selectedNode.label}</h3>
-                                    <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
-                                        {selectedNode.group}
+                                    <h3 style={{ fontSize: '1.1rem', color: '#fff', marginBottom: '4px' }}>{selectedNode.label}</h3>
+                                    <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                                        Group: {selectedNode.group}
                                     </div>
                                 </div>
 
                                 {outgoing.length > 0 && (
                                     <div style={{ marginBottom: '1.5rem' }}>
                                         <div style={{ fontSize: '0.75rem', color: 'var(--accent-blue)', fontWeight: 600, marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                            <ArrowRight size={14} /> Outgoing
+                                            <ArrowRight size={14} /> Sends To
                                         </div>
-                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
                                             {outgoing.map((edge, i) => {
                                                 const targetNode = architectureData.nodes.find(n => n.id === edge.to);
                                                 return (
                                                     <div key={i} style={{
                                                         background: 'rgba(34, 211, 238, 0.05)',
-                                                        border: '1px solid rgba(34, 211, 238, 0.1)',
+                                                        border: '1px solid rgba(34, 211, 238, 0.15)',
                                                         padding: '0.6rem',
-                                                        borderRadius: '4px'
+                                                        borderRadius: '6px'
                                                     }}>
-                                                        <div style={{ fontSize: '0.65rem', color: 'var(--accent-yellow)', marginBottom: '3px', fontFamily: "'Fira Code', monospace" }}>
+                                                        <div style={{ fontSize: '0.65rem', color: 'var(--accent-yellow)', marginBottom: '4px', fontFamily: "'Fira Code', monospace" }}>
                                                             {edge.label}
                                                         </div>
-                                                        <div style={{ fontSize: '0.75rem', color: '#eee' }}>
-                                                            → {targetNode?.label}
+                                                        <div style={{ fontSize: '0.75rem', color: '#fff', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                                            <span>→</span> {targetNode?.label}
                                                         </div>
                                                     </div>
                                                 )
@@ -251,23 +261,23 @@ const ArchitectureViewer = ({ isOpen, onClose }) => {
                                 {incoming.length > 0 && (
                                     <div>
                                         <div style={{ fontSize: '0.75rem', color: 'var(--accent-purple)', fontWeight: 600, marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                            <Zap size={14} /> Incoming
+                                            <Zap size={14} /> Received From
                                         </div>
-                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
                                             {incoming.map((edge, i) => {
                                                 const sourceNode = architectureData.nodes.find(n => n.id === edge.from);
                                                 return (
                                                     <div key={i} style={{
                                                         background: 'rgba(167, 139, 250, 0.05)',
-                                                        border: '1px solid rgba(167, 139, 250, 0.1)',
+                                                        border: '1px solid rgba(167, 139, 250, 0.15)',
                                                         padding: '0.6rem',
-                                                        borderRadius: '4px'
+                                                        borderRadius: '6px'
                                                     }}>
-                                                        <div style={{ fontSize: '0.65rem', color: 'var(--accent-yellow)', marginBottom: '3px', fontFamily: "'Fira Code', monospace" }}>
+                                                        <div style={{ fontSize: '0.65rem', color: 'var(--accent-yellow)', marginBottom: '4px', fontFamily: "'Fira Code', monospace" }}>
                                                             {edge.label}
                                                         </div>
-                                                        <div style={{ fontSize: '0.75rem', color: '#eee' }}>
-                                                            ← {sourceNode?.label}
+                                                        <div style={{ fontSize: '0.75rem', color: '#fff', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                                            <span>←</span> {sourceNode?.label}
                                                         </div>
                                                     </div>
                                                 )
@@ -277,24 +287,29 @@ const ArchitectureViewer = ({ isOpen, onClose }) => {
                                 )}
                             </div>
                         ) : (
-                            !isMobile && (
-                                <div style={{
-                                    height: '100%',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    color: 'var(--text-muted)',
-                                    textAlign: 'center'
-                                }}>
-                                    <Network size={32} style={{ marginBottom: '1rem', opacity: 0.5 }} />
-                                    <div style={{ fontSize: '0.85rem' }}>Select a node to view connections.</div>
-                                </div>
-                            )
+                            <div style={{
+                                height: '100%',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                color: 'var(--text-muted)',
+                                textAlign: 'center'
+                            }}>
+                                <Network size={28} style={{ marginBottom: '1rem', opacity: 0.5 }} />
+                                <div style={{ fontSize: '0.8rem' }}>Select any node to<br />inspect its connections.</div>
+                            </div>
                         )}
                     </div>
                 </div>
             </div>
+
+            <style>{`
+                @keyframes bounce {
+                    0%, 100% { transform: translate(-50%, 0); }
+                    50% { transform: translate(-50%, -5px); }
+                }
+            `}</style>
         </div>
     );
 };
