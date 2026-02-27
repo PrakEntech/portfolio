@@ -6,12 +6,13 @@ import TerminalWindow from './components/TerminalWindow';
 import InteractiveTerminal from './components/InteractiveTerminal';
 import MobileNav from './components/MobileNav';
 import ScrollReveal from './components/ScrollReveal';
+import ArchitectureViewer from './components/ArchitectureViewer';
 import BlogRoutes from './generated/BlogRoutes.jsx';
 import { resumeData } from './data/resumeData';
 import {
   Briefcase, GraduationCap, Github, Linkedin,
   Mail, Phone, MapPin, Cpu, FolderGit2, ChevronRight, Star,
-  Download
+  Download, Network
 } from 'lucide-react';
 
 /* ── Section heading ────────────────────────────────────── */
@@ -100,6 +101,10 @@ function App() {
 function HomeApp() {
   const { personalInfo, summary, education, skills, experience, projects } = resumeData;
   const [projectFilter, setProjectFilter] = useState('All');
+  const [isArchViewerOpen, setIsArchViewerOpen] = useState(false);
+
+  // Parse terminal commands
+  const [terminalOutput, setTerminalOutput] = useState([]);
 
   return (
     <>
@@ -114,7 +119,7 @@ function HomeApp() {
               <a href={href} className="nav-link">{href.replace('#', '')}</a>
             </li>
           ))}
-          <li><Link to="/blog" className="nav-link" style={{ color: 'var(--accent-blue)', whiteSpace: 'nowrap' }}>blog</Link></li>
+          <li><Link to="/blog" className="nav-link" style={{ color: 'var(--accent-blue)', whiteWhiteSpace: 'nowrap' }}>blog</Link></li>
         </ul>
         <div style={{ display: 'flex', gap: '15px', alignItems: 'center', marginLeft: 'auto' }}>
           <MobileNav />
@@ -124,7 +129,7 @@ function HomeApp() {
         </div>
       </nav>
 
-      <div className="page-wrapper page-content">
+      <main className="page-wrapper page-content">
 
         {/* ── HERO ─────────────────────────────── */}
         <section id="about" style={{ paddingTop: '6rem' }}>
@@ -240,6 +245,25 @@ function HomeApp() {
                         ))}
                       </div>
                     )}
+                    {proj.name === "Delivery Tracker" && (
+                      <div style={{ marginTop: '0.75rem' }}>
+                        <button
+                          onClick={() => setIsArchViewerOpen(true)}
+                          className="project-link-tag"
+                          style={{
+                            background: 'transparent',
+                            borderColor: 'var(--accent-purple)',
+                            color: 'var(--accent-purple)',
+                            cursor: 'pointer',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '4px'
+                          }}
+                        >
+                          <Network size={12} /> View Architecture
+                        </button>
+                      </div>
+                    )}
                   </div>
                 ))}
             </div>
@@ -299,7 +323,13 @@ function HomeApp() {
           </ScrollReveal>
         </section>
 
-      </div>
+      </main>
+
+      {/* ── Architecture Viewer Modal ── */}
+      <ArchitectureViewer
+        isOpen={isArchViewerOpen}
+        onClose={() => setIsArchViewerOpen(false)}
+      />
     </>
   );
 }
