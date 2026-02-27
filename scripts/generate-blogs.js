@@ -148,40 +148,46 @@ ${sectionsJSX}
 }
 
 function generateBlogList(blogs) {
-  const cards = blogs.map(b => {
-    const tags = b.tags.split(';').map(t => `<span className="blog-tag">${t.trim()}</span>`).join('\n            ');
-    return `        <Link to="/blog/${b.key}" className="blog-card" key="${b.key}">
-          <div className="terminal-window" style={{ height: '100%' }}>
-            <div className="terminal-header">
-              <span className="dot red" /><span className="dot yellow" /><span className="dot green" />
-              <span className="terminal-title">${b.key}.md</span>
-            </div>
-            <div className="terminal-body" style={{ padding: '1.25rem 1.5rem' }}>
-              <div style={{ color: 'var(--accent-green)', fontFamily: "'Fira Code', monospace", fontSize: '0.7rem', marginBottom: '0.5rem' }}>
-                $ cat ${b.key}.md
-              </div>
-              <h2 className="blog-card-title">${b.title}</h2>
-              <div className="blog-meta-row">
-                <span className="blog-date">${b.date}</span>
-              </div>
-              <div className="blog-tags" style={{ marginTop: '0.75rem' }}>
-            ${tags}
-              </div>
-              <div style={{ marginTop: '1rem', color: 'var(--accent-blue)', fontSize: '0.75rem', fontFamily: "'Fira Code', monospace" }}>
-                read more →
-              </div>
-            </div>
-          </div>
-        </Link>`;
-  }).join('\n\n');
+  const blogsData = JSON.stringify(blogs.map(b => ({
+    id: b.key,
+    title: b.title,
+    date: b.date,
+    tags: b.tags.split(';').map(t => t.trim()),
+    path: `/blog/${b.key}`
+  })));
 
   return `// AUTO-GENERATED — do not edit manually.
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import HackerBackground from '../components/HackerBackground';
 import { BookOpen } from 'lucide-react';
 
 export default function BlogList() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '');
+
+  const blogs = ${blogsData};
+
+  useEffect(() => {
+    const q = searchParams.get('q');
+    if (q) setSearchQuery(q);
+  }, [searchParams]);
+
+  const handleSearchChange = (e) => {
+    const val = e.target.value;
+    setSearchQuery(val);
+    if (val) {
+      setSearchParams({ q: val });
+    } else {
+      setSearchParams({});
+    }
+  };
+
+  const filteredBlogs = blogs.filter(blog =>
+    blog.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    blog.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+  );
+
   return (
     <>
       <HackerBackground />
@@ -205,10 +211,64 @@ export default function BlogList() {
             <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem', fontSize: '0.9rem' }}>
               Engineering notes, real-world discoveries, and system design thinking.
             </p>
+
+            <div style={{ marginTop: '2rem', position: 'relative' }}>
+              <div style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--accent-green)', fontFamily: "'Fira Code', monospace", fontSize: '0.85rem' }}>$ grep -i</div>
+              <input
+                type="text"
+                placeholder="search_query"
+                value={searchQuery}
+                onChange={handleSearchChange}
+                style={{
+                  width: '100%',
+                  background: 'rgba(34,211,238,0.05)',
+                  border: '1px solid rgba(34,211,238,0.2)',
+                  borderRadius: '6px',
+                  padding: '12px 12px 12px 100px',
+                  color: 'var(--text-color)',
+                  fontFamily: "'Fira Code', monospace",
+                  fontSize: '0.9rem',
+                  outline: 'none',
+                  transition: 'border-color 0.2s'
+                }}
+                onFocus={(e) => e.target.style.borderColor = 'var(--accent-blue)'}
+                onBlur={(e) => e.target.style.borderColor = 'rgba(34,211,238,0.2)'}
+              />
+            </div>
           </div>
 
           <div className="blog-grid">
-${cards}
+            {filteredBlogs.length > 0 ? filteredBlogs.map(blog => (
+              <Link to={blog.path} className="blog-card" key={blog.id}>
+                <div className="terminal-window" style={{ height: '100%' }}>
+                  <div className="terminal-header">
+                    <span className="dot red" /><span className="dot yellow" /><span className="dot green" />
+                    <span className="terminal-title">{blog.id}.md</span>
+                  </div>
+                  <div className="terminal-body" style={{ padding: '1.25rem 1.5rem' }}>
+                    <div style={{ color: 'var(--accent-green)', fontFamily: "'Fira Code', monospace", fontSize: '0.7rem', marginBottom: '0.5rem' }}>
+                      $ cat {blog.id}.md
+                    </div>
+                    <h2 className="blog-card-title">{blog.title}</h2>
+                    <div className="blog-meta-row">
+                      <span className="blog-date">{blog.date}</span>
+                    </div>
+                    <div className="blog-tags" style={{ marginTop: '0.75rem' }}>
+                      {blog.tags.map(tag => (
+                        <span key={tag} className="blog-tag">{tag}</span>
+                      ))}
+                    </div>
+                    <div style={{ marginTop: '1rem', color: 'var(--accent-blue)', fontSize: '0.75rem', fontFamily: "'Fira Code', monospace" }}>
+                      read more →
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            )) : (
+              <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '3rem', color: 'var(--accent-red)', fontFamily: "'Fira Code', monospace" }}>
+                [ERR] No matches found for pattern: "{searchQuery}"
+              </div>
+            )}
           </div>
         </div>
       </div>
