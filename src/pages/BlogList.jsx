@@ -96,7 +96,7 @@ export default function BlogList() {
               </div>
               <h2 className="blog-card-title">File Uploads Are an Attack Surface</h2>
               <div className="blog-meta-row">
-                <span className="blog-date">2026-02-25</span>
+                <span className="blog-date">2026-02-27</span>
               </div>
               <div className="blog-tags" style={{ marginTop: '0.75rem' }}>
             <span className="blog-tag">Security</span>

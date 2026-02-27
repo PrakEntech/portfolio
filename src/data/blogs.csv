@@ -1,4 +1,4 @@
 key,title,date,tags
 gps_lies,GPS Lies: Why Distance Alone Cannot Validate a Delivery,2026-02-25,GPS;Firebase;PWA;Engineering
 event_driven_security,Event Driven Security Is Safer Than Public Endpoints,2026-02-26,Security;Architecture;Backend
-file_uploads_attack_surface,File Uploads Are an Attack Surface,2026-02-25,Security;Storage;Architecture
+file_uploads_attack_surface,File Uploads Are an Attack Surface,2026-02-27,Security;Storage;Architecture

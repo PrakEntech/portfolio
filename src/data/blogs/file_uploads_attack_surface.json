@@ -1,7 +1,7 @@
 {
     "key": "file_uploads_attack_surface",
     "title": "File Uploads Are an Attack Surface",
-    "date": "2026-02-25",
+    "date": "2026-02-27",
     "tags": [
         "Security",
         "Storage",
