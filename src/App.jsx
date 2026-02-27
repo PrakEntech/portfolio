@@ -155,7 +155,7 @@ function HomeApp() {
 
             <div className="hero-terminal">
               <TerminalWindow title="interactive-terminal">
-                <InteractiveTerminal />
+                <InteractiveTerminal resumeData={resumeData} setProjectFilter={setProjectFilter} />
               </TerminalWindow>
             </div>
           </div>

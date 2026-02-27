@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import TypewriterText from './TypewriterText';
 import SpaceWar from './SpaceWar';
 
-const InteractiveTerminal = ({ resumeData, setProjectFilter }) => {
+const InteractiveTerminal = ({ resumeData = {}, setProjectFilter }) => {
     const navigate = useNavigate();
-    const { personalInfo, summary } = resumeData;
+    const { personalInfo = {}, summary = "" } = resumeData;
     const initialHistory = [
         {
             type: 'command',
@@ -16,15 +16,15 @@ const InteractiveTerminal = ({ resumeData, setProjectFilter }) => {
             type: 'component',
             content: (
                 <div style={{ marginBottom: '1rem' }}>
-                    <div className="glitch-wrapper hero-name" data-text={personalInfo.name}>
-                        {personalInfo.name}
+                    <div className="glitch-wrapper hero-name" data-text={personalInfo.name || "Prakhar Srivastava"}>
+                        {personalInfo.name || "Prakhar Srivastava"}
                     </div>
                     <div className="hero-role">
-                        ▸ <TypewriterText text={personalInfo.role} speed={5} className="inline-typewriter" />
+                        ▸ <TypewriterText text={personalInfo.role || ""} speed={5} className="inline-typewriter" />
                     </div>
                     <div className="hero-location">
                         <MapPin size={13} style={{ display: 'inline', marginRight: '4px', verticalAlign: 'middle' }} />
-                        <TypewriterText text={personalInfo.location} speed={5} className="inline-typewriter" />
+                        <TypewriterText text={personalInfo.location || ""} speed={5} className="inline-typewriter" />
                     </div>
                     <div className="status-badge" style={{ marginTop: '1rem' }}>
                         <span className="status-dot" />
