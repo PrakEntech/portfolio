@@ -336,10 +336,12 @@ function HomeApp() {
 
       </main>
 
-      <FlowDiagramViewer
-        isOpen={isFlowViewerOpen}
-        onClose={() => setIsFlowViewerOpen(false)}
-      />
+      {isFlowViewerOpen && (
+        <FlowDiagramViewer
+          isOpen={isFlowViewerOpen}
+          onClose={() => setIsFlowViewerOpen(false)}
+        />
+      )}
     </>
   );
 }
