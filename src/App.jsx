@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import HackerBackground from './components/HackerBackground';
 import TypewriterText from './components/TypewriterText';
 import TerminalWindow from './components/TerminalWindow';
@@ -105,6 +105,15 @@ function HomeApp() {
 
   // Parse terminal commands
   const [terminalOutput, setTerminalOutput] = useState([]);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location && window.gtag) {
+      window.gtag('config', 'G-VCHS35F0N4', {
+        page_path: location.pathname + location.search
+      });
+    }
+  }, [location]);
 
   return (
     <>
