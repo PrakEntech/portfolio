@@ -36,7 +36,6 @@ export const resumeData = {
         { category: "Integrations & APIs", items: ["Google Maps Reverse Geocoding API", "Mautic CRM", "Dropbox API"] },
         { category: "Engineering Productivity", items: ["AI-assisted Development Workflows", "Rapid POC Development", "Prompt-guided Debugging", "Technical Documentation Generation"] },
         { category: "Quality & Tooling", items: ["SonarQube", "Edge-case Testing", "System Design Documentation", "Deployment Documentation"] },
-        { category: "Quality & Tooling", items: ["SonarQube", "Edge-case Testing", "System Design Documentation", "Deployment Documentation"] },
     ],
 
     experience: [

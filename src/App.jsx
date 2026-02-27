@@ -52,14 +52,14 @@ const FeaturedExpCard = ({ exp }) => (
       <TypewriterText text={exp.overview} speed={5} />
     </div>
     <div className="exp-groups">
-      {exp.groups?.map((group, gi) => (
+      {exp.groups.map((group, gi) => (
         <div key={gi} className="exp-group">
           <div className="exp-group-label">
             <ChevronRight size={12} style={{ marginRight: '4px' }} />
             {group.label}
           </div>
           <ul className="exp-bullets">
-            {group.bullets?.map((bullet, bi) => (
+            {group.bullets.map((bullet, bi) => (
               <li key={bi} className="exp-bullet">
                 <TypewriterText text={bullet} speed={5} />
               </li>
@@ -80,7 +80,7 @@ const RegularExpCard = ({ exp }) => (
     </div>
     <div className="exp-role intern">{exp.role}</div>
     <ul className="exp-bullets">
-      {exp.bullets?.map((bullet, i) => (
+      {exp.bullets.map((bullet, i) => (
         <li key={i} className="exp-bullet">
           <TypewriterText text={bullet} speed={5} />
         </li>
@@ -99,15 +99,7 @@ function App() {
 }
 
 function HomeApp() {
-  const {
-    personalInfo = {},
-    summary = "",
-    education = [],
-    skills = [],
-    experience = [],
-    projects = []
-  } = resumeData || {};
-
+  const { personalInfo, summary, education, skills, experience, projects } = resumeData;
   const [projectFilter, setProjectFilter] = useState('All');
   const [isFlowViewerOpen, setIsFlowViewerOpen] = useState(false);
 
@@ -146,7 +138,7 @@ function HomeApp() {
                 <TypewriterText text={`I'm ${personalInfo.name}`} speed={70} />
               </h1>
               <p className="hero-subtitle">
-                <TypewriterText text={personalInfo.role} delay={1000} speed={40} />
+                <TypewriterText text={personalInfo.title} delay={1000} speed={40} />
               </p>
               <div className="hero-summary">
                 <TypewriterText text={summary} delay={2000} speed={5} />
@@ -155,7 +147,7 @@ function HomeApp() {
 
             <div className="hero-terminal">
               <TerminalWindow title="interactive-terminal">
-                <InteractiveTerminal resumeData={resumeData} setProjectFilter={setProjectFilter} />
+                <InteractiveTerminal />
               </TerminalWindow>
             </div>
           </div>
@@ -344,12 +336,10 @@ function HomeApp() {
 
       </main>
 
-      {isFlowViewerOpen && (
-        <FlowDiagramViewer
-          isOpen={isFlowViewerOpen}
-          onClose={() => setIsFlowViewerOpen(false)}
-        />
-      )}
+      <FlowDiagramViewer
+        isOpen={isFlowViewerOpen}
+        onClose={() => setIsFlowViewerOpen(false)}
+      />
     </>
   );
 }

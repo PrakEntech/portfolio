@@ -1,34 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { X, ArrowRight, Zap, Database, Terminal, Shield, List, RotateCw } from 'lucide-react';
+import React, { useState } from 'react';
+import { X, ArrowRight, Zap, Database, Terminal, Shield, List } from 'lucide-react';
 import flowData from '../../flow_diagram.json';
 
 const FlowDiagramViewer = ({ isOpen, onClose }) => {
     const [activeStep, setActiveStep] = useState(1);
-    const [isPortrait, setIsPortrait] = useState(false);
-    const viewerRef = useRef(null);
-
-    useEffect(() => {
-        const checkOrientation = () => {
-            const isMob = window.innerWidth <= 768;
-            const isPort = window.innerHeight > window.innerWidth;
-            setIsPortrait(isMob && isPort);
-        };
-
-        checkOrientation();
-        window.addEventListener('resize', checkOrientation);
-        return () => window.removeEventListener('resize', checkOrientation);
-    }, []);
 
     if (!isOpen) return null;
 
     const steps = flowData.sequence;
     const currentStepData = steps.find(s => s.step === activeStep);
-
-    // Dynamic sizing based on screen/orientation
-    const titleSize = isPortrait ? '1.2rem' : '1.8rem';
-    const subTitleSize = isPortrait ? '0.9rem' : '1.1rem';
-    const bodySize = isPortrait ? '0.75rem' : '0.9rem';
-    const paddingSize = isPortrait ? '1.5rem' : '2.5rem';
 
     return (
         <div className="arch-modal-overlay" style={{
@@ -39,61 +19,33 @@ const FlowDiagramViewer = ({ isOpen, onClose }) => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: isPortrait ? '0' : '1.5rem',
+            padding: '1.5rem',
             overflow: 'hidden'
         }}>
-            {/* Rotation Hint for Mobile Portrait */}
-            {isPortrait && (
-                <div style={{
-                    position: 'absolute',
-                    top: '1rem',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    zIndex: 1101,
-                    background: 'var(--accent-purple)',
-                    color: '#fff',
-                    padding: '6px 16px',
-                    borderRadius: '20px',
-                    fontSize: '0.65rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                    boxShadow: '0 4px 15px rgba(0,0,0,0.5)',
-                    animation: 'bounce 2s infinite'
-                }}>
-                    <RotateCw size={12} /> Sequential Flow: Landscape recommended
-                </div>
-            )}
-
             <div className="terminal-window" style={{
-                width: isPortrait ? '92vh' : '100%',
+                width: '100%',
                 maxWidth: '1100px',
-                height: isPortrait ? '92vw' : '90vh',
+                height: '90vh',
                 display: 'flex',
                 flexDirection: 'column',
                 boxShadow: '0 25px 80px rgba(0,0,0,0.8)',
-                border: '1px solid var(--border-color)',
-                transform: isPortrait ? 'rotate(90deg)' : 'none',
-                transition: 'transform 0.3s ease',
-                transformOrigin: 'center center'
+                border: '1px solid var(--border-color)'
             }}>
                 {/* Header */}
-                <div className="terminal-header" style={{ justifyContent: 'space-between', padding: isPortrait ? '8px 15px' : '10px 20px' }}>
+                <div className="terminal-header" style={{ justifyContent: 'space-between' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                         <div className="terminal-controls">
                             <div className="control red" onClick={onClose} style={{ cursor: 'pointer' }} />
                             <div className="control yellow" />
                             <div className="control green" />
                         </div>
-                        <span className="terminal-title" style={{ fontSize: isPortrait ? '0.65rem' : '0.8rem' }}>
-                            ~/delivery-tracker/flow_diagram.json
-                        </span>
+                        <span className="terminal-title">~/delivery-tracker/flow_diagram.json — Sequence Flow</span>
                     </div>
                     <button onClick={onClose} style={{
                         background: 'none', border: 'none', color: 'var(--text-muted)',
                         cursor: 'pointer', outline: 'none', display: 'flex', alignItems: 'center'
                     }}>
-                        <X size={isPortrait ? 16 : 18} />
+                        <X size={18} />
                     </button>
                 </div>
 
@@ -107,12 +59,12 @@ const FlowDiagramViewer = ({ isOpen, onClose }) => {
                 }}>
                     {/* Progress Bar / Steps Navigation */}
                     <div style={{
-                        padding: isPortrait ? '0.75rem' : '1.5rem',
+                        padding: '1.5rem',
                         borderBottom: '1px solid var(--border-color)',
                         background: 'rgba(12, 18, 24, 0.5)',
                         overflowX: 'auto',
                         display: 'flex',
-                        gap: '0.4rem',
+                        gap: '0.5rem',
                         scrollbarWidth: 'none',
                         msOverflowStyle: 'none'
                     }}>
@@ -121,13 +73,13 @@ const FlowDiagramViewer = ({ isOpen, onClose }) => {
                                 key={step.step}
                                 onClick={() => setActiveStep(step.step)}
                                 style={{
-                                    flex: `0 0 ${isPortrait ? '35px' : '45px'}`,
-                                    height: isPortrait ? '35px' : '45px',
+                                    flex: '0 0 45px',
+                                    height: '45px',
                                     borderRadius: '8px',
                                     border: `1px solid ${activeStep === step.step ? 'var(--accent-green)' : 'rgba(255,255,255,0.1)'}`,
                                     background: activeStep === step.step ? 'rgba(34, 211, 238, 0.15)' : 'rgba(255,255,255,0.03)',
                                     color: activeStep === step.step ? 'var(--accent-green)' : 'var(--text-muted)',
-                                    fontSize: isPortrait ? '0.75rem' : '0.9rem',
+                                    fontSize: '0.9rem',
                                     fontFamily: "'Fira Code', monospace",
                                     cursor: 'pointer',
                                     transition: 'all 0.2s ease',
@@ -143,34 +95,34 @@ const FlowDiagramViewer = ({ isOpen, onClose }) => {
                     </div>
 
                     {/* Step Detail View */}
-                    <div style={{ flex: 1, overflowY: 'auto', padding: paddingSize }}>
+                    <div style={{ flex: 1, overflowY: 'auto', padding: '2.5rem' }}>
                         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-                            <div style={{ color: 'var(--accent-green)', fontFamily: "'Fira Code', monospace", fontSize: isPortrait ? '0.65rem' : '0.8rem', marginBottom: '0.75rem' }}>
-                                STEP_{activeStep.toString().padStart(2, '0')} // EXECUTION
+                            <div style={{ color: 'var(--accent-green)', fontFamily: "'Fira Code', monospace", fontSize: '0.8rem', marginBottom: '1rem' }}>
+                                STEP_{activeStep.toString().padStart(2, '0')} // SEQUENCE_EXECUTION
                             </div>
 
-                            <h2 style={{ fontSize: titleSize, color: '#fff', marginBottom: isPortrait ? '1rem' : '1.5rem', letterSpacing: '-0.02em', lineHeight: 1.2 }}>
+                            <h2 style={{ fontSize: '1.8rem', color: '#fff', marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>
                                 {currentStepData.action || currentStepData.trigger}
                             </h2>
 
-                            <div style={{ display: 'grid', gridTemplateColumns: isPortrait ? '1fr' : 'repeat(auto-fit, minmax(300px, 1fr))', gap: isPortrait ? '1.5rem' : '2rem' }}>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
                                 {/* Left Side: Context */}
                                 <div>
-                                    <div style={{ marginBottom: isPortrait ? '1rem' : '2rem' }}>
-                                        <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                            <Terminal size={12} /> Source
+                                    <div style={{ marginBottom: '2rem' }}>
+                                        <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                            <Terminal size={14} /> Source Entity
                                         </div>
-                                        <div style={{ color: 'var(--accent-blue)', fontSize: subTitleSize, fontWeight: 500 }}>
+                                        <div style={{ color: 'var(--accent-blue)', fontSize: '1.1rem', fontWeight: 500 }}>
                                             {currentStepData.source}
                                         </div>
                                     </div>
 
                                     {currentStepData.target && (
-                                        <div style={{ marginBottom: isPortrait ? '1rem' : '2rem' }}>
-                                            <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                                <Database size={12} /> Sink
+                                        <div style={{ marginBottom: '2rem' }}>
+                                            <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                                <Database size={14} /> Target Sink
                                             </div>
-                                            <div style={{ color: 'var(--accent-purple)', fontSize: bodySize, fontFamily: "'Fira Code', monospace", padding: '6px 10px', background: 'rgba(167, 139, 250, 0.05)', borderRadius: '6px', border: '1px solid rgba(167, 139, 250, 0.1)', wordBreak: 'break-all' }}>
+                                            <div style={{ color: 'var(--accent-purple)', fontSize: '1rem', fontFamily: "'Fira Code', monospace", padding: '8px 12px', background: 'rgba(167, 139, 250, 0.05)', borderRadius: '6px', border: '1px solid rgba(167, 139, 250, 0.1)' }}>
                                                 {currentStepData.target}
                                             </div>
                                         </div>
@@ -178,12 +130,12 @@ const FlowDiagramViewer = ({ isOpen, onClose }) => {
 
                                     {currentStepData.data && (
                                         <div>
-                                            <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                                <ArrowRight size={12} /> Attributes
+                                            <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                                <ArrowRight size={14} /> Data Payload
                                             </div>
-                                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                                                 {currentStepData.data.map((item, i) => (
-                                                    <span key={i} style={{ fontSize: '0.65rem', padding: '3px 8px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '4px', color: 'var(--text-body)' }}>
+                                                    <span key={i} style={{ fontSize: '0.75rem', padding: '4px 10px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '4px', color: 'var(--text-body)' }}>
                                                         {item}
                                                     </span>
                                                 ))}
@@ -193,22 +145,22 @@ const FlowDiagramViewer = ({ isOpen, onClose }) => {
                                 </div>
 
                                 {/* Right Side: Logic */}
-                                <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '12px', padding: isPortrait ? '1rem' : '1.5rem' }}>
-                                    <div style={{ fontSize: '0.65rem', color: 'var(--accent-yellow)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                        <Zap size={12} /> Implementation
+                                <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '12px', padding: '1.5rem' }}>
+                                    <div style={{ fontSize: '0.7rem', color: 'var(--accent-yellow)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                        <Zap size={14} /> Processing Logic
                                     </div>
                                     {currentStepData.logic ? (
                                         <ul style={{ listStyle: 'none', padding: 0 }}>
                                             {currentStepData.logic.map((line, i) => (
-                                                <li key={i} style={{ marginBottom: '0.75rem', display: 'flex', gap: '10px' }}>
-                                                    <span style={{ color: 'var(--accent-green)', fontWeight: 'bold', fontSize: '0.8rem' }}>&gt;</span>
-                                                    <span style={{ fontSize: bodySize, color: 'var(--text-body)', lineHeight: '1.4' }}>{line}</span>
+                                                <li key={i} style={{ marginBottom: '1rem', display: 'flex', gap: '12px' }}>
+                                                    <span style={{ color: 'var(--accent-green)', fontWeight: 'bold' }}>&gt;</span>
+                                                    <span style={{ fontSize: '0.9rem', color: 'var(--text-body)', lineHeight: '1.5' }}>{line}</span>
                                                 </li>
                                             ))}
                                         </ul>
                                     ) : (
-                                        <div style={{ color: 'var(--text-muted)', fontSize: '0.75rem', fontStyle: 'italic' }}>
-                                            Passive data transfer.
+                                        <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem', fontStyle: 'italic' }}>
+                                            Passive data transfer or direct user action.
                                         </div>
                                     )}
                                 </div>
@@ -216,20 +168,20 @@ const FlowDiagramViewer = ({ isOpen, onClose }) => {
                         </div>
                     </div>
 
-                    {/* Footer / Nav */}
+                    {/* Footer / Global Security Info */}
                     <div style={{
-                        padding: isPortrait ? '0.75rem 1.5rem' : '1rem 2.5rem',
+                        padding: '1rem 2.5rem',
                         borderTop: '1px solid var(--border-color)',
                         background: 'rgba(248, 113, 113, 0.03)',
                         display: 'flex',
                         justifyContent: 'space-between',
                         alignItems: 'center'
                     }}>
-                        <div style={{ display: isPortrait ? 'none' : 'flex', alignItems: 'center', gap: '8px', color: 'var(--accent-red)', fontSize: '0.75rem', fontWeight: 600 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--accent-red)', fontSize: '0.75rem', fontWeight: 600 }}>
                             <Shield size={14} /> Security Protocol Active
                         </div>
-                        <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>
-                            {activeStep} / {steps.length}
+                        <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
+                            Step {activeStep} of {steps.length}
                         </div>
                         <div style={{ display: 'flex', gap: '1rem' }}>
                             <button
@@ -237,7 +189,7 @@ const FlowDiagramViewer = ({ isOpen, onClose }) => {
                                 onClick={() => setActiveStep(prev => prev - 1)}
                                 style={{
                                     background: 'none', border: 'none', color: activeStep === 1 ? 'transparent' : 'var(--accent-blue)',
-                                    cursor: 'pointer', fontSize: '0.7rem', fontFamily: "'Fira Code', monospace"
+                                    cursor: 'pointer', fontSize: '0.75rem', fontFamily: "'Fira Code', monospace"
                                 }}
                             >
                                 [ PREV ]
@@ -247,7 +199,7 @@ const FlowDiagramViewer = ({ isOpen, onClose }) => {
                                 onClick={() => setActiveStep(prev => prev + 1)}
                                 style={{
                                     background: 'none', border: 'none', color: activeStep === steps.length ? 'transparent' : 'var(--accent-blue)',
-                                    cursor: 'pointer', fontSize: '0.7rem', fontFamily: "'Fira Code', monospace"
+                                    cursor: 'pointer', fontSize: '0.75rem', fontFamily: "'Fira Code', monospace"
                                 }}
                             >
                                 [ NEXT ]
@@ -256,13 +208,6 @@ const FlowDiagramViewer = ({ isOpen, onClose }) => {
                     </div>
                 </div>
             </div>
-
-            <style>{`
-                @keyframes bounce {
-                    0%, 100% { transform: translate(-50%, 0); }
-                    50% { transform: translate(-50%, -5px); }
-                }
-            `}</style>
         </div>
     );
 };
