@@ -6,14 +6,13 @@ import TerminalWindow from './components/TerminalWindow';
 import InteractiveTerminal from './components/InteractiveTerminal';
 import MobileNav from './components/MobileNav';
 import ScrollReveal from './components/ScrollReveal';
-import ArchitectureViewer from './components/ArchitectureViewer';
 import FlowDiagramViewer from './components/FlowDiagramViewer';
 import BlogRoutes from './generated/BlogRoutes.jsx';
 import { resumeData } from './data/resumeData';
 import {
   Briefcase, GraduationCap, Github, Linkedin,
   Mail, Phone, MapPin, Cpu, FolderGit2, ChevronRight, Star,
-  Download, Network
+  Download
 } from 'lucide-react';
 
 /* ── Section heading ────────────────────────────────────── */
@@ -102,7 +101,6 @@ function App() {
 function HomeApp() {
   const { personalInfo, summary, education, skills, experience, projects } = resumeData;
   const [projectFilter, setProjectFilter] = useState('All');
-  const [isArchViewerOpen, setIsArchViewerOpen] = useState(false);
   const [isFlowViewerOpen, setIsFlowViewerOpen] = useState(false);
 
   // Parse terminal commands
@@ -250,21 +248,6 @@ function HomeApp() {
                     {proj.name === "Delivery Tracker" && (
                       <div style={{ marginTop: '0.75rem' }}>
                         <button
-                          onClick={() => setIsArchViewerOpen(true)}
-                          className="project-link-tag"
-                          style={{
-                            background: 'transparent',
-                            borderColor: 'var(--accent-purple)',
-                            color: 'var(--accent-purple)',
-                            cursor: 'pointer',
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: '4px'
-                          }}
-                        >
-                          <Network size={12} /> Architecture
-                        </button>
-                        <button
                           onClick={() => setIsFlowViewerOpen(true)}
                           className="project-link-tag"
                           style={{
@@ -274,8 +257,7 @@ function HomeApp() {
                             cursor: 'pointer',
                             display: 'inline-flex',
                             alignItems: 'center',
-                            gap: '4px',
-                            marginLeft: '8px'
+                            gap: '4px'
                           }}
                         >
                           <List size={12} /> Execution Flow
@@ -344,10 +326,6 @@ function HomeApp() {
       </main>
 
       {/* ── Architecture Viewer Modal ── */}
-      <ArchitectureViewer
-        isOpen={isArchViewerOpen}
-        onClose={() => setIsArchViewerOpen(false)}
-      />
       <FlowDiagramViewer
         isOpen={isFlowViewerOpen}
         onClose={() => setIsFlowViewerOpen(false)}
