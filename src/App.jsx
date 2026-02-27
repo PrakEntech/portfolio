@@ -8,7 +8,7 @@ import MobileNav from './components/MobileNav';
 import ScrollReveal from './components/ScrollReveal';
 import FlowDiagramViewer from './components/FlowDiagramViewer';
 import BlogRoutes from './generated/BlogRoutes.jsx';
-import resumeData from './data/resumeData';
+import { resumeData } from './data/resumeData';
 import {
   Briefcase, GraduationCap, Github, Linkedin,
   Mail, Phone, MapPin, Cpu, FolderGit2, ChevronRight, Star,
@@ -52,14 +52,14 @@ const FeaturedExpCard = ({ exp }) => (
       <TypewriterText text={exp.overview} speed={5} />
     </div>
     <div className="exp-groups">
-      {exp.groups.map((group, gi) => (
+      {exp.groups?.map((group, gi) => (
         <div key={gi} className="exp-group">
           <div className="exp-group-label">
             <ChevronRight size={12} style={{ marginRight: '4px' }} />
             {group.label}
           </div>
           <ul className="exp-bullets">
-            {group.bullets.map((bullet, bi) => (
+            {group.bullets?.map((bullet, bi) => (
               <li key={bi} className="exp-bullet">
                 <TypewriterText text={bullet} speed={5} />
               </li>
@@ -80,7 +80,7 @@ const RegularExpCard = ({ exp }) => (
     </div>
     <div className="exp-role intern">{exp.role}</div>
     <ul className="exp-bullets">
-      {exp.bullets.map((bullet, i) => (
+      {exp.bullets?.map((bullet, i) => (
         <li key={i} className="exp-bullet">
           <TypewriterText text={bullet} speed={5} />
         </li>
@@ -99,7 +99,15 @@ function App() {
 }
 
 function HomeApp() {
-  const { personalInfo, summary, education, skills, experience, projects } = resumeData;
+  const {
+    personalInfo = {},
+    summary = "",
+    education = [],
+    skills = [],
+    experience = [],
+    projects = []
+  } = resumeData || {};
+
   const [projectFilter, setProjectFilter] = useState('All');
   const [isFlowViewerOpen, setIsFlowViewerOpen] = useState(false);
 

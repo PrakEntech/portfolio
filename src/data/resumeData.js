@@ -1,4 +1,4 @@
-const resumeData = {
+export const resumeData = {
     personalInfo: {
         name: "Prakhar Srivastava",
         role: "Full-Stack Engineer | React & Serverless Systems",
@@ -35,6 +35,7 @@ const resumeData = {
         { category: "Languages", items: ["JavaScript", "Python", "Java", "Kotlin", "Dart", "C"] },
         { category: "Integrations & APIs", items: ["Google Maps Reverse Geocoding API", "Mautic CRM", "Dropbox API"] },
         { category: "Engineering Productivity", items: ["AI-assisted Development Workflows", "Rapid POC Development", "Prompt-guided Debugging", "Technical Documentation Generation"] },
+        { category: "Quality & Tooling", items: ["SonarQube", "Edge-case Testing", "System Design Documentation", "Deployment Documentation"] },
         { category: "Quality & Tooling", items: ["SonarQube", "Edge-case Testing", "System Design Documentation", "Deployment Documentation"] },
     ],
 
@@ -170,5 +171,3 @@ const resumeData = {
         }
     ]
 };
-
-export default resumeData;
