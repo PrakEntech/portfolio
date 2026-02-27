@@ -13,7 +13,7 @@ import { resumeData } from './data/resumeData';
 import {
   Briefcase, GraduationCap, Github, Linkedin,
   Mail, Phone, MapPin, Cpu, FolderGit2, ChevronRight, Star,
-  Download, Network
+  Download, Network, List
 } from 'lucide-react';
 
 /* ── Section heading ────────────────────────────────────── */
