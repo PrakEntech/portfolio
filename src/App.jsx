@@ -7,6 +7,7 @@ import InteractiveTerminal from './components/InteractiveTerminal';
 import MobileNav from './components/MobileNav';
 import ScrollReveal from './components/ScrollReveal';
 import ArchitectureViewer from './components/ArchitectureViewer';
+import FlowDiagramViewer from './components/FlowDiagramViewer';
 import BlogRoutes from './generated/BlogRoutes.jsx';
 import { resumeData } from './data/resumeData';
 import {
@@ -102,6 +103,7 @@ function HomeApp() {
   const { personalInfo, summary, education, skills, experience, projects } = resumeData;
   const [projectFilter, setProjectFilter] = useState('All');
   const [isArchViewerOpen, setIsArchViewerOpen] = useState(false);
+  const [isFlowViewerOpen, setIsFlowViewerOpen] = useState(false);
 
   // Parse terminal commands
   const [terminalOutput, setTerminalOutput] = useState([]);
@@ -262,6 +264,22 @@ function HomeApp() {
                         >
                           <Network size={12} /> View Architecture
                         </button>
+                        <button
+                          onClick={() => setIsFlowViewerOpen(true)}
+                          className="project-link-tag"
+                          style={{
+                            background: 'transparent',
+                            borderColor: 'var(--accent-green)',
+                            color: 'var(--accent-green)',
+                            cursor: 'pointer',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '4px',
+                            marginLeft: '8px'
+                          }}
+                        >
+                          <List size={12} /> View Flow
+                        </button>
                       </div>
                     )}
                   </div>
@@ -329,6 +347,10 @@ function HomeApp() {
       <ArchitectureViewer
         isOpen={isArchViewerOpen}
         onClose={() => setIsArchViewerOpen(false)}
+      />
+      <FlowDiagramViewer
+        isOpen={isFlowViewerOpen}
+        onClose={() => setIsFlowViewerOpen(false)}
       />
     </>
   );

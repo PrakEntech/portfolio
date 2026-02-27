@@ -1,0 +1,119 @@
+{
+    "sequence": [
+        {
+            "step": 1,
+            "source": "Scanner.js (Frontend)",
+            "action": "User scans delivery QR code",
+            "target": "RTDB: /data/temp/{userID}/{scanID}/tempData",
+            "data": [
+                "Mautic URL/ID",
+                "Raw GPS Coordinates"
+            ]
+        },
+        {
+            "step": 2,
+            "source": "Firebase Cloud Function (onTempScanCreated)",
+            "trigger": "RTDB: /data/temp onCreate",
+            "logic": [
+                "Call Google Maps API for reverse-geocoding",
+                "Perform global redundancy check",
+                "Promote record from /data/temp to /data/scans"
+            ]
+        },
+        {
+            "step": 3,
+            "source": "AddressEditor.js (Frontend)",
+            "action": "User confirms or edits derived address",
+            "target": "RTDB: /data/scans/{userID}/{scanID}",
+            "data": [
+                "editedAddress (optional)",
+                "addedToMautic: false"
+            ]
+        },
+        {
+            "step": 4,
+            "source": "Firebase Cloud Function (onAddressConfirmed)",
+            "trigger": "RTDB: /data/scans/.../addedToMautic onCreate",
+            "logic": [
+                "Bypass if coordinates are in India",
+                "Call USPS WebTools API for normalization/validation",
+                "Perform campaign-level duplicate check",
+                "Write validation results/errors to RTDB"
+            ]
+        },
+        {
+            "step": 5,
+            "source": "Firebase Cloud Function (onGoogleMapAddressCreated)",
+            "trigger": "RTDB: /data/scans/.../addedToMautic onWrite (false -> true)",
+            "logic": [
+                "Sync confirmed address to Mautic CRM API",
+                "Set addedToMautic: true"
+            ]
+        },
+        {
+            "step": 6,
+            "source": "PhotoCapture.js (Frontend)",
+            "action": "User captures proof-of-delivery photo",
+            "logic": [
+                "Calculate GPS confidence vs initial scan (getDistance)",
+                "Local image resize/compression",
+                "Block if location distance exceeds rejection threshold"
+            ],
+            "target": "RTDB: /data/scans/{userID}/{scanID}",
+            "data": [
+                "requestToUpload: 1",
+                "photoCoords",
+                "trustScore"
+            ]
+        },
+        {
+            "step": 7,
+            "source": "Firebase Cloud Function (generateSignedUploadUrl)",
+            "trigger": "RTDB: onWrite (requestToUpload)",
+            "logic": [
+                "Generate 5-minute V4 Signed URL for Cloud Storage",
+                "Write signedUrlToUploadImage to RTDB"
+            ]
+        },
+        {
+            "step": 8,
+            "source": "PhotoCapture.js (Frontend)",
+            "trigger": "Listen for signedUrlToUploadImage",
+            "action": "Direct HTTP PUT to Cloud Storage",
+            "target": "Firebase Storage"
+        },
+        {
+            "step": 9,
+            "source": "Firebase Cloud Function (deleteSignedUrls)",
+            "trigger": "Cloud Storage onFinalize (Image Uploaded)",
+            "logic": [
+                "Nullify signedUrlToUploadImage in RTDB",
+                "Set permanent urlToReadImage",
+                "Sync image URL/User ID notes to Mautic CRM API"
+            ]
+        },
+        {
+            "step": 10,
+            "source": "ScannedData.js (Frontend - Admin Only)",
+            "action": "Admin reviews and marks scan as 'verified'",
+            "target": "RTDB: /data/scans/{userID}/{scanID}/status",
+            "data": [
+                "status: 'verified'"
+            ]
+        },
+        {
+            "step": 11,
+            "source": "Firebase Cloud Function (archiveImageOnVerification)",
+            "trigger": "RTDB: status onWrite ('verified')",
+            "logic": [
+                "Move image from /userId/scanId to /archive/userId/scanId in Storage",
+                "Generate and update new urlToReadImage in RTDB"
+            ]
+        }
+    ],
+    "global_security": {
+        "source": "Firebase Cloud Function (applyDatabaseRules)",
+        "trigger": "Pub/Sub alert topic",
+        "action": "Lock database (read/write: false)"
+    }
+}
