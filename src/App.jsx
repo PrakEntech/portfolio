@@ -8,7 +8,7 @@ import MobileNav from './components/MobileNav';
 import ScrollReveal from './components/ScrollReveal';
 import FlowDiagramViewer from './components/FlowDiagramViewer';
 import BlogRoutes from './generated/BlogRoutes.jsx';
-import { resumeData } from './data/resumeData';
+import resumeData from './data/resumeData';
 import {
   Briefcase, GraduationCap, Github, Linkedin,
   Mail, Phone, MapPin, Cpu, FolderGit2, ChevronRight, Star,
@@ -138,7 +138,7 @@ function HomeApp() {
                 <TypewriterText text={`I'm ${personalInfo.name}`} speed={70} />
               </h1>
               <p className="hero-subtitle">
-                <TypewriterText text={personalInfo.title} delay={1000} speed={40} />
+                <TypewriterText text={personalInfo.role} delay={1000} speed={40} />
               </p>
               <div className="hero-summary">
                 <TypewriterText text={summary} delay={2000} speed={5} />

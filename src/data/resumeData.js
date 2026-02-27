@@ -1,4 +1,4 @@
-export const resumeData = {
+const resumeData = {
     personalInfo: {
         name: "Prakhar Srivastava",
         role: "Full-Stack Engineer | React & Serverless Systems",
@@ -170,3 +170,5 @@ export const resumeData = {
         }
     ]
 };
+
+export default resumeData;
