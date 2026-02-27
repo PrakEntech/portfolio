@@ -42,7 +42,19 @@ const InteractiveTerminal = ({ resumeData, setProjectFilter }) => {
     ];
 
     const [history, setHistory] = useState(initialHistory);
-    const [commandLog, setCommandLog] = useState([]); // Stores just the string commands typed
+    const [commandLog, setCommandLog] = useState(() => {
+        if (typeof window !== 'undefined') {
+            const saved = window.localStorage.getItem('terminalCommandLog');
+            if (saved) {
+                try {
+                    return JSON.parse(saved);
+                } catch (e) {
+                    console.error('Failed to parse terminal command log', e);
+                }
+            }
+        }
+        return [];
+    });
     const [historyIndex, setHistoryIndex] = useState(-1); // -1 means currently typing new command
     const [input, setInput] = useState('');
     const [activeApp, setActiveApp] = useState(null); // e.g. 'spacewar'
@@ -60,6 +72,12 @@ const InteractiveTerminal = ({ resumeData, setProjectFilter }) => {
             }
         }, 0);
     };
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            window.localStorage.setItem('terminalCommandLog', JSON.stringify(commandLog));
+        }
+    }, [commandLog]);
 
     useEffect(() => {
         if (isFirstRun.current) {
