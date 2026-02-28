@@ -167,7 +167,7 @@ function HomeApp() {
             className="nav-link recruiter-view-toggle"
             onClick={() => setIsRecruiterView(prev => !prev)}
           >
-            {isRecruiterView ? 'Terminal' : 'Recruiter'}
+            {isRecruiterView ? 'Terminal View' : 'Recruiter View'}
           </button>
           <a href="https://drive.google.com/uc?export=download&id=1igMNs4ceEuZVMB2LMMKKsulOOAbuVvlg" target="_blank" rel="noreferrer" className="nav-link download-btn">
             <Download size={14} /> Resume
