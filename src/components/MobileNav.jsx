@@ -58,8 +58,10 @@ export default function MobileNav({ isRecruiterView = false }) {
             <button
                 onClick={toggleMenu}
                 className="mobile-nav-btn"
+                aria-label="Open sections"
+                title="Sections"
                 style={{
-                    display: 'flex', alignItems: 'center', gap: '8px',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
                     background: palette.panelBg,
                     border: `1px solid ${isOpen ? palette.accent : palette.panelBorder}`,
                     color: isOpen ? palette.accent : palette.text,
@@ -77,7 +79,6 @@ export default function MobileNav({ isRecruiterView = false }) {
                 }}
             >
                 {isOpen ? <X size={16} /> : <Menu size={16} />}
-                SECTIONS
             </button>
 
             <AnimatePresence>

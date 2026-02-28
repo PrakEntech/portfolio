@@ -162,7 +162,6 @@ function HomeApp() {
           <li><Link to="/blog" className="nav-link" style={{ color: 'var(--accent-blue)', whiteSpace: 'nowrap' }}>blog</Link></li>
         </ul>
         <div className="nav-actions">
-          <MobileNav isRecruiterView={isRecruiterView} />
           <button
             type="button"
             className="nav-link recruiter-view-toggle"
@@ -170,9 +169,10 @@ function HomeApp() {
           >
             {isRecruiterView ? 'Terminal View' : 'Recruiter View'}
           </button>
-          <a href="https://drive.google.com/uc?export=download&id=1igMNs4ceEuZVMB2LMMKKsulOOAbuVvlg" target="_blank" rel="noreferrer" className="nav-link download-btn">
+          <a href="https://drive.google.com/file/d/157hRPhupQhICbTWd-g7FqBzkBerwb1_o/view?usp=sharing" target="_blank" rel="noreferrer" className="nav-link download-btn">
             <Download size={14} /> Resume
           </a>
+          <MobileNav isRecruiterView={isRecruiterView} />
         </div>
       </nav>
 
