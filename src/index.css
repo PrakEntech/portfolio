@@ -1166,6 +1166,13 @@ section {
   border: 1px solid var(--accent-green);
   background: transparent;
   color: var(--accent-green);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  font-size: 0.85rem;
+  line-height: 1.2;
+  border-radius: 4px;
   cursor: pointer;
 }
 
