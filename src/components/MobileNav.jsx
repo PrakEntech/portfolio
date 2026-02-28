@@ -4,7 +4,7 @@ import { Menu, X, Cpu } from 'lucide-react';
 
 const SECTIONS = ['about', 'skills', 'experience', 'projects', 'education', 'contact', 'blog'];
 
-export default function MobileNav() {
+export default function MobileNav({ isRecruiterView = false }) {
     const [isOpen, setIsOpen] = useState(false);
     const MotionDiv = motion.div;
     const MotionA = motion.a;
@@ -23,6 +23,35 @@ export default function MobileNav() {
     }, [isOpen]);
 
     const radius = 130; // Radius of the circular orbit
+    const palette = isRecruiterView
+        ? {
+            panelBg: '#ffffff',
+            panelBorder: '#d4d4d4',
+            text: '#000000',
+            accent: '#000000',
+            overlay: 'rgba(255, 255, 255, 0.97)',
+            coreBg: 'radial-gradient(circle, rgba(0,0,0,0.08) 0%, rgba(255,255,255,1) 80%)',
+            ring: 'rgba(0, 0, 0, 0.18)',
+            ringGlow: 'none',
+            pillBg: '#ffffff',
+            pillBorder: '#c9c9c9',
+            pillHoverBg: '#f3f3f3',
+            pillShadow: 'none',
+        }
+        : {
+            panelBg: 'var(--terminal-bg)',
+            panelBorder: 'var(--border-color)',
+            text: 'var(--text-color)',
+            accent: 'var(--accent-green)',
+            overlay: 'rgba(8, 12, 16, 0.85)',
+            coreBg: 'radial-gradient(circle, rgba(34,211,238,0.2) 0%, rgba(12,18,24,0.95) 80%)',
+            ring: 'rgba(34, 211, 238, 0.15)',
+            ringGlow: '0 0 20px rgba(34, 211, 238, 0.1) inset, 0 0 20px rgba(34, 211, 238, 0.1)',
+            pillBg: 'rgba(12, 18, 24, 0.95)',
+            pillBorder: 'var(--accent-green)',
+            pillHoverBg: 'rgba(34, 211, 238, 0.1)',
+            pillShadow: '0 0 15px rgba(34, 211, 238, 0.2)',
+        };
 
     return (
         <div className="mobile-nav">
@@ -31,16 +60,16 @@ export default function MobileNav() {
                 className="mobile-nav-btn"
                 style={{
                     display: 'flex', alignItems: 'center', gap: '8px',
-                    background: 'var(--terminal-bg)',
-                    border: `1px solid ${isOpen ? 'var(--accent-green)' : 'var(--border-color)'}`,
-                    color: isOpen ? 'var(--accent-green)' : 'var(--text-color)',
+                    background: palette.panelBg,
+                    border: `1px solid ${isOpen ? palette.accent : palette.panelBorder}`,
+                    color: isOpen ? palette.accent : palette.text,
                     padding: '8px 16px',
                     borderRadius: '4px',
                     cursor: 'pointer',
                     fontFamily: "'Fira Code', monospace",
                     fontSize: '0.85rem',
                     textTransform: 'uppercase',
-                    boxShadow: isOpen ? '0 0 15px rgba(34, 211, 238, 0.2)' : 'none',
+                    boxShadow: 'none',
                     transition: 'all 0.3s ease',
                     zIndex: 1001,
                     position: 'relative'
@@ -62,8 +91,8 @@ export default function MobileNav() {
                             left: 0,
                             width: '100vw',
                             height: '100vh',
-                            background: 'rgba(8, 12, 16, 0.85)',
-                            backdropFilter: 'blur(8px)',
+                            background: palette.overlay,
+                            backdropFilter: isRecruiterView ? 'none' : 'blur(8px)',
                             zIndex: 1000,
                             display: 'flex',
                             alignItems: 'center',
@@ -85,13 +114,13 @@ export default function MobileNav() {
                                     top: '-40px', left: '-40px',
                                     width: '80px', height: '80px',
                                     borderRadius: '50%',
-                                    background: 'radial-gradient(circle, rgba(34,211,238,0.2) 0%, rgba(12,18,24,0.95) 80%)',
-                                    border: '2px solid var(--accent-green)',
-                                    boxShadow: '0 0 30px rgba(34, 211, 238, 0.4)',
+                                    background: palette.coreBg,
+                                    border: `2px solid ${palette.accent}`,
+                                    boxShadow: 'none',
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
-                                    color: 'var(--accent-green)'
+                                    color: palette.accent
                                 }}
                             >
                                 <Cpu size={32} />
@@ -108,8 +137,8 @@ export default function MobileNav() {
                                     top: -radius, left: -radius,
                                     width: radius * 2, height: radius * 2,
                                     borderRadius: '50%',
-                                    border: '2px solid rgba(34, 211, 238, 0.15)',
-                                    boxShadow: '0 0 20px rgba(34, 211, 238, 0.1) inset, 0 0 20px rgba(34, 211, 238, 0.1)',
+                                    border: `2px solid ${palette.ring}`,
+                                    boxShadow: palette.ringGlow,
                                     pointerEvents: 'none'
                                 }}
                             />
@@ -154,14 +183,14 @@ export default function MobileNav() {
                                                 display: 'flex',
                                                 alignItems: 'center',
                                                 justifyContent: 'center',
-                                                background: 'rgba(12, 18, 24, 0.95)',
-                                                border: '1px solid var(--accent-green)',
-                                                color: 'var(--accent-green)',
+                                                background: palette.pillBg,
+                                                border: `1px solid ${palette.pillBorder}`,
+                                                color: palette.accent,
                                                 textDecoration: 'none',
                                                 borderRadius: '20px',
                                                 fontSize: '0.75rem',
                                                 textTransform: 'uppercase',
-                                                boxShadow: '0 0 15px rgba(34, 211, 238, 0.2)',
+                                                boxShadow: palette.pillShadow,
                                                 fontFamily: "'Fira Code', monospace",
                                                 pointerEvents: 'auto',
                                                 willChange: 'transform'
@@ -178,8 +207,8 @@ export default function MobileNav() {
                                             }}
                                             whileHover={{
                                                 scale: 1.1,
-                                                background: 'rgba(34, 211, 238, 0.1)',
-                                                boxShadow: '0 0 20px rgba(34, 211, 238, 0.4)'
+                                                background: palette.pillHoverBg,
+                                                boxShadow: 'none'
                                             }}
                                         >
                                             {section}

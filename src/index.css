@@ -1192,6 +1192,7 @@ section {
   box-shadow: none !important;
   filter: none !important;
   animation: none !important;
+  font-family: 'Inter', 'Segoe UI', Roboto, Arial, sans-serif !important;
 }
 
 .home-app.recruiter-mode .page-wrapper {
@@ -1250,6 +1251,14 @@ section {
   transform: none !important;
 }
 
+.home-app.recruiter-mode .featured-card,
+.home-app.recruiter-mode .featured-card .exp-group,
+.home-app.recruiter-mode .featured-card .exp-overview {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-color: #d4d4d4 !important;
+}
+
 .home-app.recruiter-mode .exp-card::before {
   background: #000000;
   opacity: 0.5;
@@ -1278,6 +1287,20 @@ section {
   background: #ffffff;
   border: 1px solid #c9c9c9;
   color: #000000;
+  font-size: 0.82rem;
+  padding: 4px 10px;
+}
+
+.home-app.recruiter-mode .skill-category {
+  font-size: 1rem !important;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  margin-bottom: 0.9rem;
+}
+
+.home-app.recruiter-mode .skill-category::before {
+  content: '';
 }
 
 .home-app.recruiter-mode .contact-link {
@@ -1351,7 +1374,6 @@ section {
 .home-app.recruiter-mode .epoch-badge,
 .home-app.recruiter-mode .exp-period,
 .home-app.recruiter-mode .exp-role,
-.home-app.recruiter-mode .skill-category,
 .home-app.recruiter-mode .edu-institution,
 .home-app.recruiter-mode .edu-grade {
   color: #000000 !important;
@@ -1399,6 +1421,53 @@ section {
 
 .home-app.recruiter-mode .typewriter-line > div {
   display: none !important;
+}
+
+.home-app.recruiter-mode .exp-bullet::before {
+  color: #000000 !important;
+}
+
+.home-app.recruiter-mode .terminal-window,
+.home-app.recruiter-mode .terminal-header,
+.home-app.recruiter-mode .terminal-body,
+.home-app.recruiter-mode .terminal-title {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-color: #d4d4d4 !important;
+}
+
+.home-app.recruiter-mode .control.red,
+.home-app.recruiter-mode .control.yellow,
+.home-app.recruiter-mode .control.green {
+  background: #000000 !important;
+}
+
+/* Recruiter mode flow viewer */
+.arch-modal-overlay.recruiter-flow,
+.arch-modal-overlay.recruiter-flow * {
+  color: #000000 !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.arch-modal-overlay.recruiter-flow .terminal-window,
+.arch-modal-overlay.recruiter-flow .terminal-header,
+.arch-modal-overlay.recruiter-flow .terminal-body,
+.arch-modal-overlay.recruiter-flow .terminal-title {
+  background: #ffffff !important;
+  border-color: #d4d4d4 !important;
+}
+
+.arch-modal-overlay.recruiter-flow button,
+.arch-modal-overlay.recruiter-flow [style*="background: rgba(12, 18, 24, 0.5)"],
+.arch-modal-overlay.recruiter-flow [style*="background: rgba(8, 12, 16, 0.4)"],
+.arch-modal-overlay.recruiter-flow [style*="background: rgba(248, 113, 113, 0.03)"],
+.arch-modal-overlay.recruiter-flow [style*="background: rgba(255,255,255,0.02)"],
+.arch-modal-overlay.recruiter-flow [style*="background: rgba(255,255,255,0.03)"],
+.arch-modal-overlay.recruiter-flow [style*="background: rgba(34, 211, 238, 0.15)"],
+.arch-modal-overlay.recruiter-flow [style*="background: rgba(167, 139, 250, 0.05)"] {
+  background: #ffffff !important;
+  border-color: #d4d4d4 !important;
 }
 
 .blog-table tr:hover td {

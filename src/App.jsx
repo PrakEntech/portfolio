@@ -161,7 +161,7 @@ function HomeApp() {
           <li><Link to="/blog" className="nav-link" style={{ color: 'var(--accent-blue)', whiteSpace: 'nowrap' }}>blog</Link></li>
         </ul>
         <div style={{ display: 'flex', gap: '15px', alignItems: 'center', marginLeft: 'auto' }}>
-          <MobileNav />
+          <MobileNav isRecruiterView={isRecruiterView} />
           <button
             type="button"
             className="nav-link recruiter-view-toggle"
@@ -385,6 +385,7 @@ function HomeApp() {
       <FlowDiagramViewer
         isOpen={isFlowViewerOpen}
         onClose={() => setIsFlowViewerOpen(false)}
+        isRecruiterView={isRecruiterView}
       />
     </div>
   );

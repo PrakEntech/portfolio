@@ -8,7 +8,7 @@ export default function BlogList() {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('q') || '';
 
-  const blogs = [{"id":"gps_lies","title":"GPS Lies: Why Distance Alone Cannot Validate a Delivery","date":"2026-02-25","tags":["GPS","Firebase","PWA","Engineering"],"path":"/blog/gps_lies"},{"id":"event_driven_security","title":"Event Driven Security Is Safer Than Public Endpoints","date":"2026-02-26","tags":["Security","Architecture","Backend"],"path":"/blog/event_driven_security"},{"id":"file_uploads_attack_surface","title":"File Uploads Are an Attack Surface","date":"2026-02-27","tags":["Security","Storage","Architecture"],"path":"/blog/file_uploads_attack_surface"}];
+  const blogs = [{"id":"gps_lies","title":"GPS Lies: Why Distance Alone Cannot Validate a Delivery","date":"2026-02-25","tags":["GPS","Firebase","PWA","Engineering"],"path":"/blog/gps_lies"},{"id":"event_driven_security","title":"Event Driven Security Is Safer Than Public Endpoints","date":"2026-02-26","tags":["Security","Architecture","Backend"],"path":"/blog/event_driven_security"},{"id":"file_uploads_attack_surface","title":"File Uploads Are an Attack Surface","date":"2026-02-27","tags":["Security","Storage","Architecture"],"path":"/blog/file_uploads_attack_surface"},{"id":"monitoring_without_response","title":"Monitoring Without Automated Response Is Useless","date":"2026-02-28","tags":["Security","Monitoring","DevOps"],"path":"/blog/monitoring_without_response"}];
 
   const handleSearchChange = (e) => {
     const val = e.target.value;

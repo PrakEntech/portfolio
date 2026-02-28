@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { X, ArrowRight, Zap, Database, Terminal, Shield, List } from 'lucide-react';
 import flowData from '../../flow_diagram.json';
 
-const FlowDiagramViewer = ({ isOpen, onClose }) => {
+const FlowDiagramViewer = ({ isOpen, onClose, isRecruiterView = false }) => {
     const [activeStep, setActiveStep] = useState(1);
     const [isMobile, setIsMobile] = useState(false);
 
@@ -21,10 +21,10 @@ const FlowDiagramViewer = ({ isOpen, onClose }) => {
     const currentStepData = steps.find(s => s.step === activeStep);
 
     return (
-        <div className="arch-modal-overlay" style={{
+        <div className={`arch-modal-overlay ${isRecruiterView ? 'recruiter-flow' : ''}`} style={{
             position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-            backgroundColor: 'rgba(5, 8, 12, 0.98)',
-            backdropFilter: 'blur(15px)',
+            backgroundColor: isRecruiterView ? '#ffffff' : 'rgba(5, 8, 12, 0.98)',
+            backdropFilter: isRecruiterView ? 'none' : 'blur(15px)',
             zIndex: 1100,
             display: 'flex',
             alignItems: 'center',
@@ -38,8 +38,8 @@ const FlowDiagramViewer = ({ isOpen, onClose }) => {
                 height: isMobile ? '95vh' : '90vh',
                 display: 'flex',
                 flexDirection: 'column',
-                boxShadow: '0 25px 80px rgba(0,0,0,0.8)',
-                border: '1px solid var(--border-color)',
+                boxShadow: isRecruiterView ? 'none' : '0 25px 80px rgba(0,0,0,0.8)',
+                border: isRecruiterView ? '1px solid #d4d4d4' : '1px solid var(--border-color)',
                 borderRadius: isMobile ? '8px' : '12px',
                 overflow: 'hidden'
             }}>
