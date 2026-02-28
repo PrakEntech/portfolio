@@ -169,7 +169,7 @@ function HomeApp() {
           >
             {isRecruiterView ? 'Terminal View' : 'Recruiter View'}
           </button>
-          <a href="https://www.google.com/search?q=https://drive.google.com/uc%3Fexport%3Ddownload%26id%3D157hRPhupQhICbTWd-g7FqBzkBerwb1_o" target="_blank" rel="noreferrer" className="nav-link download-btn">
+          <a href="https://drive.google.com/uc?export=download&id=157hRPhupQhICbTWd-g7FqBzkBerwb1_o" target="_blank" rel="noreferrer" className="nav-link download-btn">
             <Download size={14} /> Resume
           </a>
           <MobileNav isRecruiterView={isRecruiterView} />
