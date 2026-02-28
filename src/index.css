@@ -6,7 +6,7 @@
   --terminal-bg: rgba(12, 18, 24, 0.92);
   --terminal-header-bg: rgba(18, 26, 33, 0.97);
   --text-color: #d1fae5;
-  --text-muted: #94a3b8;
+  --text-muted: #b1c0d0;
   --text-body: #cbd5e1;
   --accent-green: #22d3ee;
   --accent-green-glow: #22d3ee;
@@ -31,7 +31,7 @@ body {
   color: var(--text-body);
   font-family: 'Fira Code', monospace;
   overflow-x: hidden;
-  line-height: 1.7;
+  line-height: 1.75;
 }
 
 /* Custom Scrollbar */
@@ -82,7 +82,7 @@ section {
 
 .section-heading-label {
   font-family: 'Inter', sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.62rem;
   font-weight: 700;
   color: #ffffff;
   letter-spacing: 0.02em;
@@ -96,7 +96,7 @@ section {
 }
 
 .section-heading-command {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
   background: rgba(34, 211, 238, 0.08);
   border: 1px solid var(--border-color);
@@ -165,7 +165,7 @@ section {
 
 .terminal-title {
   color: #64748b;
-  font-size: 0.78rem;
+  font-size: 0.84rem;
   letter-spacing: 0.04em;
   flex: 1;
   text-align: center;
@@ -181,7 +181,7 @@ section {
   align-items: center;
   gap: 8px;
   margin-bottom: 1rem;
-  font-size: 0.88rem;
+  font-size: 0.94rem;
   flex-wrap: wrap;
 }
 
@@ -222,8 +222,8 @@ section {
 /* ─── Typewriter Lines ───────────────────────────────────── */
 .typewriter-line {
   margin-bottom: 0.4rem;
-  line-height: 1.7;
-  font-size: 0.92rem;
+  line-height: 1.8;
+  font-size: 0.98rem;
   color: var(--text-body);
 }
 
@@ -250,13 +250,13 @@ section {
 }
 
 .hero-location {
-  font-size: 0.88rem;
+  font-size: 0.95rem;
   color: var(--text-muted);
   margin-top: 2px;
 }
 
 .hero-summary {
-  font-size: 0.92rem;
+  font-size: 0.98rem;
   color: var(--text-body);
   line-height: 1.8;
   max-width: 780px;
@@ -274,7 +274,7 @@ section {
   border: 1px solid rgba(34, 211, 238, 0.25);
   border-radius: 99px;
   padding: 4px 14px;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: var(--accent-green);
   margin-bottom: 1.5rem;
 }
@@ -319,9 +319,9 @@ section {
 
 .skill-category {
   color: var(--accent-yellow);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   margin-bottom: 0.75rem;
   display: flex;
@@ -340,8 +340,8 @@ section {
   border: 1px solid rgba(34, 211, 238, 0.18);
   color: #93c5fd;
   border-radius: 4px;
-  padding: 2px 8px;
-  font-size: 0.76rem;
+  padding: 4px 10px;
+  font-size: 0.82rem;
   margin: 3px 3px 3px 0;
 }
 
@@ -383,13 +383,13 @@ section {
 
 .exp-company {
   font-family: 'Inter', sans-serif;
-  font-size: 1.15rem;
+  font-size: 1.24rem;
   font-weight: 700;
   color: #ffffff;
 }
 
 .exp-period {
-  font-size: 0.78rem;
+  font-size: 0.84rem;
   color: var(--text-muted);
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -399,7 +399,7 @@ section {
 }
 
 .exp-role {
-  font-size: 0.85rem;
+  font-size: 0.92rem;
   color: var(--accent-green);
   margin-bottom: 1rem;
   text-shadow: 0 0 6px rgba(34, 211, 238, 0.3);
@@ -418,7 +418,7 @@ section {
 .exp-bullet {
   position: relative;
   padding-left: 1.2rem;
-  font-size: 0.875rem;
+  font-size: 0.95rem;
   color: var(--text-body);
   margin-bottom: 0.55rem;
   line-height: 1.7;
@@ -446,7 +446,7 @@ section {
 .epoch-badge {
   display: inline-flex;
   align-items: center;
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   border-radius: 4px;
   padding: 2px 10px;
   border: 1px solid;
@@ -470,8 +470,8 @@ section {
 }
 
 .exp-overview {
-  font-size: 0.875rem;
-  color: #94a3b8;
+  font-size: 0.95rem;
+  color: #b9c8d7;
   line-height: 1.75;
   margin-bottom: 1.5rem;
   padding: 0.85rem 1rem;
@@ -496,7 +496,7 @@ section {
 .exp-group-label {
   display: flex;
   align-items: center;
-  font-size: 0.86rem;
+  font-size: 0.94rem;
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -544,16 +544,16 @@ section {
 
 .project-name {
   font-family: 'Inter', sans-serif;
-  font-size: 1rem;
+  font-size: 1.08rem;
   font-weight: 600;
   color: #ffffff;
   margin-bottom: 0.5rem;
 }
 
 .project-desc {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  line-height: 1.7;
+  font-size: 0.92rem;
+  color: var(--text-body);
+  line-height: 1.8;
   margin-bottom: 1rem;
 }
 
@@ -572,7 +572,7 @@ section {
 
 .project-link-tag {
   display: inline-block;
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   padding: 2px 9px;
   border: 1px solid rgba(96, 165, 250, 0.35);
   border-radius: 4px;
@@ -605,25 +605,25 @@ section {
 
 .edu-degree {
   font-family: 'Inter', sans-serif;
-  font-size: 0.95rem;
+  font-size: 1.02rem;
   font-weight: 600;
   color: #e2e8f0;
 }
 
 .edu-institution {
-  font-size: 0.82rem;
+  font-size: 0.9rem;
   color: var(--accent-blue);
   margin-top: 3px;
 }
 
 .edu-period {
-  font-size: 0.78rem;
+  font-size: 0.84rem;
   color: var(--text-muted);
   white-space: nowrap;
 }
 
 .edu-grade {
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   color: var(--accent-yellow);
   margin-top: 3px;
 }
@@ -649,7 +649,7 @@ section {
 }
 
 .contact-subtitle {
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   color: var(--text-muted);
   margin-bottom: 2rem;
 }
@@ -667,7 +667,7 @@ section {
   gap: 8px;
   color: var(--text-muted);
   text-decoration: none;
-  font-size: 0.85rem;
+  font-size: 0.92rem;
   padding: 10px 20px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
@@ -851,7 +851,7 @@ section {
 .nav-link {
   color: var(--text-muted);
   text-decoration: none;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   padding: 4px 10px;
   border-radius: 4px;
   transition: color 0.2s, background 0.2s;
@@ -1064,7 +1064,7 @@ section {
 
 .blog-card-title {
   font-family: 'Inter', sans-serif;
-  font-size: 1.1rem;
+  font-size: 1.16rem;
   font-weight: 600;
   color: var(--text-color);
   line-height: 1.4;
@@ -1084,7 +1084,7 @@ section {
   display: flex;
   gap: 1rem;
   align-items: center;
-  font-size: 0.78rem;
+  font-size: 0.84rem;
   color: var(--text-muted);
   margin-bottom: 0.75rem;
   flex-wrap: wrap;
@@ -1093,7 +1093,7 @@ section {
 .blog-date,
 .blog-read-time {
   font-family: 'Fira Code', monospace;
-  font-size: 0.75rem;
+  font-size: 0.81rem;
   color: var(--text-muted);
 }
 
@@ -1107,7 +1107,7 @@ section {
 
 .blog-tag {
   font-family: 'Fira Code', monospace;
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   padding: 2px 8px;
   border: 1px solid var(--border-color);
   border-radius: 12px;
@@ -1117,14 +1117,14 @@ section {
 
 .blog-content {
   font-family: 'Inter', sans-serif;
-  font-size: 1rem;
+  font-size: 1.04rem;
   line-height: 1.85;
   color: var(--text-body);
 }
 
 .blog-heading {
   font-family: 'Inter', sans-serif;
-  font-size: 1.25rem;
+  font-size: 1.32rem;
   font-weight: 700;
   color: var(--accent-green);
   margin: 2.25rem 0 0.75rem;
@@ -1145,7 +1145,7 @@ section {
   padding: 0.9rem 1.2rem;
   margin: 1.5rem 0;
   font-family: 'Fira Code', monospace;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--accent-green);
   box-shadow: 0 0 12px rgba(34, 211, 238, 0.06);
 }
@@ -1158,7 +1158,7 @@ section {
   margin: 1.5rem 0;
   overflow-x: auto;
   font-family: 'Fira Code', monospace;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   line-height: 1.7;
   color: #4ade80;
 }
@@ -1174,7 +1174,7 @@ section {
   width: 100%;
   border-collapse: collapse;
   font-family: 'Fira Code', monospace;
-  font-size: 0.82rem;
+  font-size: 0.86rem;
 }
 
 .blog-table th {

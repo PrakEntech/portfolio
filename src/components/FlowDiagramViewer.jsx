@@ -54,7 +54,7 @@ const FlowDiagramViewer = ({ isOpen, onClose, isRecruiterView = false }) => {
                             <div className="control yellow" />
                             <div className="control green" />
                         </div>
-                        <span className="terminal-title" style={{ fontSize: isMobile ? '0.7rem' : '0.85rem' }}>
+                        <span className="terminal-title" style={{ fontSize: isMobile ? '0.78rem' : '0.92rem' }}>
                             {isMobile ? '~/flow_diagram.json' : '~/delivery-tracker/flow_diagram.json — Sequence Flow'}
                         </span>
                     </div>
@@ -97,7 +97,7 @@ const FlowDiagramViewer = ({ isOpen, onClose, isRecruiterView = false }) => {
                                     border: `1px solid ${activeStep === step.step ? 'var(--accent-green)' : 'rgba(255,255,255,0.1)'}`,
                                     background: activeStep === step.step ? 'rgba(34, 211, 238, 0.15)' : 'rgba(255,255,255,0.03)',
                                     color: activeStep === step.step ? 'var(--accent-green)' : 'var(--text-muted)',
-                                    fontSize: isMobile ? '0.75rem' : '0.9rem',
+                                    fontSize: isMobile ? '0.82rem' : '0.95rem',
                                     fontFamily: "'Fira Code', monospace",
                                     cursor: 'pointer',
                                     transition: 'all 0.2s ease',
@@ -120,12 +120,12 @@ const FlowDiagramViewer = ({ isOpen, onClose, isRecruiterView = false }) => {
                         WebkitOverflowScrolling: 'touch'
                     }}>
                         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-                            <div style={{ color: 'var(--accent-green)', fontFamily: "'Fira Code', monospace", fontSize: isMobile ? '0.65rem' : '0.8rem', marginBottom: isMobile ? '0.5rem' : '1rem' }}>
+                            <div style={{ color: 'var(--accent-green)', fontFamily: "'Fira Code', monospace", fontSize: isMobile ? '0.72rem' : '0.86rem', marginBottom: isMobile ? '0.5rem' : '1rem' }}>
                                 STEP_{activeStep.toString().padStart(2, '0')} // SEQUENCE_EXECUTION
                             </div>
 
                             <h2 style={{
-                                fontSize: isMobile ? '1.2rem' : '1.8rem',
+                                fontSize: isMobile ? '1.3rem' : '1.95rem',
                                 color: '#fff',
                                 marginBottom: isMobile ? '1.25rem' : '1.5rem',
                                 letterSpacing: '-0.02em',
@@ -142,22 +142,22 @@ const FlowDiagramViewer = ({ isOpen, onClose, isRecruiterView = false }) => {
                                 {/* Context Information */}
                                 <div>
                                     <div style={{ marginBottom: isMobile ? '1.25rem' : '2rem' }}>
-                                        <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                        <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
                                             <Terminal size={12} /> Source Entity
                                         </div>
-                                        <div style={{ color: 'var(--accent-blue)', fontSize: isMobile ? '0.95rem' : '1.1rem', fontWeight: 500 }}>
+                                        <div style={{ color: 'var(--accent-blue)', fontSize: isMobile ? '1rem' : '1.15rem', fontWeight: 600 }}>
                                             {currentStepData.source}
                                         </div>
                                     </div>
 
                                     {currentStepData.target && (
                                         <div style={{ marginBottom: isMobile ? '1.25rem' : '2rem' }}>
-                                            <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                            <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
                                                 <Database size={12} /> Target Sink
                                             </div>
                                             <div style={{
                                                 color: 'var(--accent-purple)',
-                                                fontSize: isMobile ? '0.75rem' : '1rem',
+                                                fontSize: isMobile ? '0.82rem' : '1.02rem',
                                                 fontFamily: "'Fira Code', monospace",
                                                 padding: '6px 10px',
                                                 background: 'rgba(167, 139, 250, 0.05)',
@@ -172,13 +172,13 @@ const FlowDiagramViewer = ({ isOpen, onClose, isRecruiterView = false }) => {
 
                                     {currentStepData.data && (
                                         <div>
-                                            <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                            <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
                                                 <ArrowRight size={12} /> Data Payload
                                             </div>
                                             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                                                 {currentStepData.data.map((item, i) => (
                                                     <span key={i} style={{
-                                                        fontSize: isMobile ? '0.65rem' : '0.75rem',
+                                                        fontSize: isMobile ? '0.72rem' : '0.8rem',
                                                         padding: '3px 8px',
                                                         background: 'rgba(255,255,255,0.05)',
                                                         border: '1px solid rgba(255,255,255,0.1)',
@@ -200,7 +200,7 @@ const FlowDiagramViewer = ({ isOpen, onClose, isRecruiterView = false }) => {
                                     borderRadius: '12px',
                                     padding: isMobile ? '1.25rem' : '1.5rem'
                                 }}>
-                                    <div style={{ fontSize: '0.65rem', color: 'var(--accent-yellow)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                    <div style={{ fontSize: '0.72rem', color: 'var(--accent-yellow)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
                                         <Zap size={12} /> Processing Logic
                                     </div>
                                     {currentStepData.logic ? (
@@ -208,12 +208,12 @@ const FlowDiagramViewer = ({ isOpen, onClose, isRecruiterView = false }) => {
                                             {currentStepData.logic.map((line, i) => (
                                                 <li key={i} style={{ marginBottom: isMobile ? '0.75rem' : '1rem', display: 'flex', gap: '10px' }}>
                                                     <span style={{ color: 'var(--accent-green)', fontWeight: 'bold', fontSize: '0.8rem' }}>&gt;</span>
-                                                    <span style={{ fontSize: isMobile ? '0.8rem' : '0.9rem', color: 'var(--text-body)', lineHeight: '1.4' }}>{line}</span>
+                                                    <span style={{ fontSize: isMobile ? '0.86rem' : '0.96rem', color: 'var(--text-body)', lineHeight: '1.5' }}>{line}</span>
                                                 </li>
                                             ))}
                                         </ul>
                                     ) : (
-                                        <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem', fontStyle: 'italic' }}>
+                                        <div style={{ color: 'var(--text-muted)', fontSize: '0.86rem', fontStyle: 'italic' }}>
                                             Passive data transfer or direct user action.
                                         </div>
                                     )}
@@ -232,11 +232,11 @@ const FlowDiagramViewer = ({ isOpen, onClose, isRecruiterView = false }) => {
                         alignItems: 'center'
                     }}>
                         {!isMobile && (
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--accent-red)', fontSize: '0.75rem', fontWeight: 600 }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--accent-red)', fontSize: '0.8rem', fontWeight: 700 }}>
                                 <Shield size={14} /> Security Protocol Active
                             </div>
                         )}
-                        <div style={{ fontSize: isMobile ? '0.65rem' : '0.7rem', color: 'var(--text-muted)' }}>
+                        <div style={{ fontSize: isMobile ? '0.72rem' : '0.76rem', color: 'var(--text-muted)' }}>
                             {isMobile ? `Step ${activeStep}/${steps.length}` : `Step ${activeStep} of ${steps.length}`}
                         </div>
                         <div style={{ display: 'flex', gap: isMobile ? '0.5rem' : '1rem' }}>
@@ -245,7 +245,7 @@ const FlowDiagramViewer = ({ isOpen, onClose, isRecruiterView = false }) => {
                                 onClick={() => setActiveStep(prev => prev - 1)}
                                 style={{
                                     background: 'none', border: 'none', color: activeStep === 1 ? 'transparent' : 'var(--accent-blue)',
-                                    cursor: 'pointer', fontSize: isMobile ? '0.65rem' : '0.75rem', fontFamily: "'Fira Code', monospace",
+                                    cursor: 'pointer', fontSize: isMobile ? '0.72rem' : '0.8rem', fontFamily: "'Fira Code', monospace",
                                     padding: '8px'
                                 }}
                             >
@@ -256,7 +256,7 @@ const FlowDiagramViewer = ({ isOpen, onClose, isRecruiterView = false }) => {
                                 onClick={() => setActiveStep(prev => prev + 1)}
                                 style={{
                                     background: 'none', border: 'none', color: activeStep === steps.length ? 'transparent' : 'var(--accent-blue)',
-                                    cursor: 'pointer', fontSize: isMobile ? '0.65rem' : '0.75rem', fontFamily: "'Fira Code', monospace",
+                                    cursor: 'pointer', fontSize: isMobile ? '0.72rem' : '0.8rem', fontFamily: "'Fira Code', monospace",
                                     padding: '8px'
                                 }}
                             >
