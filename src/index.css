@@ -760,6 +760,9 @@ section {
 
 /* ─── Nav ────────────────────────────────────────────────── */
 .nav-bar {
+  --nav-control-height: 30px;
+  --nav-control-padding: 0 10px;
+  --nav-control-font-size: 0.75rem;
   position: fixed;
   top: 0;
   left: 0;
@@ -801,6 +804,14 @@ section {
 
 .nav-links::-webkit-scrollbar {
   display: none;
+}
+
+.nav-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-left: auto;
+  flex-shrink: 0;
 }
 
 @media (max-width: 640px) {
@@ -995,7 +1006,26 @@ section {
   }
 
   .nav-bar {
+    --nav-control-height: 28px;
+    --nav-control-padding: 0 8px;
+    --nav-control-font-size: 0.7rem;
     padding: 1rem 1.25rem;
+  }
+
+  .nav-actions {
+    gap: 6px;
+  }
+
+  .download-btn,
+  .recruiter-view-toggle {
+    height: var(--nav-control-height);
+    padding: var(--nav-control-padding) !important;
+    font-size: var(--nav-control-font-size) !important;
+  }
+
+  .download-btn svg {
+    width: 12px;
+    height: 12px;
   }
 }
 
@@ -1169,15 +1199,33 @@ section {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 4px 12px;
-  font-size: 0.85rem;
-  line-height: 1.2;
+  height: var(--nav-control-height);
+  padding: var(--nav-control-padding);
+  font-size: var(--nav-control-font-size);
+  line-height: 1;
   border-radius: 4px;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .recruiter-view-toggle:hover {
   background: rgba(34, 211, 238, 0.08);
+}
+
+.download-btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: var(--nav-control-height);
+  padding: var(--nav-control-padding) !important;
+  border: 1px solid var(--accent-green);
+  color: var(--accent-green);
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: var(--nav-control-font-size) !important;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .home-app.recruiter-mode {
@@ -1234,6 +1282,12 @@ section {
   border: 1px solid #111111;
   background: #ffffff;
   color: #111111;
+}
+
+.home-app.recruiter-mode .download-btn {
+  border-color: #111111;
+  color: #111111;
+  background: #ffffff;
 }
 
 .home-app.recruiter-mode .section-heading-icon {
