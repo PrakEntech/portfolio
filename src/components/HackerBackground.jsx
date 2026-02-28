@@ -45,24 +45,45 @@ export default function HackerBackground() {
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
 
-        let animId;
+        let animId = 0;
+        let lastFrame = 0;
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        const targetFps = isMobile ? 30 : 60;
+        const frameInterval = 1000 / targetFps;
         const fontSize = 13;
         let columns;
         let drops;
 
         const resize = () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            columns = Math.floor(canvas.width / fontSize);
+            const dpr = isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 1.5);
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+
+            canvas.width = Math.floor(width * dpr);
+            canvas.height = Math.floor(height * dpr);
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+            columns = Math.floor(width / fontSize);
             drops = Array(columns).fill(1);
         };
 
         resize();
         window.addEventListener('resize', resize);
 
-        const draw = () => {
+        const draw = (timestamp = 0) => {
+            if (document.hidden) {
+                animId = requestAnimationFrame(draw);
+                return;
+            }
+
+            if (timestamp - lastFrame < frameInterval) {
+                animId = requestAnimationFrame(draw);
+                return;
+            }
+            lastFrame = timestamp;
+
             ctx.fillStyle = 'rgba(13, 13, 13, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
 
             ctx.font = `${fontSize}px 'Fira Code', monospace`;
 
@@ -71,12 +92,12 @@ export default function HackerBackground() {
                 const y = drops[i] * fontSize;
 
                 // Lead character brightness
-                const isLead = drops[i] * fontSize < canvas.height && Math.random() > 0.9;
+                const isLead = y < window.innerHeight && Math.random() > 0.9;
                 ctx.fillStyle = isLead ? '#ffffff' : `rgba(74, 222, 128, ${Math.random() * 0.5 + 0.1})`;
 
                 ctx.fillText(char, i * fontSize, y);
 
-                if (y > canvas.height && Math.random() > 0.975) {
+                if (y > window.innerHeight && Math.random() > 0.975) {
                     drops[i] = 0;
                 }
                 drops[i]++;
@@ -84,7 +105,7 @@ export default function HackerBackground() {
             animId = requestAnimationFrame(draw);
         };
 
-        draw();
+        animId = requestAnimationFrame(draw);
         return () => {
             cancelAnimationFrame(animId);
             window.removeEventListener('resize', resize);
@@ -97,9 +118,18 @@ export default function HackerBackground() {
         if (!container) return;
 
         let lineIndex = 0;
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        const maxLines = isMobile ? 8 : 16;
+        const removalTimeouts = new Set();
         let intervalId;
 
         const addLine = () => {
+            if (document.hidden) return;
+
+            if (container.childElementCount >= maxLines) {
+                container.firstChild?.remove();
+            }
+
             const line = document.createElement('div');
             line.className = 'hacker-terminal-line';
             line.textContent = TERMINAL_LINES[lineIndex % TERMINAL_LINES.length];
@@ -118,18 +148,35 @@ export default function HackerBackground() {
 
             // Fade and remove after 6-10s
             const duration = Math.random() * 4000 + 6000;
-            setTimeout(() => {
+            const fadeTimeout = setTimeout(() => {
                 line.style.transition = 'opacity 1s ease';
                 line.style.opacity = '0';
-                setTimeout(() => line.remove(), 1000);
+                const removeTimeout = setTimeout(() => {
+                    line.remove();
+                    removalTimeouts.delete(removeTimeout);
+                }, 1000);
+                removalTimeouts.add(removeTimeout);
+                removalTimeouts.delete(fadeTimeout);
             }, duration);
+            removalTimeouts.add(fadeTimeout);
         };
 
         // Initial burst
-        for (let i = 0; i < 6; i++) setTimeout(addLine, i * 300);
-        intervalId = setInterval(addLine, 1200);
+        const burstCount = isMobile ? 3 : 6;
+        for (let i = 0; i < burstCount; i++) {
+            const timeoutId = setTimeout(() => {
+                addLine();
+                removalTimeouts.delete(timeoutId);
+            }, i * 300);
+            removalTimeouts.add(timeoutId);
+        }
+        intervalId = setInterval(addLine, isMobile ? 1800 : 1200);
 
-        return () => clearInterval(intervalId);
+        return () => {
+            clearInterval(intervalId);
+            removalTimeouts.forEach(clearTimeout);
+            removalTimeouts.clear();
+        };
     }, []);
 
     return (
