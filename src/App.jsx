@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import HackerBackground from './components/HackerBackground';
 import TypewriterText from './components/TypewriterText';
-import TerminalWindow from './components/TerminalWindow';
 import InteractiveTerminal from './components/InteractiveTerminal';
 import MobileNav from './components/MobileNav';
 import ScrollReveal from './components/ScrollReveal';
@@ -11,14 +10,14 @@ import BlogRoutes from './generated/BlogRoutes.jsx';
 import { resumeData } from './data/resumeData';
 import {
   Briefcase, GraduationCap, Github, Linkedin,
-  Mail, Phone, MapPin, Cpu, FolderGit2, ChevronRight, Star,
+  Mail, Phone, Cpu, FolderGit2, ChevronRight, Star,
   Download, List
 } from 'lucide-react';
 
 /* ── Section heading ────────────────────────────────────── */
-const SectionHeading = ({ icon: Icon, label, command }) => (
+const SectionHeading = ({ icon, label, command }) => (
   <div className="section-heading">
-    <Icon className="section-heading-icon" size={22} />
+    {React.createElement(icon, { className: 'section-heading-icon', size: 22 })}
     <span className="section-heading-label">
       <TypewriterText text={label} speed={5} />
     </span>
@@ -99,12 +98,10 @@ function App() {
 }
 
 function HomeApp() {
-  const { personalInfo, summary, education, skills, experience, projects } = resumeData;
+  const { personalInfo, education, skills, experience, projects } = resumeData;
   const [projectFilter, setProjectFilter] = useState('All');
   const [isFlowViewerOpen, setIsFlowViewerOpen] = useState(false);
 
-  // Parse terminal commands
-  const [terminalOutput, setTerminalOutput] = useState([]);
   const location = useLocation();
 
   useEffect(() => {

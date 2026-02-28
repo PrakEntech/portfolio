@@ -1,22 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-const SpaceWar = ({ onExit }) => {
-    const containerRef = useRef(null);
-    const canvasRef = useRef(null);
-    const [gameOver, setGameOver] = useState(false);
-    const [winner, setWinner] = useState(null); // 'Needle', 'Wedge', or 'Draw'
-    const [gameStarted, setGameStarted] = useState(false);
-    const [isFullscreen, setIsFullscreen] = useState(false);
+const CANVAS_SIZE = 600;
+const STAR_X = CANVAS_SIZE / 2;
+const STAR_Y = CANVAS_SIZE / 2;
+const G = 800; // Gravitational constant (adjusted for feel)
+const MAX_FUEL = 1000;
+const MAX_TORPEDOES = 20;
 
-    // Game constants
-    const CANVAS_SIZE = 600;
-    const STAR_X = CANVAS_SIZE / 2;
-    const STAR_Y = CANVAS_SIZE / 2;
-    const G = 800; // Gravitational constant (adjusted for feel)
-    const MAX_FUEL = 1000;
-    const MAX_TORPEDOES = 20;
-
-    const gameState = useRef({
+function createInitialGameState() {
+    return {
         p1: {
             name: 'Needle', type: 'needle', color: '#0f0',
             x: 100, y: CANVAS_SIZE / 2, vx: 0, vy: -1.5, angle: -Math.PI / 2,
@@ -29,7 +21,35 @@ const SpaceWar = ({ onExit }) => {
         },
         torpedoes: [],
         keys: {}
-    });
+    };
+}
+
+const SpaceWar = ({ onExit }) => {
+    const containerRef = useRef(null);
+    const canvasRef = useRef(null);
+    const [gameOver, setGameOver] = useState(false);
+    const [winner, setWinner] = useState(null); // 'Needle', 'Wedge', or 'Draw'
+    const [gameStarted, setGameStarted] = useState(false);
+    const [isFullscreen, setIsFullscreen] = useState(false);
+
+    const gameState = useRef(createInitialGameState());
+
+    const resetGame = useCallback(() => {
+        gameState.current = createInitialGameState();
+        setGameOver(false);
+        setWinner(null);
+        setGameStarted(true);
+    }, []);
+
+    const toggleFullscreen = useCallback(() => {
+        if (!document.fullscreenElement) {
+            containerRef.current?.requestFullscreen().catch(err => {
+                console.error(`Error attempting to enable fullscreen: ${err.message}`);
+            });
+        } else {
+            document.exitFullscreen();
+        }
+    }, []);
 
     useEffect(() => {
         const handleKeyDown = (e) => {
@@ -64,27 +84,7 @@ const SpaceWar = ({ onExit }) => {
             window.removeEventListener('keydown', handleKeyDown);
             window.removeEventListener('keyup', handleKeyUp);
         };
-    }, [gameStarted, gameOver]);
-
-    const resetGame = () => {
-        gameState.current = {
-            p1: {
-                name: 'Needle', type: 'needle', color: '#0f0',
-                x: 100, y: CANVAS_SIZE / 2, vx: 0, vy: -1.5, angle: -Math.PI / 2,
-                alive: true, fuel: MAX_FUEL, torpedoes: MAX_TORPEDOES, cooldown: 0
-            },
-            p2: {
-                name: 'Wedge', type: 'wedge', color: '#0cf',
-                x: CANVAS_SIZE - 100, y: CANVAS_SIZE / 2, vx: 0, vy: 1.5, angle: Math.PI / 2,
-                alive: true, fuel: MAX_FUEL, torpedoes: MAX_TORPEDOES, cooldown: 0
-            },
-            torpedoes: [],
-            keys: {}
-        };
-        setGameOver(false);
-        setWinner(null);
-        setGameStarted(true);
-    };
+    }, [gameStarted, gameOver, onExit, resetGame, toggleFullscreen]);
 
     const triggerHyperspace = (player) => {
         if (!player.alive) return;
@@ -137,7 +137,7 @@ const SpaceWar = ({ onExit }) => {
             }
         };
 
-        const updatePhysics = (player, state) => {
+        const updatePhysics = (player) => {
             if (!player.alive) return;
 
             // Gravity Calculation: F = G / r^2
@@ -256,8 +256,8 @@ const SpaceWar = ({ onExit }) => {
             }
 
             // Physics Update
-            updatePhysics(state.p1, state);
-            updatePhysics(state.p2, state);
+            updatePhysics(state.p1);
+            updatePhysics(state.p2);
 
             // Update Torpedoes (Optimized: Avoid map/filter allocation each frame)
             for (let i = state.torpedoes.length - 1; i >= 0; i--) {
@@ -413,7 +413,7 @@ const SpaceWar = ({ onExit }) => {
         draw();
 
         return () => cancelAnimationFrame(animationFrameId);
-    }, [gameOver, gameStarted]);
+    }, [gameOver, gameStarted, winner]);
 
     // Handle fullscreen
     useEffect(() => {
@@ -428,16 +428,6 @@ const SpaceWar = ({ onExit }) => {
         document.addEventListener('fullscreenchange', handleFullscreenChange);
         return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
     }, []);
-
-    const toggleFullscreen = () => {
-        if (!document.fullscreenElement) {
-            containerRef.current?.requestFullscreen().catch(err => {
-                console.error(`Error attempting to enable fullscreen: ${err.message}`);
-            });
-        } else {
-            document.exitFullscreen();
-        }
-    };
 
     const controlPanelStyle = {
         width: '240px',

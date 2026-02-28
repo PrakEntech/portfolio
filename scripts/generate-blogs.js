@@ -157,25 +157,19 @@ function generateBlogList(blogs) {
   })));
 
   return `// AUTO-GENERATED — do not edit manually.
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import HackerBackground from '../components/HackerBackground';
 import { BookOpen } from 'lucide-react';
 
 export default function BlogList() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '');
+  const searchQuery = searchParams.get('q') || '';
 
   const blogs = ${blogsData};
 
-  useEffect(() => {
-    const q = searchParams.get('q');
-    if (q) setSearchQuery(q);
-  }, [searchParams]);
-
   const handleSearchChange = (e) => {
     const val = e.target.value;
-    setSearchQuery(val);
     if (val) {
       setSearchParams({ q: val });
     } else {

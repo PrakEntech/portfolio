@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { useInView } from 'framer-motion';
 
 const TypewriterText = ({ text, delay = 0, speed = 30, className = "" }) => {
     const [displayedText, setDisplayedText] = useState("");

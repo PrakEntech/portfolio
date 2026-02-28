@@ -6,6 +6,8 @@ const SECTIONS = ['about', 'skills', 'experience', 'projects', 'education', 'con
 
 export default function MobileNav() {
     const [isOpen, setIsOpen] = useState(false);
+    const MotionDiv = motion.div;
+    const MotionA = motion.a;
     const toggleMenu = () => setIsOpen(!isOpen);
 
     // Prevent body scroll when the full-screen menu is open
@@ -50,7 +52,7 @@ export default function MobileNav() {
 
             <AnimatePresence>
                 {isOpen && (
-                    <motion.div
+                    <MotionDiv
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
@@ -74,7 +76,7 @@ export default function MobileNav() {
                         <div style={{ position: 'relative', width: '2px', height: '2px' }}>
 
                             {/* Central Core */}
-                            <motion.div
+                            <MotionDiv
                                 initial={{ scale: 0 }}
                                 animate={{ scale: 1 }}
                                 exit={{ scale: 0 }}
@@ -93,10 +95,10 @@ export default function MobileNav() {
                                 }}
                             >
                                 <Cpu size={32} />
-                            </motion.div>
+                            </MotionDiv>
 
                             {/* Glowing Ring Path */}
-                            <motion.div
+                            <MotionDiv
                                 initial={{ opacity: 0, scale: 0.5 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0.8 }}
@@ -118,7 +120,7 @@ export default function MobileNav() {
                                 const targetAngle = -90 + (idx * (360 / SECTIONS.length));
 
                                 return (
-                                    <motion.div
+                                    <MotionDiv
                                         key={section}
                                         initial={{ rotate: -90, opacity: 0 }}
                                         animate={{ rotate: targetAngle, opacity: 1 }}
@@ -138,7 +140,7 @@ export default function MobileNav() {
                                             willChange: 'transform, opacity'
                                         }}
                                     >
-                                        <motion.a
+                                        <MotionA
                                             href={section === 'blog' ? '/blog' : `#${section}`}
                                             onClick={(e) => {
                                                 e.stopPropagation();
@@ -181,12 +183,12 @@ export default function MobileNav() {
                                             }}
                                         >
                                             {section}
-                                        </motion.a>
-                                    </motion.div>
+                                        </MotionA>
+                                    </MotionDiv>
                                 );
                             })}
                         </div>
-                    </motion.div>
+                    </MotionDiv>
                 )}
             </AnimatePresence>
         </div>
