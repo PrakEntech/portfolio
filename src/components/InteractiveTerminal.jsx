@@ -58,12 +58,23 @@ const InteractiveTerminal = ({ resumeData, setProjectFilter }) => {
     const [historyIndex, setHistoryIndex] = useState(-1); // -1 means currently typing new command
     const [input, setInput] = useState('');
     const [activeApp, setActiveApp] = useState(null); // e.g. 'spacewar'
+    const [isMobile, setIsMobile] = useState(false);
     const terminalBodyRef = useRef(null);
     const inputRef = useRef(null);
     const isFirstRun = useRef(true);
 
     // Check if device is large enough for SpaceWar (e.g. tablet/desktop width)
     const canPlayGames = typeof window !== 'undefined' && window.innerWidth >= 1024;
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return undefined;
+        const mediaQuery = window.matchMedia('(max-width: 768px)');
+        const updateIsMobile = () => setIsMobile(mediaQuery.matches);
+
+        updateIsMobile();
+        mediaQuery.addEventListener('change', updateIsMobile);
+        return () => mediaQuery.removeEventListener('change', updateIsMobile);
+    }, []);
 
     const scrollToBottom = () => {
         setTimeout(() => {
@@ -268,9 +279,9 @@ const InteractiveTerminal = ({ resumeData, setProjectFilter }) => {
                 className={`terminal-body ${activeApp ? 'app-active' : ''}`}
                 ref={terminalBodyRef}
                 style={{
-                    minHeight: activeApp ? '600px' : '300px',
-                    maxHeight: activeApp ? '800px' : '500px',
-                    overflowY: activeApp ? 'hidden' : 'auto',
+                    minHeight: activeApp ? '600px' : (isMobile ? 'auto' : '300px'),
+                    maxHeight: activeApp ? '800px' : (isMobile ? 'none' : '500px'),
+                    overflowY: activeApp ? 'hidden' : (isMobile ? 'visible' : 'auto'),
                     transition: 'all 0.3s ease'
                 }}
             >
