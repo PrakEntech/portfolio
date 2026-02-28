@@ -2,7 +2,7 @@
 
 A terminal-inspired, interactive portfolio designed to showcase engineering expertise, security-first thinking, and product ownership. Built as a high-performance React SPA with a custom static-generation engine for blogging.
 
-## 🚀 Key Features
+## Key Features
 
 - **Interactive Terminal:** A fully functional bash-like interface allowing users to navigate sections, filter projects, and search blogs using terminal commands.
 - **Recruiter Mode:** A high-visibility, professional overlay for quick access to key information, accessible at the click of a button.
@@ -11,7 +11,7 @@ A terminal-inspired, interactive portfolio designed to showcase engineering expe
 
 ---
 
-## 🛠️ Architecture & Components
+## Architecture & Components
 
 ### 1. Interactive Terminal (`InteractiveTerminal.jsx`)
 The heart of the portfolio. It manages a virtual filesystem-like navigation experience.
@@ -29,7 +29,7 @@ A physics-accurate recreation of the first digital computer game.
 
 ---
 
-## ✍️ Static Blog System (Backend-less)
+## Static Blog System (Backend-less)
 
 The project uses a custom **Static Generation Engine** (`scripts/generate-blogs.js`) to manage content. This allows for rich, searchable blog posts without the overhead of a CMS or database.
 
@@ -44,14 +44,14 @@ The project uses a custom **Static Generation Engine** (`scripts/generate-blogs.
 
 ---
 
-## 📊 Analytics & Monitoring
+## Analytics & Monitoring
 
 - **Google Analytics 4 (GA4):** Connected via a Global Site Tag in `index.html`.
 - **SPA Tracking:** Since React doesn't trigger a full page reload on navigation, a `useEffect` hook in `App.jsx` monitors `location` changes via `react-router-dom` and manually pushes `page_view` events to Google Analytics. This ensures every blog post read and section visit is tracked precisely.
 
 ---
 
-## ☁️ Deployment & CI/CD
+## Deployment & CI/CD
 
 The project iterates fast through a modern CI/CD pipeline:
 
@@ -64,7 +64,7 @@ The project iterates fast through a modern CI/CD pipeline:
 
 ---
 
-## 🛠️ Development
+## Development
 
 ```bash
 # Install dependencies
