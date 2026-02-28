@@ -1545,6 +1545,18 @@ section {
   border-color: #d4d4d4 !important;
 }
 
+.arch-modal-overlay.recruiter-flow .control.red {
+  background: #ff5f57 !important;
+}
+
+.arch-modal-overlay.recruiter-flow .control.yellow {
+  background: #ffbd2e !important;
+}
+
+.arch-modal-overlay.recruiter-flow .control.green {
+  background: #28ca41 !important;
+}
+
 .arch-modal-overlay.recruiter-flow button,
 .arch-modal-overlay.recruiter-flow [style*="background: rgba(12, 18, 24, 0.5)"],
 .arch-modal-overlay.recruiter-flow [style*="background: rgba(8, 12, 16, 0.4)"],

@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense, lazy } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import HackerBackground from './components/HackerBackground';
 import TypewriterText from './components/TypewriterText';
 import InteractiveTerminal from './components/InteractiveTerminal';
 import MobileNav from './components/MobileNav';
 import ScrollReveal from './components/ScrollReveal';
-import FlowDiagramViewer from './components/FlowDiagramViewer';
 import BlogRoutes from './generated/BlogRoutes.jsx';
 import { resumeData } from './data/resumeData';
 import {
@@ -13,6 +12,8 @@ import {
   Mail, Phone, Cpu, FolderGit2, ChevronRight, Star, MapPin,
   Download, List
 } from 'lucide-react';
+
+const FlowDiagramViewer = lazy(() => import('./components/FlowDiagramViewer'));
 
 /* ── Section heading ────────────────────────────────────── */
 const SectionHeading = ({ icon, label, command }) => (
@@ -382,11 +383,15 @@ function HomeApp() {
       </main>
 
       {/* ── Architecture Viewer Modal ── */}
-      <FlowDiagramViewer
-        isOpen={isFlowViewerOpen}
-        onClose={() => setIsFlowViewerOpen(false)}
-        isRecruiterView={isRecruiterView}
-      />
+      {isFlowViewerOpen && (
+        <Suspense fallback={null}>
+          <FlowDiagramViewer
+            isOpen={isFlowViewerOpen}
+            onClose={() => setIsFlowViewerOpen(false)}
+            isRecruiterView={isRecruiterView}
+          />
+        </Suspense>
+      )}
     </div>
   );
 }

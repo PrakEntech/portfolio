@@ -148,6 +148,9 @@ export default function MobileNav({ isRecruiterView = false }) {
                             {SECTIONS.map((section, idx) => {
                                 // 0 degrees is 3 o'clock. We want 12 o'clock, which is -90 degrees.
                                 const targetAngle = -90 + (idx * (360 / SECTIONS.length));
+                                const label = section === 'blog'
+                                    ? 'Blog'
+                                    : section.charAt(0).toUpperCase() + section.slice(1);
 
                                 return (
                                     <MotionDiv
@@ -179,8 +182,8 @@ export default function MobileNav({ isRecruiterView = false }) {
                                             style={{
                                                 position: 'absolute',
                                                 top: '50%', right: 0,
-                                                marginTop: '-20px', marginRight: '-45px', // Center the 90x40 element on the arc
-                                                width: '90px', height: '40px',
+                                                marginTop: '-22px', marginRight: '-52px', // Center the pill on the arc
+                                                width: '104px', height: '44px',
                                                 display: 'flex',
                                                 alignItems: 'center',
                                                 justifyContent: 'center',
@@ -188,9 +191,10 @@ export default function MobileNav({ isRecruiterView = false }) {
                                                 border: `1px solid ${palette.pillBorder}`,
                                                 color: palette.accent,
                                                 textDecoration: 'none',
-                                                borderRadius: '20px',
-                                                fontSize: '0.75rem',
-                                                textTransform: 'uppercase',
+                                                borderRadius: '22px',
+                                                fontSize: '0.82rem',
+                                                fontWeight: 600,
+                                                textTransform: 'none',
                                                 boxShadow: palette.pillShadow,
                                                 fontFamily: "'Fira Code', monospace",
                                                 pointerEvents: 'auto',
@@ -212,7 +216,7 @@ export default function MobileNav({ isRecruiterView = false }) {
                                                 boxShadow: 'none'
                                             }}
                                         >
-                                            {section}
+                                            {label}
                                         </MotionA>
                                     </MotionDiv>
                                 );
