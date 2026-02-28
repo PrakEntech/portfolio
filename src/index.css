@@ -1163,10 +1163,14 @@ section {
 
 /* ─── Recruiter View ─────────────────────────────────────── */
 .recruiter-view-toggle {
-  border: 1px solid #111111;
-  background: #ffffff;
-  color: #111111;
+  border: 1px solid var(--accent-green);
+  background: transparent;
+  color: var(--accent-green);
   cursor: pointer;
+}
+
+.recruiter-view-toggle:hover {
+  background: rgba(34, 211, 238, 0.08);
 }
 
 .home-app.recruiter-mode {
@@ -1217,6 +1221,12 @@ section {
 .home-app.recruiter-mode .nav-link:hover {
   color: #000000 !important;
   background: #f3f3f3;
+}
+
+.home-app.recruiter-mode .recruiter-view-toggle {
+  border: 1px solid #111111;
+  background: #ffffff;
+  color: #111111;
 }
 
 .home-app.recruiter-mode .section-heading-icon {
