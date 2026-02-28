@@ -144,6 +144,7 @@ const InteractiveTerminal = ({ resumeData, setProjectFilter }) => {
                             <div><span style={{ color: 'var(--accent-yellow)', width: '80px', display: 'inline-block' }}>spacewar</span>  - Play a retro terminal space game</div>
                         )}
                         <div><span style={{ color: 'var(--accent-yellow)', width: '80px', display: 'inline-block' }}>clear</span>  - Clear terminal history</div>
+                        <div><span style={{ color: 'var(--accent-yellow)', width: '80px', display: 'inline-block' }}>clearls</span>  - Clear browser local storage</div>
                         <div><span style={{ color: 'var(--accent-yellow)', width: '80px', display: 'inline-block' }}>sudo</span>  - ???</div>
                     </div>
                 );
@@ -231,6 +232,12 @@ const InteractiveTerminal = ({ resumeData, setProjectFilter }) => {
                 } else {
                     output = <div style={{ color: 'var(--accent-red)' }}>Error: Your screen is too small to initialize the SpaceWar canvas. Please use a desktop device.</div>;
                 }
+            } else if (cmd === 'clearls' || cmd === 'clear-local-storage') {
+                if (typeof window !== 'undefined') {
+                    window.localStorage.clear();
+                }
+                setCommandLog([]);
+                output = <div style={{ color: 'var(--accent-green)' }}>[OK] localStorage cleared.</div>;
             } else if (cmd === 'sudo') {
                 output = <div style={{ color: 'var(--accent-red)' }}>prakhar is not in the sudoers file. This incident will be reported.</div>;
             } else {

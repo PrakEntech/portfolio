@@ -681,6 +681,29 @@ section {
   box-shadow: 0 0 15px rgba(34, 211, 238, 0.12);
 }
 
+/* Reduce expensive hover effects on touch devices */
+@media (hover: none), (pointer: coarse) {
+  .terminal-window:hover {
+    box-shadow:
+      0 0 0 1px rgba(34, 211, 238, 0.05),
+      0 12px 28px rgba(0, 0, 0, 0.55),
+      0 0 28px rgba(34, 211, 238, 0.03) inset;
+  }
+
+  .skill-card:hover,
+  .exp-card:hover,
+  .project-card:hover {
+    box-shadow: none;
+    transform: none;
+  }
+
+  .contact-link:hover,
+  .project-link-tag:hover,
+  .nav-link:hover {
+    box-shadow: none;
+  }
+}
+
 /* ─── Floating terminal lines (hacker bg) ────────────────── */
 .hacker-terminal-line {
   position: absolute;
