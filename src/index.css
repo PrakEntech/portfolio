@@ -1161,6 +1161,162 @@ section {
   border-bottom: none;
 }
 
+/* ─── Recruiter View ─────────────────────────────────────── */
+.recruiter-view-toggle {
+  border: 1px solid var(--accent-blue);
+  background: rgba(96, 165, 250, 0.1);
+  color: var(--accent-blue);
+  cursor: pointer;
+}
+
+.home-app.recruiter-mode {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f5f7fb 0%, #eef3f8 100%);
+}
+
+.home-app.recruiter-mode .page-wrapper {
+  color: #1f2937;
+}
+
+.home-app.recruiter-mode .nav-bar {
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom: 1px solid #d8e2ec;
+  backdrop-filter: blur(10px);
+}
+
+.home-app.recruiter-mode .nav-logo {
+  color: #0f172a;
+  text-shadow: none;
+}
+
+.home-app.recruiter-mode .nav-link {
+  color: #475569;
+}
+
+.home-app.recruiter-mode .nav-link:hover {
+  color: #1d4ed8;
+  background: #e2ebf5;
+}
+
+.home-app.recruiter-mode .section-heading-icon {
+  color: #1d4ed8;
+  filter: none;
+}
+
+.home-app.recruiter-mode .section-heading-label {
+  color: #0f172a;
+  text-shadow: none;
+}
+
+.home-app.recruiter-mode .section-heading-line {
+  background: linear-gradient(90deg, #9bb2ca 0%, rgba(155, 178, 202, 0.1) 100%);
+}
+
+.home-app.recruiter-mode .skill-card,
+.home-app.recruiter-mode .exp-card,
+.home-app.recruiter-mode .project-card,
+.home-app.recruiter-mode .edu-card,
+.home-app.recruiter-mode .contact-box {
+  background: #ffffff;
+  border: 1px solid #dbe5ef;
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.05);
+}
+
+.home-app.recruiter-mode .exp-card::before {
+  background: linear-gradient(180deg, #3b82f6 0%, rgba(59, 130, 246, 0.1) 100%);
+}
+
+.home-app.recruiter-mode .project-card::after {
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+}
+
+.home-app.recruiter-mode .project-name,
+.home-app.recruiter-mode .exp-company,
+.home-app.recruiter-mode .contact-title,
+.home-app.recruiter-mode .edu-degree {
+  color: #0f172a;
+}
+
+.home-app.recruiter-mode .project-desc,
+.home-app.recruiter-mode .contact-subtitle,
+.home-app.recruiter-mode .exp-overview,
+.home-app.recruiter-mode .exp-bullet,
+.home-app.recruiter-mode .edu-period {
+  color: #475569;
+}
+
+.home-app.recruiter-mode .skill-tag {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e3a8a;
+}
+
+.home-app.recruiter-mode .contact-link {
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+}
+
+.home-app.recruiter-mode .contact-link:hover {
+  color: #0f172a;
+  border-color: #93c5fd;
+  background: #eff6ff;
+  box-shadow: none;
+}
+
+.recruiter-hero {
+  background: #ffffff;
+  border: 1px solid #dbe5ef;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.06);
+}
+
+.recruiter-eyebrow {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #2563eb;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.recruiter-name {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+.recruiter-role {
+  color: #1e3a8a;
+  font-size: 1rem;
+  margin-top: 0.45rem;
+}
+
+.recruiter-location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #64748b;
+  font-size: 0.88rem;
+  margin-top: 0.45rem;
+}
+
+.recruiter-summary {
+  color: #334155;
+  font-size: 0.95rem;
+  margin-top: 1rem;
+  line-height: 1.8;
+}
+
+.recruiter-quick-links {
+  margin-top: 1.25rem;
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
 .blog-table tr:hover td {
   background: rgba(34, 211, 238, 0.03);
 }

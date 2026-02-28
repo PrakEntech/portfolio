@@ -10,7 +10,7 @@ import BlogRoutes from './generated/BlogRoutes.jsx';
 import { resumeData } from './data/resumeData';
 import {
   Briefcase, GraduationCap, Github, Linkedin,
-  Mail, Phone, Cpu, FolderGit2, ChevronRight, Star,
+  Mail, Phone, Cpu, FolderGit2, ChevronRight, Star, MapPin,
   Download, List
 } from 'lucide-react';
 
@@ -88,6 +88,30 @@ const RegularExpCard = ({ exp }) => (
   </div>
 );
 
+const RecruiterHero = ({ personalInfo, summary }) => (
+  <div className="recruiter-hero">
+    <p className="recruiter-eyebrow">Recruiter View</p>
+    <h1 className="recruiter-name">{personalInfo.name}</h1>
+    <p className="recruiter-role">{personalInfo.role}</p>
+    <p className="recruiter-location">
+      <MapPin size={14} />
+      {personalInfo.location}
+    </p>
+    <p className="recruiter-summary">{summary}</p>
+    <div className="recruiter-quick-links">
+      <a href={`mailto:${personalInfo.email}`} className="project-link-tag">
+        <Mail size={13} /> Email
+      </a>
+      <a href={`https://github.com/${personalInfo.github}`} target="_blank" rel="noreferrer" className="project-link-tag">
+        <Github size={13} /> GitHub
+      </a>
+      <a href={`https://linkedin.com/in/${personalInfo.linkedin}`} target="_blank" rel="noreferrer" className="project-link-tag">
+        <Linkedin size={13} /> LinkedIn
+      </a>
+    </div>
+  </div>
+);
+
 function App() {
   return (
     <Routes>
@@ -98,9 +122,13 @@ function App() {
 }
 
 function HomeApp() {
-  const { personalInfo, education, skills, experience, projects } = resumeData;
+  const { personalInfo, summary, education, skills, experience, projects } = resumeData;
   const [projectFilter, setProjectFilter] = useState('All');
   const [isFlowViewerOpen, setIsFlowViewerOpen] = useState(false);
+  const [isRecruiterView, setIsRecruiterView] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.localStorage.getItem('recruiterViewEnabled') === 'true';
+  });
 
   const location = useLocation();
 
@@ -112,9 +140,14 @@ function HomeApp() {
     }
   }, [location]);
 
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    window.localStorage.setItem('recruiterViewEnabled', String(isRecruiterView));
+  }, [isRecruiterView]);
+
   return (
-    <>
-      <HackerBackground />
+    <div className={`home-app ${isRecruiterView ? 'recruiter-mode' : ''}`}>
+      {!isRecruiterView && <HackerBackground />}
 
       {/* NAV */}
       <nav className="nav-bar">
@@ -125,10 +158,17 @@ function HomeApp() {
               <a href={href} className="nav-link">{href.replace('#', '')}</a>
             </li>
           ))}
-          <li><Link to="/blog" className="nav-link" style={{ color: 'var(--accent-blue)', whiteWhiteSpace: 'nowrap' }}>blog</Link></li>
+          <li><Link to="/blog" className="nav-link" style={{ color: 'var(--accent-blue)', whiteSpace: 'nowrap' }}>blog</Link></li>
         </ul>
         <div style={{ display: 'flex', gap: '15px', alignItems: 'center', marginLeft: 'auto' }}>
           <MobileNav />
+          <button
+            type="button"
+            className="nav-link recruiter-view-toggle"
+            onClick={() => setIsRecruiterView(prev => !prev)}
+          >
+            {isRecruiterView ? 'Terminal View' : 'Recruiter View'}
+          </button>
           <a href="https://drive.google.com/uc?export=download&id=1igMNs4ceEuZVMB2LMMKKsulOOAbuVvlg" target="_blank" rel="noreferrer" className="nav-link download-btn" style={{ display: 'flex', alignItems: 'center', gap: '6px', border: '1px solid var(--accent-green)', color: 'var(--accent-green)', padding: '4px 12px', borderRadius: '4px', textDecoration: 'none', fontSize: '0.85rem' }}>
             <Download size={14} /> Resume
           </a>
@@ -140,13 +180,17 @@ function HomeApp() {
         {/* ── HERO ─────────────────────────────── */}
         <section id="about" style={{ paddingTop: '6rem' }}>
           <ScrollReveal>
-            <InteractiveTerminal resumeData={resumeData} setProjectFilter={setProjectFilter} />
+            {isRecruiterView ? (
+              <RecruiterHero personalInfo={personalInfo} summary={summary} />
+            ) : (
+              <InteractiveTerminal resumeData={resumeData} setProjectFilter={setProjectFilter} />
+            )}
           </ScrollReveal>
         </section>
 
         {/* ── SKILLS ───────────────────────────── */}
         <section id="skills">
-          <SectionHeading icon={Cpu} label="Technical Skills" command="ls -la ~/skills/" />
+          <SectionHeading icon={Cpu} label="Technical Skills" command={isRecruiterView ? null : 'ls -la ~/skills/'} />
           {/* Wrap whole grid so cards can stagger */}
           <ScrollReveal>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '1rem' }}>
@@ -166,7 +210,7 @@ function HomeApp() {
 
         {/* ── EXPERIENCE ───────────────────────── */}
         <section id="experience">
-          <SectionHeading icon={Briefcase} label="Work Experience" command="./read_experience.sh" />
+          <SectionHeading icon={Briefcase} label="Work Experience" command={isRecruiterView ? null : './read_experience.sh'} />
           {experience.map((exp, idx) => (
             <ScrollReveal key={idx} delay={idx * 80}>
               {exp.type === 'featured'
@@ -179,7 +223,7 @@ function HomeApp() {
 
         {/* ── PROJECTS ─────────────────────────── */}
         <section id="projects">
-          <SectionHeading icon={FolderGit2} label="Projects" command="git log --oneline" />
+          <SectionHeading icon={FolderGit2} label="Projects" command={isRecruiterView ? null : 'git log --oneline'} />
 
           <div className="filter-tabs" style={{ marginBottom: '1.5rem', display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
             {['All', 'Frontend', 'Backend', 'Mobile', 'Security'].map(cat => (
@@ -278,7 +322,7 @@ function HomeApp() {
 
         {/* ── EDUCATION ────────────────────────── */}
         <section id="education">
-          <SectionHeading icon={GraduationCap} label="Education" command="cat education.log" />
+          <SectionHeading icon={GraduationCap} label="Education" command={isRecruiterView ? null : 'cat education.log'} />
           {education.map((edu, idx) => (
             <ScrollReveal key={idx} delay={idx * 100}>
               <div className="edu-card">
@@ -303,7 +347,7 @@ function HomeApp() {
 
         {/* ── CONTACT ──────────────────────────── */}
         <section id="contact" style={{ paddingBottom: '6rem' }}>
-          <SectionHeading icon={Mail} label="Contact" command="send_message --encrypted" />
+          <SectionHeading icon={Mail} label="Contact" command={isRecruiterView ? null : 'send_message --encrypted'} />
           <ScrollReveal>
             <div className="contact-box">
               <div className="contact-title">Let's build something great.</div>
@@ -322,9 +366,15 @@ function HomeApp() {
                   <Phone size={16} /> {personalInfo.phone}
                 </a>
               </div>
-              <div style={{ marginTop: '2rem', fontSize: '0.75rem', color: 'rgba(100,116,139,0.7)' }}>
-                <TypewriterText text="// system ready. awaiting input..." delay={500} speed={40} />
-              </div>
+              {isRecruiterView ? (
+                <div style={{ marginTop: '2rem', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                  Available for full-time full-stack roles and backend-heavy product engineering work.
+                </div>
+              ) : (
+                <div style={{ marginTop: '2rem', fontSize: '0.75rem', color: 'rgba(100,116,139,0.7)' }}>
+                  <TypewriterText text="// system ready. awaiting input..." delay={500} speed={40} />
+                </div>
+              )}
             </div>
           </ScrollReveal>
         </section>
@@ -336,7 +386,7 @@ function HomeApp() {
         isOpen={isFlowViewerOpen}
         onClose={() => setIsFlowViewerOpen(false)}
       />
-    </>
+    </div>
   );
 }
 
