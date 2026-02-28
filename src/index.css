@@ -1163,53 +1163,80 @@ section {
 
 /* ─── Recruiter View ─────────────────────────────────────── */
 .recruiter-view-toggle {
-  border: 1px solid var(--accent-blue);
-  background: rgba(96, 165, 250, 0.1);
-  color: var(--accent-blue);
+  border: 1px solid #111111;
+  background: #ffffff;
+  color: #111111;
   cursor: pointer;
 }
 
 .home-app.recruiter-mode {
   min-height: 100vh;
-  background: linear-gradient(180deg, #f5f7fb 0%, #eef3f8 100%);
+  background: #ffffff;
+  color: #000000;
+  --accent-green: #000000;
+  --accent-blue: #000000;
+  --accent-yellow: #000000;
+  --accent-red: #000000;
+  --accent-purple: #000000;
+  --text-color: #000000;
+  --text-body: #000000;
+  --text-muted: #000000;
+  --border-color: rgba(0, 0, 0, 0.2);
+  --border-glow: rgba(0, 0, 0, 0.2);
+  --terminal-bg: #ffffff;
+  --terminal-header-bg: #ffffff;
+}
+
+.home-app.recruiter-mode * {
+  text-shadow: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+  animation: none !important;
 }
 
 .home-app.recruiter-mode .page-wrapper {
-  color: #1f2937;
+  color: #000000;
 }
 
 .home-app.recruiter-mode .nav-bar {
-  background: rgba(255, 255, 255, 0.92);
-  border-bottom: 1px solid #d8e2ec;
-  backdrop-filter: blur(10px);
+  background: #ffffff;
+  border-bottom: 1px solid #d4d4d4;
+  backdrop-filter: none;
 }
 
 .home-app.recruiter-mode .nav-logo {
-  color: #0f172a;
+  color: #000000;
   text-shadow: none;
 }
 
 .home-app.recruiter-mode .nav-link {
-  color: #475569;
+  color: #000000 !important;
 }
 
 .home-app.recruiter-mode .nav-link:hover {
-  color: #1d4ed8;
-  background: #e2ebf5;
+  color: #000000 !important;
+  background: #f3f3f3;
 }
 
 .home-app.recruiter-mode .section-heading-icon {
-  color: #1d4ed8;
+  color: #000000;
   filter: none;
 }
 
 .home-app.recruiter-mode .section-heading-label {
-  color: #0f172a;
+  color: #000000;
   text-shadow: none;
 }
 
 .home-app.recruiter-mode .section-heading-line {
-  background: linear-gradient(90deg, #9bb2ca 0%, rgba(155, 178, 202, 0.1) 100%);
+  background: #000000;
+  opacity: 0.18;
+}
+
+.home-app.recruiter-mode .section-heading-command {
+  border: 1px solid #000000;
+  background: #ffffff;
+  color: #000000;
 }
 
 .home-app.recruiter-mode .skill-card,
@@ -1217,24 +1244,26 @@ section {
 .home-app.recruiter-mode .project-card,
 .home-app.recruiter-mode .edu-card,
 .home-app.recruiter-mode .contact-box {
-  background: #ffffff;
-  border: 1px solid #dbe5ef;
-  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.05);
+  background: #ffffff !important;
+  border: 1px solid #d4d4d4 !important;
+  border-radius: 8px;
+  transform: none !important;
 }
 
 .home-app.recruiter-mode .exp-card::before {
-  background: linear-gradient(180deg, #3b82f6 0%, rgba(59, 130, 246, 0.1) 100%);
+  background: #000000;
+  opacity: 0.5;
 }
 
 .home-app.recruiter-mode .project-card::after {
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+  display: none;
 }
 
 .home-app.recruiter-mode .project-name,
 .home-app.recruiter-mode .exp-company,
 .home-app.recruiter-mode .contact-title,
 .home-app.recruiter-mode .edu-degree {
-  color: #0f172a;
+  color: #000000;
 }
 
 .home-app.recruiter-mode .project-desc,
@@ -1242,41 +1271,41 @@ section {
 .home-app.recruiter-mode .exp-overview,
 .home-app.recruiter-mode .exp-bullet,
 .home-app.recruiter-mode .edu-period {
-  color: #475569;
+  color: #000000;
 }
 
 .home-app.recruiter-mode .skill-tag {
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
-  color: #1e3a8a;
+  background: #ffffff;
+  border: 1px solid #c9c9c9;
+  color: #000000;
 }
 
 .home-app.recruiter-mode .contact-link {
-  color: #334155;
-  border: 1px solid #cbd5e1;
-  background: #f8fafc;
+  color: #000000;
+  border: 1px solid #c9c9c9;
+  background: #ffffff;
 }
 
 .home-app.recruiter-mode .contact-link:hover {
-  color: #0f172a;
-  border-color: #93c5fd;
-  background: #eff6ff;
+  color: #000000;
+  border-color: #000000;
+  background: #f8f8f8;
   box-shadow: none;
 }
 
 .recruiter-hero {
   background: #ffffff;
-  border: 1px solid #dbe5ef;
-  border-radius: 12px;
+  border: 1px solid #d4d4d4;
+  border-radius: 8px;
   padding: 2rem;
-  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.06);
+  box-shadow: none;
 }
 
 .recruiter-eyebrow {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #2563eb;
+  color: #000000;
   margin-bottom: 0.75rem;
   font-weight: 600;
 }
@@ -1284,12 +1313,12 @@ section {
 .recruiter-name {
   font-family: 'Inter', sans-serif;
   font-size: clamp(1.6rem, 4vw, 2.4rem);
-  color: #0f172a;
+  color: #000000;
   line-height: 1.2;
 }
 
 .recruiter-role {
-  color: #1e3a8a;
+  color: #000000;
   font-size: 1rem;
   margin-top: 0.45rem;
 }
@@ -1298,13 +1327,13 @@ section {
   display: flex;
   align-items: center;
   gap: 6px;
-  color: #64748b;
+  color: #000000;
   font-size: 0.88rem;
   margin-top: 0.45rem;
 }
 
 .recruiter-summary {
-  color: #334155;
+  color: #000000;
   font-size: 0.95rem;
   margin-top: 1rem;
   line-height: 1.8;
@@ -1315,6 +1344,61 @@ section {
   display: flex;
   gap: 0.6rem;
   flex-wrap: wrap;
+}
+
+.home-app.recruiter-mode .project-link-tag,
+.home-app.recruiter-mode .filter-btn,
+.home-app.recruiter-mode .epoch-badge,
+.home-app.recruiter-mode .exp-period,
+.home-app.recruiter-mode .exp-role,
+.home-app.recruiter-mode .skill-category,
+.home-app.recruiter-mode .edu-institution,
+.home-app.recruiter-mode .edu-grade {
+  color: #000000 !important;
+  background: #ffffff !important;
+  border-color: #c9c9c9 !important;
+}
+
+.home-app.recruiter-mode .project-link-tag:hover,
+.home-app.recruiter-mode .filter-btn:hover {
+  background: #f3f3f3 !important;
+  border-color: #000000 !important;
+}
+
+.home-app.recruiter-mode .scroll-reveal,
+.home-app.recruiter-mode .scroll-reveal--visible {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+.home-app.recruiter-mode .scroll-reveal .terminal-window,
+.home-app.recruiter-mode .scroll-reveal .exp-card,
+.home-app.recruiter-mode .scroll-reveal .skill-card,
+.home-app.recruiter-mode .scroll-reveal .project-card,
+.home-app.recruiter-mode .scroll-reveal .edu-card,
+.home-app.recruiter-mode .scroll-reveal .contact-box,
+.home-app.recruiter-mode .scroll-reveal--visible .terminal-window,
+.home-app.recruiter-mode .scroll-reveal--visible .exp-card,
+.home-app.recruiter-mode .scroll-reveal--visible .skill-card,
+.home-app.recruiter-mode .scroll-reveal--visible .project-card,
+.home-app.recruiter-mode .scroll-reveal--visible .edu-card,
+.home-app.recruiter-mode .scroll-reveal--visible .contact-box {
+  clip-path: none !important;
+  animation: none !important;
+}
+
+/* Disable typewriter animation in recruiter mode and show plain text immediately */
+.home-app.recruiter-mode .typewriter-line .cursor {
+  display: none !important;
+}
+
+.home-app.recruiter-mode .typewriter-line > span {
+  visibility: visible !important;
+}
+
+.home-app.recruiter-mode .typewriter-line > div {
+  display: none !important;
 }
 
 .blog-table tr:hover td {
