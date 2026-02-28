@@ -9,7 +9,7 @@ export const resumeData = {
         linkedin: "prakhar-srivastava-3210641ba",
     },
 
-    summary: "Full-Stack Engineer with 1+ years of experience building and shipping secure, production-grade web systems. Owned end-to-end delivery of a QR-based field operations PWA — from development to CI/CD automation, security hardening, and independent production releases. Specialized in React, Firebase serverless architecture, and designing systems with strong security and operational reliability.",
+    summary: "Full-Stack Engineer with 1+ years of experience building and shipping secure, production-grade web systems. Owned end-to-end delivery of a QR-based field operations PWA -> from development to CI/CD automation, security hardening, and independent production releases. Specialized in React, Firebase serverless architecture, and designing systems with strong security and operational reliability.",
 
     education: [
         {
@@ -46,14 +46,14 @@ export const resumeData = {
             internPeriod: "Intern: Aug 2024 - Jan 2025",
             fullTimePeriod: "Full-Time: Feb 2025 - Present",
             type: "featured",
-            overview: "Owned end-to-end delivery of the Delivery Tracker — a production QR-based field operations system. Led development, security hardening, CI/CD automation, and independent multi-environment production releases.",
+            overview: "Owned end-to-end delivery of the Delivery Tracker, a production QR-based field operations system. Led development, security hardening, CI/CD automation, and independent multi-environment production releases.",
 
             groups: [
                 {
                     label: "Product & Architecture",
                     bullets: [
                         "Architected and shipped a QR-based delivery tracking Progressive Web App (PWA) using React and Firebase, taking the system from proof-of-concept to stable production deployment.",
-                        "Designed a fully serverless architecture using Firebase Authentication, Realtime Database, Storage, and event-driven Cloud Functions — eliminating public HTTP endpoints to reduce attack surface.",
+                        "Designed a fully serverless architecture using Firebase Authentication, Realtime Database, Storage, and event-driven Cloud Functions, eliminating public HTTP endpoints to reduce attack surface.",
                         "Established isolated multi-environment deployments (Developer, Alpha, Blue, Production) with independent Firebase projects and environment-specific configurations."
                     ]
                 },
@@ -122,7 +122,7 @@ export const resumeData = {
     projects: [
         {
             name: "Delivery Tracker",
-            description: "Production QR-based field operations PWA with full lifecycle ownership — React frontend, serverless Firebase backend, secure image uploads via signed URLs, multi-environment CI/CD automation, and security-hardened architecture.",
+            description: "Production QR-based field operations PWA with full lifecycle ownership -> React frontend, serverless Firebase backend, secure image uploads via signed URLs, multi-environment CI/CD automation, and security-hardened architecture.",
             tech: ["React.js", "Firebase", "PWA", "Jenkins", "GitHub Actions", "GCP"],
             highlight: true,
             links: [
