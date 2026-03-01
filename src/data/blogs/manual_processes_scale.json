@@ -1,0 +1,41 @@
+{
+    "key": "manual_processes_scale",
+    "title": "Manual Processes Do Not Scale Operationally",
+    "date": "2026-03-08",
+    "tags": [
+        "DevOps",
+        "Automation",
+        "Engineering"
+    ],
+    "readTime": "2 min read",
+    "sections": [
+        {
+            "type": "paragraph",
+            "content": "If a process requires a human every time, it will eventually fail. Humans forget steps, skip checks, and make inconsistent decisions."
+        },
+        {
+            "type": "heading",
+            "content": "Automation Ensures Consistency"
+        },
+        {
+            "type": "paragraph",
+            "content": "Critical operations should be automated: backups, deployments, incident response, and cleanup tasks. Automation turns best practices into guaranteed practices."
+        },
+        {
+            "type": "heading",
+            "content": "Human Role Shifts"
+        },
+        {
+            "type": "paragraph",
+            "content": "Humans design systems; machines execute procedures. Manual operations create hidden operational debt."
+        },
+        {
+            "type": "heading",
+            "content": "Conclusion"
+        },
+        {
+            "type": "paragraph",
+            "content": "Automate anything you cannot afford to do wrong."
+        }
+    ]
+}

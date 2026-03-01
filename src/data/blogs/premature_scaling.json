@@ -1,0 +1,41 @@
+{
+    "key": "premature_scaling",
+    "title": "Premature Scaling Is a Production Risk",
+    "date": "2026-03-02",
+    "tags": [
+        "Architecture",
+        "Scalability",
+        "Engineering"
+    ],
+    "readTime": "2 min read",
+    "sections": [
+        {
+            "type": "paragraph",
+            "content": "Many teams design for millions of users before they have thousands. They introduce microservices, message queues, distributed caching, and multi-region deployments—all before product-market fit."
+        },
+        {
+            "type": "heading",
+            "content": "Complexity Is the Real Bottleneck"
+        },
+        {
+            "type": "paragraph",
+            "content": "Every distributed component adds failure modes, latency, operational overhead, and debugging difficulty. Most early systems fail not from load, but from complexity."
+        },
+        {
+            "type": "heading",
+            "content": "Scaling Should Be Evidence Driven"
+        },
+        {
+            "type": "paragraph",
+            "content": "Scale when metrics demand it: CPU saturation, database contention, queue backlog, or user growth trends. Not because a blog post recommended it."
+        },
+        {
+            "type": "heading",
+            "content": "Conclusion"
+        },
+        {
+            "type": "paragraph",
+            "content": "Simple systems fail predictably. Complex systems fail mysteriously. Start simple. Scale when forced."
+        }
+    ]
+}

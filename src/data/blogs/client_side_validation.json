@@ -1,0 +1,33 @@
+{
+    "key": "client_side_validation",
+    "title": "Client Side Validation Is a Suggestion",
+    "date": "2026-03-05",
+    "tags": [
+        "Security",
+        "Web",
+        "Backend"
+    ],
+    "readTime": "1 min read",
+    "sections": [
+        {
+            "type": "paragraph",
+            "content": "Anything running on a user's device can be modified. Client validation prevents mistakes, not attacks. Attackers bypass form restrictions, disabled buttons, input checks, and rate limits by calling APIs directly."
+        },
+        {
+            "type": "heading",
+            "content": "Trust Boundaries Matter"
+        },
+        {
+            "type": "paragraph",
+            "content": "All enforcement must exist on the server: authorization, business rules, data validation, and rate limiting. Client checks are for UX only."
+        },
+        {
+            "type": "heading",
+            "content": "Conclusion"
+        },
+        {
+            "type": "paragraph",
+            "content": "If breaking your rules only requires opening DevTools, your system has no real protection. Never trust the client."
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "key": "feature_flags",
+    "title": "Feature Flags Are Operational Controls",
+    "date": "2026-03-06",
+    "tags": [
+        "Deployment",
+        "Architecture",
+        "Engineering"
+    ],
+    "readTime": "2 min read",
+    "sections": [
+        {
+            "type": "paragraph",
+            "content": "Feature flags are often treated as release toggles, but they are much more powerful. In production, they allow instant rollback without redeploy, gradual rollouts, A/B testing, and emergency shutdown of risky features."
+        },
+        {
+            "type": "heading",
+            "content": "Operational Safety Net"
+        },
+        {
+            "type": "paragraph",
+            "content": "When a feature causes issues, you can disable the flag, contain the damage, and investigate safely. Without flags, rollback requires redeployment under pressure."
+        },
+        {
+            "type": "heading",
+            "content": "Conclusion"
+        },
+        {
+            "type": "paragraph",
+            "content": "Feature flags reduce blast radius. Every high-risk feature should be behind one. They turn deployments into reversible decisions."
+        }
+    ]
+}

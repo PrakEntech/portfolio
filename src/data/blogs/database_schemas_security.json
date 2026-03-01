@@ -1,0 +1,33 @@
+{
+    "key": "database_schemas_security",
+    "title": "Database Schemas Are Security Boundaries",
+    "date": "2026-03-07",
+    "tags": [
+        "Database",
+        "Security",
+        "Backend"
+    ],
+    "readTime": "2 min read",
+    "sections": [
+        {
+            "type": "paragraph",
+            "content": "Most developers view schemas as data organization, but they are also access control mechanisms. Poor schema design enables unauthorized data access, accidental overwrites, difficult auditing, and privilege escalation."
+        },
+        {
+            "type": "heading",
+            "content": "Structure Determines Safety"
+        },
+        {
+            "type": "paragraph",
+            "content": "Well-designed schemas enforce ownership boundaries, clear relationships, controlled updates, and minimal exposure. Security is not only authentication—it is also data modeling."
+        },
+        {
+            "type": "heading",
+            "content": "Conclusion"
+        },
+        {
+            "type": "paragraph",
+            "content": "A secure system starts with a secure data structure. Bad schemas create vulnerabilities no firewall can fix."
+        }
+    ]
+}

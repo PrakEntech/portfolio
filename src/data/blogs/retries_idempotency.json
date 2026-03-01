@@ -1,0 +1,41 @@
+{
+    "key": "retries_idempotency",
+    "title": "Retries Without Idempotency Corrupt Data",
+    "date": "2026-03-03",
+    "tags": [
+        "Backend",
+        "Distributed Systems",
+        "Reliability"
+    ],
+    "readTime": "2 min read",
+    "sections": [
+        {
+            "type": "paragraph",
+            "content": "Retry logic looks harmless. Until it duplicates money transfers, orders, or state changes. Network failures make clients retry, and servers process the same request twice."
+        },
+        {
+            "type": "heading",
+            "content": "The Silent Data Killer"
+        },
+        {
+            "type": "paragraph",
+            "content": "Without idempotency, payments double charge, records duplicate, and inventory becomes inconsistent. The system appears healthy while silently corrupting data."
+        },
+        {
+            "type": "heading",
+            "content": "The Fix"
+        },
+        {
+            "type": "paragraph",
+            "content": "Every state-changing operation must have idempotency keys, request deduplication, and safe retry semantics. If repeating a request changes results, your system is unsafe."
+        },
+        {
+            "type": "heading",
+            "content": "Conclusion"
+        },
+        {
+            "type": "paragraph",
+            "content": "Retries increase reliability only when operations are idempotent. Otherwise, retries amplify failure."
+        }
+    ]
+}

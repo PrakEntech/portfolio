@@ -1,0 +1,41 @@
+{
+    "key": "logs_not_observability",
+    "title": "Logs Are Not Observability",
+    "date": "2026-03-04",
+    "tags": [
+        "DevOps",
+        "Monitoring",
+        "SRE"
+    ],
+    "readTime": "1 min read",
+    "sections": [
+        {
+            "type": "paragraph",
+            "content": "Teams collect logs and assume they understand their system. Logs answer 'What happened?', but they rarely answer 'Why did it happen?', 'Is it happening again?', or 'How bad is it right now?'"
+        },
+        {
+            "type": "heading",
+            "content": "True Observability Requires"
+        },
+        {
+            "type": "paragraph",
+            "content": "Metrics (system health over time), Tracing (request flow across services), and Context (correlation between events). Without these, logs become noise."
+        },
+        {
+            "type": "heading",
+            "content": "Production Reality"
+        },
+        {
+            "type": "paragraph",
+            "content": "During incidents, scrolling logs is slow and reactive. Metrics and traces show patterns instantly."
+        },
+        {
+            "type": "heading",
+            "content": "Conclusion"
+        },
+        {
+            "type": "paragraph",
+            "content": "Logging is record keeping. Observability is understanding. They are not the same."
+        }
+    ]
+}
