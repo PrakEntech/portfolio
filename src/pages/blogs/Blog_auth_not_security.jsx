@@ -42,7 +42,7 @@ export default function Blog_auth_not_security() {
               <h1 className="blog-title">Your Database Is Not Protected Just Because Users Are Logged In</h1>
               <div className="blog-meta-row">
                 <span className="blog-date"><Clock size={13} style={{ marginRight: '4px', display: 'inline' }} />2026-03-01</span>
-                <span className="blog-read-time">3 min read</span>
+                <span className="blog-read-time">1 min read</span>
               </div>
               <div className="blog-tags">
                 <Tag size={13} style={{ marginRight: '6px', opacity: 0.6 }} />

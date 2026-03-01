@@ -42,7 +42,7 @@ export default function Blog_file_uploads_attack_surface() {
               <h1 className="blog-title">File Uploads Are an Attack Surface</h1>
               <div className="blog-meta-row">
                 <span className="blog-date"><Clock size={13} style={{ marginRight: '4px', display: 'inline' }} />2026-02-27</span>
-                <span className="blog-read-time">4 min read</span>
+                <span className="blog-read-time">2 min read</span>
               </div>
               <div className="blog-tags">
                 <Tag size={13} style={{ marginRight: '6px', opacity: 0.6 }} />

@@ -1,7 +1,7 @@
 {
     "key": "retries_idempotency",
     "title": "Retries Without Idempotency Corrupt Data",
-    "date": "2026-03-03",
+    "date": "2026-03-05",
     "tags": [
         "Backend",
         "Distributed Systems",
