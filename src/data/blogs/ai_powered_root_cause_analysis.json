@@ -1,0 +1,57 @@
+{
+    "key": "ai_powered_root_cause_analysis",
+    "title": "AI Powered Root Cause Analysis",
+    "date": "2026-03-02",
+    "tags": [
+        "Debugging",
+        "AI",
+        "DevOps"
+    ],
+    "readTime": "5 min read",
+    "sections": [
+        {
+            "type": "paragraph",
+            "content": "Logs tell you what happened. AI helps you infer why."
+        },
+        {
+            "type": "heading",
+            "content": "Context-Rich Debugging"
+        },
+        {
+            "type": "paragraph",
+            "content": "When facing a production bug, instead of scanning logs manually, I provide error logs, recent code changes, system architecture, and observed behavior."
+        },
+        {
+            "type": "paragraph",
+            "content": "AI can correlate signals humans miss."
+        },
+        {
+            "type": "heading",
+            "content": "From Symptoms To Causes"
+        },
+        {
+            "type": "paragraph",
+            "content": "Traditional debugging focuses on visible errors. AI helps trace upstream causes like misconfigured permissions, timing issues between services, and silent failures in dependent systems."
+        },
+        {
+            "type": "callout",
+            "content": "It compresses hours of investigation into minutes."
+        },
+        {
+            "type": "heading",
+            "content": "Human Plus Machine Pattern Matching"
+        },
+        {
+            "type": "paragraph",
+            "content": "Experienced engineers rely on pattern recognition. AI has read millions of incidents and can suggest causes you have never seen before."
+        },
+        {
+            "type": "heading",
+            "content": "Conclusion"
+        },
+        {
+            "type": "paragraph",
+            "content": "Debugging is search. AI dramatically narrows the search space."
+        }
+    ]
+}

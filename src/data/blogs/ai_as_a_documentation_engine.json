@@ -1,0 +1,49 @@
+{
+    "key": "ai_as_a_documentation_engine",
+    "title": "AI As A Documentation Engine",
+    "date": "2026-03-04",
+    "tags": [
+        "Documentation",
+        "AI",
+        "Engineering"
+    ],
+    "readTime": "3 min read",
+    "sections": [
+        {
+            "type": "paragraph",
+            "content": "Most documentation is written after the system exists. I generate documentation while building."
+        },
+        {
+            "type": "heading",
+            "content": "Generate Docs In Parallel"
+        },
+        {
+            "type": "paragraph",
+            "content": "After implementing a component, I ask AI to produce operational runbooks, failure scenarios, maintenance procedures, and onboarding guides."
+        },
+        {
+            "type": "callout",
+            "content": "This prevents knowledge silos."
+        },
+        {
+            "type": "heading",
+            "content": "Documentation As Infrastructure"
+        },
+        {
+            "type": "paragraph",
+            "content": "Undocumented systems are fragile. If only one person understands the system, the system is already broken."
+        },
+        {
+            "type": "paragraph",
+            "content": "AI makes high-quality documentation cheap enough to produce continuously."
+        },
+        {
+            "type": "heading",
+            "content": "Conclusion"
+        },
+        {
+            "type": "paragraph",
+            "content": "Documentation should not be a project phase. It should be a parallel process. AI makes that feasible."
+        }
+    ]
+}

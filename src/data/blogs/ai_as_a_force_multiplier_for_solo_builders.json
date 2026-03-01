@@ -1,0 +1,45 @@
+{
+    "key": "ai_as_a_force_multiplier_for_solo_builders",
+    "title": "AI As A Force Multiplier For Solo Builders",
+    "date": "2026-03-06",
+    "tags": [
+        "Productivity",
+        "AI",
+        "Indie Engineering"
+    ],
+    "readTime": "5 min read",
+    "sections": [
+        {
+            "type": "paragraph",
+            "content": "Large teams distribute knowledge across specialists. Solo builders do not have that luxury."
+        },
+        {
+            "type": "heading",
+            "content": "On-Demand Specialist Roles"
+        },
+        {
+            "type": "paragraph",
+            "content": "AI can fill multiple roles on demand: architect, debugger, security reviewer, technical writer, and performance analyst."
+        },
+        {
+            "type": "paragraph",
+            "content": "Instead of hiring five experts, you consult one system trained across domains."
+        },
+        {
+            "type": "heading",
+            "content": "Speed Without Recklessness"
+        },
+        {
+            "type": "paragraph",
+            "content": "The risk of moving fast alone is missing critical details. AI reduces that risk by acting as a second brain that never gets tired."
+        },
+        {
+            "type": "heading",
+            "content": "Conclusion"
+        },
+        {
+            "type": "paragraph",
+            "content": "AI does not replace engineers. It reduces the minimum team size required to build serious systems. For solo founders and indie developers, this changes what is possible."
+        }
+    ]
+}

@@ -1,0 +1,49 @@
+{
+    "key": "using_ai_to_simulate_malicious_users",
+    "title": "Using AI To Simulate Malicious Users",
+    "date": "2026-03-05",
+    "tags": [
+        "Security",
+        "AI",
+        "Testing"
+    ],
+    "readTime": "4 min read",
+    "sections": [
+        {
+            "type": "paragraph",
+            "content": "Most testing assumes users behave correctly. Attackers do not."
+        },
+        {
+            "type": "heading",
+            "content": "Adversarial Prompting"
+        },
+        {
+            "type": "paragraph",
+            "content": "I use AI to generate abuse scenarios by asking how someone could bypass validation, exploit APIs, or abuse trust boundaries."
+        },
+        {
+            "type": "callout",
+            "content": "AI thinks like an adversary."
+        },
+        {
+            "type": "heading",
+            "content": "Adversarial Testing Outcomes"
+        },
+        {
+            "type": "paragraph",
+            "content": "This approach revealed ways to spam endpoints, data overwrite vulnerabilities, and privilege escalation paths."
+        },
+        {
+            "type": "paragraph",
+            "content": "Security improves when you test against hostile behavior, not ideal behavior."
+        },
+        {
+            "type": "heading",
+            "content": "Conclusion"
+        },
+        {
+            "type": "paragraph",
+            "content": "If you only test happy paths, your system is unprepared for reality. AI is an effective chaos agent for security thinking."
+        }
+    ]
+}

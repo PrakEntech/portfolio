@@ -1,0 +1,49 @@
+{
+    "key": "prompting_for_architecture_not_answers",
+    "title": "Prompting For Architecture Not Answers",
+    "date": "2026-03-03",
+    "tags": [
+        "AI",
+        "Architecture",
+        "Engineering"
+    ],
+    "readTime": "4 min read",
+    "sections": [
+        {
+            "type": "paragraph",
+            "content": "Bad prompts produce shallow answers."
+        },
+        {
+            "type": "paragraph",
+            "content": "Instead of asking how to build a feature, ask for a production-grade architecture for a defined constraint set."
+        },
+        {
+            "type": "heading",
+            "content": "Prompt For Constraints"
+        },
+        {
+            "type": "paragraph",
+            "content": "Include scale expectations, security requirements, failure tolerance, and cost constraints. AI responds with system design, not snippets."
+        },
+        {
+            "type": "heading",
+            "content": "Constraint Driven Thinking"
+        },
+        {
+            "type": "paragraph",
+            "content": "Real engineering is about tradeoffs. By specifying constraints first, you force AI to justify decisions, expose assumptions, and suggest alternatives."
+        },
+        {
+            "type": "paragraph",
+            "content": "This mirrors real design reviews in high-performing teams."
+        },
+        {
+            "type": "heading",
+            "content": "Conclusion"
+        },
+        {
+            "type": "paragraph",
+            "content": "AI becomes powerful when you stop asking for solutions and start asking for designs."
+        }
+    ]
+}

@@ -1,0 +1,49 @@
+{
+    "key": "ai_as_a_senior_engineer_not_a_code_generator",
+    "title": "AI As A Senior Engineer Not A Code Generator",
+    "date": "2026-03-01",
+    "tags": [
+        "AI",
+        "Engineering",
+        "Productivity"
+    ],
+    "readTime": "4 min read",
+    "sections": [
+        {
+            "type": "paragraph",
+            "content": "Most developers use AI to generate code. I use it to challenge decisions."
+        },
+        {
+            "type": "heading",
+            "content": "AI As A Design Reviewer"
+        },
+        {
+            "type": "paragraph",
+            "content": "Before implementing a feature, I ask AI what could break in production, what edge cases I am missing, and how the design could fail under load."
+        },
+        {
+            "type": "callout",
+            "content": "This turns AI into a design reviewer, not a typing assistant."
+        },
+        {
+            "type": "heading",
+            "content": "Pre-Mortems Beat Post-Mortems"
+        },
+        {
+            "type": "paragraph",
+            "content": "AI is extremely good at simulated failure analysis. By asking how the system will fail, I discovered race conditions, security gaps, and data consistency issues."
+        },
+        {
+            "type": "paragraph",
+            "content": "These are failure scenarios most teams only discover after launch."
+        },
+        {
+            "type": "heading",
+            "content": "Conclusion"
+        },
+        {
+            "type": "paragraph",
+            "content": "AI should be used as a senior engineer who reviews your work, not as a junior who writes it. The real productivity gain is fewer production incidents."
+        }
+    ]
+}
