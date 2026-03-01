@@ -130,6 +130,10 @@ function HomeApp() {
     if (typeof window === 'undefined') return false;
     return window.localStorage.getItem('recruiterViewEnabled') === 'true';
   });
+  const [showRecruiterBanner, setShowRecruiterBanner] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.localStorage.getItem('recruiterBannerSeen') !== 'true';
+  });
 
   const location = useLocation();
 
@@ -145,6 +149,13 @@ function HomeApp() {
     if (typeof window === 'undefined') return;
     window.localStorage.setItem('recruiterViewEnabled', String(isRecruiterView));
   }, [isRecruiterView]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if (showRecruiterBanner) {
+      window.localStorage.setItem('recruiterBannerSeen', 'true');
+    }
+  }, [showRecruiterBanner]);
 
   return (
     <div className={`home-app ${isRecruiterView ? 'recruiter-mode' : ''}`}>
@@ -165,7 +176,10 @@ function HomeApp() {
           <button
             type="button"
             className="nav-link recruiter-view-toggle"
-            onClick={() => setIsRecruiterView(prev => !prev)}
+            onClick={() => {
+              setIsRecruiterView(prev => !prev);
+              setShowRecruiterBanner(false);
+            }}
           >
             {isRecruiterView ? 'Terminal View' : 'Recruiter View'}
           </button>
@@ -177,6 +191,23 @@ function HomeApp() {
       </nav>
 
       <main className="page-wrapper page-content">
+        {!isRecruiterView && showRecruiterBanner && (
+          <div className="recruiter-banner">
+            <span className="recruiter-banner-text">
+              Recruiter? Switch to a simplified resume view.
+            </span>
+            <button
+              type="button"
+              className="recruiter-banner-btn"
+              onClick={() => {
+                setIsRecruiterView(true);
+                setShowRecruiterBanner(false);
+              }}
+            >
+              View Recruiter Mode
+            </button>
+          </div>
+        )}
 
         {/* ── HERO ─────────────────────────────── */}
         <section id="about" style={{ paddingTop: '6rem' }}>
