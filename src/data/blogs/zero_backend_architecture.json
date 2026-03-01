@@ -1,0 +1,49 @@
+{
+    "key": "zero_backend_architecture",
+    "title": "The Zero-Backend Architecture: Why Static Is Often Enough",
+    "date": "2026-03-14",
+    "tags": [
+        "Architecture",
+        "Static Sites",
+        "Engineering"
+    ],
+    "readTime": "2 min read",
+    "sections": [
+        {
+            "type": "paragraph",
+            "content": "Many developers instinctively reach for a backend and a database when building content-heavy applications. This introduces maintenance burdens, latency bottlenecks, and expanded attack surfaces."
+        },
+        {
+            "type": "heading",
+            "content": "A Simpler Alternative"
+        },
+        {
+            "type": "paragraph",
+            "content": "What if you compile the data directly into the application at build time? By managing data in structured files, such as JSON or Markdown, and relying on continuous deployment pipelines, the deployment process essentially becomes the database update mechanism."
+        },
+        {
+            "type": "paragraph",
+            "content": "Every code push triggers a build. The build script reads the local data files, generates static components for each entry, and deploys the entire application to a global edge network."
+        },
+        {
+            "type": "heading",
+            "content": "The Results Speak For Themselves"
+        },
+        {
+            "type": "paragraph",
+            "content": "This approach yields sub-100ms load times worldwide, infinite scalability, and absolutely zero database maintenance or scaling costs. It forces simplicity into the architecture."
+        },
+        {
+            "type": "callout",
+            "content": "If your structured data rarely changes during runtime, you probably don't need a database."
+        },
+        {
+            "type": "heading",
+            "content": "Where It Falls Short"
+        },
+        {
+            "type": "paragraph",
+            "content": "This architecture is not a silver bullet. It is perfect for personal websites, portfolios, and documentation where updates are infrequent and made by developers. It fails completely for highly dynamic applications where user-generated content or real-time state requires constant read and write operations."
+        }
+    ]
+}

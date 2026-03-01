@@ -1,0 +1,61 @@
+{
+    "key": "firebase_storage_costs_autoclass_trap",
+    "title": "Slashing Firebase Storage Costs by 90% (And The Autoclass Trap)",
+    "date": "2026-03-16",
+    "tags": [
+        "Firebase",
+        "Cloud Architecture",
+        "Cost Optimization"
+    ],
+    "readTime": "3 min read",
+    "sections": [
+        {
+            "type": "paragraph",
+            "content": "If you are building an app that handles user uploads—like a delivery tracker where drivers snap photos of dropped-off packages—you will quickly run into a cloud storage dilemma."
+        },
+        {
+            "type": "paragraph",
+            "content": "In the beginning, everything is great. A photo is uploaded, the customer sees it, the delivery is verified, and everyone moves on. But what happens to that photo? It sits in your Firebase bucket, collecting digital dust, while Google charges you the premium \"Standard\" storage rate month after month."
+        },
+        {
+            "type": "paragraph",
+            "content": "Here is the strategy I use to optimize Google Cloud Storage (GCS) and Firebase costs using Hierarchical Storage Management (HSM), dropping storage bills by over 90%."
+        },
+        {
+            "type": "heading",
+            "content": "The Firebase \"Free Tier\" Secret"
+        },
+        {
+            "type": "paragraph",
+            "content": "Firebase’s Blaze (pay-as-you-go) plan includes a generous 5GB of free storage. But there’s a catch: that 5GB only applies to Standard storage."
+        },
+        {
+            "type": "paragraph",
+            "content": "If you have 10GB of delivery photos sitting in Standard storage, you pay $0.026 per GB for the 5GB overage. It sounds cheap until that 10GB becomes 1,000GB ($26.00/month)."
+        },
+        {
+            "type": "paragraph",
+            "content": "When you move a file to a colder tier like Coldline ($0.007/GB) or Archive ($0.0012/GB), it no longer counts toward your free 5GB. By aggressively moving \"verified\" data into the ultra-cheap Archive tier, you keep your main Standard bucket empty. You essentially never exceed the 5GB free limit for your \"Hot\" active data, and you pay absolute pennies to store your long-term records. Storing 1,000GB in Archive costs roughly $1.20 a month."
+        },
+        {
+            "type": "heading",
+            "content": "The Autoclass Trap: Why We Don't Use It"
+        },
+        {
+            "type": "paragraph",
+            "content": "Google offers a feature called Autoclass that automatically transitions data based on when it was last accessed, rather than its age. Sounds perfect, right?"
+        },
+        {
+            "type": "callout",
+            "content": "Do not use Autoclass for small files like delivery receipts."
+        },
+        {
+            "type": "paragraph",
+            "content": "Autoclass has a strict, hidden rule: Files smaller than 128 KB are ignored. If your driver uploads an 11KB compressed JPEG, Autoclass will leave it in the expensive Standard storage tier forever. Furthermore, Autoclass forces a rigid timeline (you have to wait 365 days to reach Archive) and charges a monthly management fee."
+        },
+        {
+            "type": "paragraph",
+            "content": "Writing a custom lifecycle.json rule based on object age is completely free, processes files of any size, and lets you push data to the cheapest tier in just 30 days. In Part 2, we will look at exactly how to build this automated pipeline and write the code to make it happen."
+        }
+    ]
+}

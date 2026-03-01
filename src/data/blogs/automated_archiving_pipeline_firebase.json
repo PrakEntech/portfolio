@@ -1,0 +1,76 @@
+{
+    "key": "automated_archiving_pipeline_firebase",
+    "title": "Building an Automated Archiving Pipeline in Firebase",
+    "date": "2026-03-17",
+    "tags": [
+        "Firebase",
+        "CI/CD",
+        "Backend"
+    ],
+    "readTime": "4 min read",
+    "sections": [
+        {
+            "type": "paragraph",
+            "content": "In Part 1, we established why moving verified app uploads into Google Cloud's Archive storage tier is the secret to keeping your Firebase bill near zero. Now, let's build the automated pipeline."
+        },
+        {
+            "type": "paragraph",
+            "content": "The goal is simple:"
+        },
+        {
+            "type": "paragraph",
+            "content": "1. The app uploads the photo to the main bucket (Standard).\n2. Once the delivery is verified in the database, a Cloud Function moves the file to an archive/ folder.\n3. A Lifecycle Rule automatically converts everything in that folder to Coldline, and eventually, Archive."
+        },
+        {
+            "type": "heading",
+            "content": "Step 1: The Lifecycle Rule"
+        },
+        {
+            "type": "paragraph",
+            "content": "Here is the exact lifecycle.json configuration to create your cost-saving pipeline:"
+        },
+        {
+            "type": "code",
+            "lang": "json",
+            "content": "{\n  \"rule\": [\n    {\n      \"action\": {\n        \"type\": \"SetStorageClass\",\n        \"storageClass\": \"COLDLINE\"\n      },\n      \"condition\": {\n        \"age\": 0,\n        \"matchesPrefix\": [\"archive/\"]\n      }\n    },\n    {\n      \"action\": {\n        \"type\": \"SetStorageClass\",\n        \"storageClass\": \"ARCHIVE\"\n      },\n      \"condition\": {\n        \"age\": 30,\n        \"matchesStorageClass\": [\"COLDLINE\"],\n        \"matchesPrefix\": [\"archive/\"]\n      }\n    }\n  ]\n}"
+        },
+        {
+            "type": "paragraph",
+            "content": "To apply this to your Firebase bucket, use the Google Cloud CLI:"
+        },
+        {
+            "type": "code",
+            "lang": "bash",
+            "content": "gsutil lifecycle set lifecycle.json gs://your-firebase-bucket.appspot.com"
+        },
+        {
+            "type": "paragraph",
+            "content": "The \"Waiting Room\": After running this command, do not panic if your files still say \"Regional\" or \"Standard\". Cloud Storage Lifecycle Management is a background batch process that runs once every 24 hours. Give it a day or two for the metadata to officially flip."
+        },
+        {
+            "type": "heading",
+            "content": "Step 2: The IAM Permissions"
+        },
+        {
+            "type": "paragraph",
+            "content": "If your Cloud Function is going to move files, it needs permission. If you are using Cloud Functions v1, the default App Engine service account (Editor role) handles this perfectly. If you upgrade to v2 (which uses the Compute Engine Service Account), you must explicitly grant it roles/storage.objectAdmin and roles/firebasedatabase.admin using gcloud commands, or your function will fail silently."
+        },
+        {
+            "type": "heading",
+            "content": "Step 3: The Cloud Function (Node.js)"
+        },
+        {
+            "type": "paragraph",
+            "content": "Finally, here is the Firebase Cloud Function that ties it all together. This script listens to your Realtime Database for a delivery status change. When a delivery is marked as \"verified\", it moves the image to the archive/ folder so the lifecycle rules can take over."
+        },
+        {
+            "type": "code",
+            "lang": "javascript",
+            "content": "const functions = require('firebase-functions');\nconst admin = require('firebase-admin');\nadmin.initializeApp();\n\nexports.archiveVerifiedDeliveryImage = functions.database.ref('/deliveries/{deliveryId}')\n    .onUpdate(async (change, context) => {\n        const before = change.before.val();\n        const after = change.after.val();\n\n        // Check if the status just changed to 'verified'\n        if (before.status !== 'verified' && after.status === 'verified') {\n            const bucket = admin.storage().bucket();\n            const originalFilePath = after.imagePath; // e.g., 'deliveries/image123.jpg'\n            \n            // Skip if it's already in the archive\n            if (!originalFilePath || originalFilePath.startsWith('archive/')) {\n                return null;\n            }\n\n            const fileName = originalFilePath.split('/').pop();\n            const archiveFilePath = `archive/${after.driverEmail}/${fileName}`;\n\n            try {\n                // Move the file in Google Cloud Storage\n                const file = bucket.file(originalFilePath);\n                await file.move(archiveFilePath);\n                \n                console.log(`Successfully moved ${fileName} to archive.`);\n\n                // Update the database with the new archived path\n                return change.after.ref.update({\n                    imagePath: archiveFilePath\n                });\n\n            } catch (error) {\n                console.error(\"Error moving file to archive:\", error);\n                return null;\n            }\n        }\n        return null;\n    });"
+        },
+        {
+            "type": "paragraph",
+            "content": "By combining Firebase Cloud Functions with GCP Lifecycle Rules, you create a self-cleaning architecture that scales effortlessly without inflating your monthly bill. Set it up once, and let the cloud do the housekeeping."
+        }
+    ]
+}

@@ -1,0 +1,49 @@
+{
+    "key": "deployments_as_database",
+    "title": "Deployments as the Database: Rethinking Content Management",
+    "date": "2026-03-15",
+    "tags": [
+        "CI/CD",
+        "Engineering",
+        "Architecture"
+    ],
+    "readTime": "2 min read",
+    "sections": [
+        {
+            "type": "paragraph",
+            "content": "Content management systems are incredibly powerful, but they are frequently overused. They require runtime API calls, database queries, and complex caching strategies simply to serve text that rarely changes."
+        },
+        {
+            "type": "heading",
+            "content": "The Git-Centric Approach"
+        },
+        {
+            "type": "paragraph",
+            "content": "Treat the codebase as the single source of truth for content. Instead of making an API request to fetch an article upon page load, a build script parses the article at compile time and outputs directly to static file formats."
+        },
+        {
+            "type": "paragraph",
+            "content": "When a typo needs fixing or a new article is published, the change goes through the standard pull request process. The CI/CD pipeline runs the static generator and atomically deploys the new version globally."
+        },
+        {
+            "type": "heading",
+            "content": "Security and Stability"
+        },
+        {
+            "type": "paragraph",
+            "content": "This workflow introduces immense security benefits. There are no admin dashboards to hack, no SQL injection vulnerabilities, and no exposed content APIs to rate limit. Complexity is completely shifted from runtime to build time."
+        },
+        {
+            "type": "callout",
+            "content": "Complexity at build time is manageable; complexity at runtime is an incident waiting to happen."
+        },
+        {
+            "type": "heading",
+            "content": "The Practical Limits"
+        },
+        {
+            "type": "paragraph",
+            "content": "Treating deployments as a database works beautifully for personal websites or static pages. However, once your project needs non-technical authors to publish content instantly, or if the sheer volume of data makes build times unacceptably slow, a traditional database or headless CMS becomes necessary."
+        }
+    ]
+}
