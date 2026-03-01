@@ -7,6 +7,7 @@ import Blog_event_driven_security from '../pages/blogs/Blog_event_driven_securit
 import Blog_file_uploads_attack_surface from '../pages/blogs/Blog_file_uploads_attack_surface.jsx';
 import Blog_monitoring_without_response from '../pages/blogs/Blog_monitoring_without_response.jsx';
 import Blog_ai_as_a_senior_engineer_not_a_code_generator from '../pages/blogs/Blog_ai_as_a_senior_engineer_not_a_code_generator.jsx';
+import Blog_auth_not_security from '../pages/blogs/Blog_auth_not_security.jsx';
 
 export default function BlogRoutes() {
   return (
@@ -17,6 +18,7 @@ export default function BlogRoutes() {
       <Route path="file_uploads_attack_surface" element={<Blog_file_uploads_attack_surface />} />
       <Route path="monitoring_without_response" element={<Blog_monitoring_without_response />} />
       <Route path="ai_as_a_senior_engineer_not_a_code_generator" element={<Blog_ai_as_a_senior_engineer_not_a_code_generator />} />
+      <Route path="auth_not_security" element={<Blog_auth_not_security />} />
     </Routes>
   );
 }
