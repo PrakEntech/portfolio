@@ -8,7 +8,7 @@ export default function BlogList() {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('q') || '';
 
-  const blogs = [{"id":"gps_lies","title":"GPS Lies: Why Distance Alone Cannot Validate a Delivery","date":"2026-02-25","tags":["GPS","Firebase","PWA","Engineering"],"path":"/blog/gps_lies"},{"id":"event_driven_security","title":"Event Driven Security Is Safer Than Public Endpoints","date":"2026-02-26","tags":["Security","Architecture","Backend"],"path":"/blog/event_driven_security"},{"id":"file_uploads_attack_surface","title":"File Uploads Are an Attack Surface","date":"2026-02-27","tags":["Security","Storage","Architecture"],"path":"/blog/file_uploads_attack_surface"},{"id":"monitoring_without_response","title":"Monitoring Without Automated Response Is Useless","date":"2026-02-28","tags":["Security","Monitoring","DevOps"],"path":"/blog/monitoring_without_response"},{"id":"ai_as_a_senior_engineer_not_a_code_generator","title":"AI As A Senior Engineer Not A Code Generator","date":"2026-03-01","tags":["AI","Engineering","Productivity"],"path":"/blog/ai_as_a_senior_engineer_not_a_code_generator"},{"id":"auth_not_security","title":"Your Database Is Not Protected Just Because Users Are Logged In","date":"2026-03-01","tags":["Security","Database","Authentication"],"path":"/blog/auth_not_security"}];
+  const blogs = [{"id":"gps_lies","displayId":"gps_lies","title":"GPS Lies: Why Distance Alone Cannot Validate a Delivery","date":"2026-02-25","tags":["GPS","Firebase","PWA","Engineering"],"path":"/blog/gps_lies"},{"id":"event_driven_security","displayId":"event_driven_security","title":"Event Driven Security Is Safer Than Public Endpoints","date":"2026-02-26","tags":["Security","Architecture","Backend"],"path":"/blog/event_driven_security"},{"id":"file_uploads_attack_surface","displayId":"file_uploads_attack","title":"File Uploads Are an Attack Surface","date":"2026-02-27","tags":["Security","Storage","Architecture"],"path":"/blog/file_uploads_attack_surface"},{"id":"monitoring_without_response","displayId":"monitoring_without","title":"Monitoring Without Automated Response Is Useless","date":"2026-02-28","tags":["Security","Monitoring","DevOps"],"path":"/blog/monitoring_without_response"},{"id":"ai_as_a_senior_engineer_not_a_code_generator","displayId":"ai_as_a_senior_engineer","title":"AI As A Senior Engineer Not A Code Generator","date":"2026-03-01","tags":["AI","Engineering","Productivity"],"path":"/blog/ai_as_a_senior_engineer_not_a_code_generator"},{"id":"auth_not_security","displayId":"auth_not_security","title":"Your Database Is Not Protected Just Because Users Are Logged In","date":"2026-03-01","tags":["Security","Database","Authentication"],"path":"/blog/auth_not_security"}];
 
   const handleSearchChange = (e) => {
     const val = e.target.value;
@@ -79,11 +79,11 @@ export default function BlogList() {
                 <div className="terminal-window" style={{ height: '100%' }}>
                   <div className="terminal-header">
                     <span className="dot red" /><span className="dot yellow" /><span className="dot green" />
-                    <span className="terminal-title">{blog.id}.md</span>
+                    <span className="terminal-title">{blog.displayId}.md</span>
                   </div>
                   <div className="terminal-body" style={{ padding: '1.25rem 1.5rem' }}>
                     <div style={{ color: 'var(--accent-green)', fontFamily: "'Fira Code', monospace", fontSize: '0.7rem', marginBottom: '0.5rem' }}>
-                      $ cat {blog.id}.md
+                      $ cat {blog.displayId}.md
                     </div>
                     <h2 className="blog-card-title">{blog.title}</h2>
                     <div className="blog-meta-row">

@@ -31,12 +31,12 @@ export default function Blog_monitoring_without_response() {
               <span className="dot red" />
               <span className="dot yellow" />
               <span className="dot green" />
-              <span className="terminal-title">blog — monitoring_without_response.md</span>
+              <span className="terminal-title">blog — monitoring_without.md</span>
             </div>
             <div className="terminal-body" style={{ padding: '1.5rem 2rem' }}>
               <div className="blog-meta">
                 <span style={{ color: 'var(--accent-green)', fontFamily: "'Fira Code', monospace", fontSize: '0.75rem' }}>
-                  $ cat monitoring_without_response.md
+                  $ cat monitoring_without.md
                 </span>
               </div>
               <h1 className="blog-title">Monitoring Without Automated Response Is Useless</h1>

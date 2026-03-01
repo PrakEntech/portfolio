@@ -31,12 +31,12 @@ export default function Blog_ai_as_a_senior_engineer_not_a_code_generator() {
               <span className="dot red" />
               <span className="dot yellow" />
               <span className="dot green" />
-              <span className="terminal-title">blog — ai_as_a_senior_engineer_not_a_code_generator.md</span>
+              <span className="terminal-title">blog — ai_as_a_senior_engineer.md</span>
             </div>
             <div className="terminal-body" style={{ padding: '1.5rem 2rem' }}>
               <div className="blog-meta">
                 <span style={{ color: 'var(--accent-green)', fontFamily: "'Fira Code', monospace", fontSize: '0.75rem' }}>
-                  $ cat ai_as_a_senior_engineer_not_a_code_generator.md
+                  $ cat ai_as_a_senior_engineer.md
                 </span>
               </div>
               <h1 className="blog-title">AI As A Senior Engineer Not A Code Generator</h1>

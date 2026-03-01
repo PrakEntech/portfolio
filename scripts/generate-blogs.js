@@ -42,6 +42,16 @@ function escapeJSX(str) {
   return str.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$/g, '\\$');
 }
 
+function formatDisplayKey(key, limit = 25) {
+  if (key.length <= limit) return key;
+  const truncated = key.substring(0, limit);
+  const lastUnderscore = truncated.lastIndexOf('_');
+  if (lastUnderscore > 10) {
+    return key.substring(0, lastUnderscore);
+  }
+  return truncated + '...';
+}
+
 function generateSectionJSX(section, idx) {
   switch (section.type) {
     case 'intro':
@@ -73,6 +83,7 @@ function generateSectionJSX(section, idx) {
 function generateBlogPage(blogData) {
   const sectionsJSX = blogData.sections.map(generateSectionJSX).join('\n\n');
   const tagsJSX = blogData.tags.map(t => `<span className="blog-tag">${t}</span>`).join('\n          ');
+  const displayKey = formatDisplayKey(blogData.key);
 
   return `// AUTO-GENERATED — do not edit manually.
 // Re-run: node scripts/generate-blogs.js
@@ -107,12 +118,12 @@ export default function Blog_${blogData.key}() {
               <span className="dot red" />
               <span className="dot yellow" />
               <span className="dot green" />
-              <span className="terminal-title">blog — ${escapeJSX(blogData.key)}.md</span>
+              <span className="terminal-title">blog — ${escapeJSX(displayKey)}.md</span>
             </div>
             <div className="terminal-body" style={{ padding: '1.5rem 2rem' }}>
               <div className="blog-meta">
                 <span style={{ color: 'var(--accent-green)', fontFamily: "'Fira Code', monospace", fontSize: '0.75rem' }}>
-                  $ cat ${escapeJSX(blogData.key)}.md
+                  $ cat ${escapeJSX(displayKey)}.md
                 </span>
               </div>
               <h1 className="blog-title">${escapeJSX(blogData.title)}</h1>
@@ -150,6 +161,7 @@ ${sectionsJSX}
 function generateBlogList(blogs) {
   const blogsData = JSON.stringify(blogs.map(b => ({
     id: b.key,
+    displayId: formatDisplayKey(b.key),
     title: b.title,
     date: b.date,
     tags: b.tags.split(';').map(t => t.trim()),
@@ -237,11 +249,11 @@ export default function BlogList() {
                 <div className="terminal-window" style={{ height: '100%' }}>
                   <div className="terminal-header">
                     <span className="dot red" /><span className="dot yellow" /><span className="dot green" />
-                    <span className="terminal-title">{blog.id}.md</span>
+                    <span className="terminal-title">{blog.displayId}.md</span>
                   </div>
                   <div className="terminal-body" style={{ padding: '1.25rem 1.5rem' }}>
                     <div style={{ color: 'var(--accent-green)', fontFamily: "'Fira Code', monospace", fontSize: '0.7rem', marginBottom: '0.5rem' }}>
-                      $ cat {blog.id}.md
+                      $ cat {blog.displayId}.md
                     </div>
                     <h2 className="blog-card-title">{blog.title}</h2>
                     <div className="blog-meta-row">

@@ -31,12 +31,12 @@ export default function Blog_file_uploads_attack_surface() {
               <span className="dot red" />
               <span className="dot yellow" />
               <span className="dot green" />
-              <span className="terminal-title">blog — file_uploads_attack_surface.md</span>
+              <span className="terminal-title">blog — file_uploads_attack.md</span>
             </div>
             <div className="terminal-body" style={{ padding: '1.5rem 2rem' }}>
               <div className="blog-meta">
                 <span style={{ color: 'var(--accent-green)', fontFamily: "'Fira Code', monospace", fontSize: '0.75rem' }}>
-                  $ cat file_uploads_attack_surface.md
+                  $ cat file_uploads_attack.md
                 </span>
               </div>
               <h1 className="blog-title">File Uploads Are an Attack Surface</h1>
