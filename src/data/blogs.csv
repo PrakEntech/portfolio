@@ -5,3 +5,4 @@ file_uploads_attack_surface,File Uploads Are an Attack Surface,2026-02-27,Securi
 monitoring_without_response,Monitoring Without Automated Response Is Useless,2026-02-28,Security;Monitoring;DevOps
 ai_as_a_senior_engineer_not_a_code_generator,AI As A Senior Engineer Not A Code Generator,2026-03-01,AI;Engineering;Productivity
 auth_not_security,Your Database Is Not Protected Just Because Users Are Logged In,2026-03-01,Security;Database;Authentication
+ai_powered_root_cause_analysis,AI Powered Root Cause Analysis,2026-03-02,Debugging;AI;DevOps

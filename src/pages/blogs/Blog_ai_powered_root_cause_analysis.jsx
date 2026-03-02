@@ -31,18 +31,18 @@ export default function Blog_ai_powered_root_cause_analysis() {
               <span className="dot red" />
               <span className="dot yellow" />
               <span className="dot green" />
-              <span className="terminal-title">blog — ai_powered_root_cause_analysis.md</span>
+              <span className="terminal-title">blog — ai_powered_root_cause.md</span>
             </div>
             <div className="terminal-body" style={{ padding: '1.5rem 2rem' }}>
               <div className="blog-meta">
                 <span style={{ color: 'var(--accent-green)', fontFamily: "'Fira Code', monospace", fontSize: '0.75rem' }}>
-                  $ cat ai_powered_root_cause_analysis.md
+                  $ cat ai_powered_root_cause.md
                 </span>
               </div>
               <h1 className="blog-title">AI Powered Root Cause Analysis</h1>
               <div className="blog-meta-row">
                 <span className="blog-date"><Clock size={13} style={{ marginRight: '4px', display: 'inline' }} />2026-03-02</span>
-                <span className="blog-read-time">5 min read</span>
+                <span className="blog-read-time">2 min read</span>
               </div>
               <div className="blog-tags">
                 <Tag size={13} style={{ marginRight: '6px', opacity: 0.6 }} />
